@@ -13,21 +13,22 @@ body {
    font-family: 'Roboto', sans-serif;
 }
 
+
+/*=== HEADER SECTION === */
 header {
    padding: 20px;
 }
 
-header .container {
+header .wrapper {
    display: grid;
    grid-template-columns: auto 1fr;
    align-items: center;
    justify-content: space-between;
-   max-width: 980px;
+   max-width: 940px;
    margin: auto;
 }
 
 header img {
-   margin-left: 20px;
    margin-right: 120px;
    padding: 15px 0;
 }
@@ -44,4 +45,40 @@ header nav ul li a {
    text-decoration: none;
    color: #333;
    padding: 15px;
+}
+
+/* === LANDING SECTION === */
+#landing .container {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   align-items: center;
+
+   width: 940px;
+   max-width: 940px;
+   height: 366px;
+   background-color: #FBDFDB;
+   margin: 0 auto;
+   border-radius: 30px;
+
+   position: relative;
+}
+
+.container .landing-text {
+   padding: 60px 80px 60px 60px;
+}
+
+.container .landing-text h1 {
+   font-size: 32px;
+   margin-bottom: 10px;
+}
+
+.container .landing-text p {
+   font-size: 18px;
+   line-height: 28px;
+}
+
+.container img {
+   position: absolute;
+   bottom: 0;
+   right: 100px;
 }
