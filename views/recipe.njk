@@ -1,0 +1,69 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+
+
+{% endblock %}
+
+{% block content %}
+
+  <section class="recipes__detail-section container">
+  
+    <div class="banner__image-container">
+      <img src="{{recipe.image}}" alt="{{recipe.title}}">
+    </div>
+    
+    <div class="recipe-info">
+      <h1>{{recipe.title}}</h1>
+      <p>Por {{recipe.author}}</p>
+    </div>
+
+    <div class="ingredients">
+      <div class="section-title">
+        <h3>Ingredientes</h3>
+        <button class="btn-collapse">esconder</button>
+      </div>
+      <div class="details">
+        <ul>
+          {% for ingredients in recipe.ingredients %}
+            <li>
+              {{ingredients}}
+            </li>
+          {% endfor%}
+        </ul>
+      </div>
+      
+    </div>
+
+    <div class="preparation">
+      <div class="section-title">
+        <h3>Modo de preparo</h3>
+        <button class="btn-collapse">mostrar</button>
+      </div>
+      <div class="details">
+        <ul>
+          {% for ingredients in recipe.preparation %}
+            <li>
+              {{ingredients}}
+            </li>
+          {% endfor%}
+        </ul>
+      </div>
+      
+      
+    </div>
+
+    <div class="information">
+      <div class="section-title">
+        <h3>Informações Adicionais</h3>
+        <button class="btn-collapse">mostrar</button>
+      </div>
+      <div class="details">
+        <p>{{recipe.information}}</p>
+      </div>
+      
+    </div>
+  
+  </section>
+
+{% endblock %}

@@ -68,7 +68,7 @@ header nav ul li a {
 }
 
 header nav ul li a:hover,
-.menu-section .link-active a {
+.link-active {
    font-weight: bold;
 }
 
@@ -106,10 +106,7 @@ header nav ul li a:hover,
    right: 100px;
 }
 
-
-
 /* === Cards === */
-
 .cards {
    display: grid;
    grid-template-columns: 1fr 1fr 1fr;
@@ -120,11 +117,19 @@ header nav ul li a:hover,
    cursor: pointer;
 }
 
-.card__image-container img{
+.card__image-container {
    width: 300px;
    height: 140px;
    margin-bottom: 20px;
    border-radius: 15px;
+   overflow: hidden;
+   
+   display: flex;
+   justify-content: center;
+}
+
+.card__image-container img{
+   height: 100%;
 }
 
 .card__title p {
@@ -140,7 +145,8 @@ header nav ul li a:hover,
 
 /*=== ABOUT SECTION ===*/
 .about-section,
-.recipes-section {
+.recipes-section,
+.recipes__detail-section {
    margin-top: 25px;
 }
 
@@ -188,6 +194,7 @@ header nav ul li a:hover,
    border-radius: 15px;
 
    display: flex;
+   justify-content: center;
    align-items: center;
 
    overflow: hidden;
@@ -235,4 +242,66 @@ header nav ul li a:hover,
 .footer > p {
    color: #999;
    margin: 0;
+}
+
+/* === Recipe Detail === */
+.recipes__detail-section .details ul{
+   padding-left: 20px;
+}
+
+.banner__image-container img{
+   max-width: 940px;
+   border-radius: 15px;
+   margin-bottom: 50px;
+}
+
+.recipe-info {
+   text-align: center;
+}
+
+.recipe-info h1 {
+   font-size: 36px;
+   margin-bottom: 4px;
+}
+
+.recipe-info p {
+   font-size: 20px;
+   color: var(--info-color);
+}
+
+.section-title {
+   display: flex;
+   align-items: baseline;
+
+   margin-bottom: 20px;
+}
+
+.section-title h3 {
+   font-size: 24px;
+   margin-bottom: 0;
+}
+
+.details {
+   color: #444444;
+   font-size: 18px;
+   line-height: 28px;
+   margin-bottom: 39px;
+}
+
+.btn-collapse {
+   color: #999999;
+   font-size: 12px;
+   text-transform: uppercase;
+   cursor: pointer;
+}
+
+.btn-collapse:hover {
+   color: #999999;
+   filter: brightness(0.7);
+}
+
+button.btn-collapse {
+   border: none;
+   background-color: transparent;  
+   margin-left: 8px;
 }
