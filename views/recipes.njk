@@ -11,7 +11,7 @@
 	<section class="recipes-section container">
 		<div class="cards">
 			{% for item in items %}
-				<div class="card">
+				<div class="card" id="{{loop.index0}}">
 					<div class="card__image-container">
 						<img src="{{item.image}}" alt="Burger">
 					</div>
@@ -25,7 +25,7 @@
 			{% endfor %}
 
 			{% for item in items %}
-				<div class="card">
+				<div class="card" id="{{loop.index0}}">
 					<div class="card__image-container">
 						<img src="{{item.image}}" alt="Burger">
 					</div>
@@ -39,11 +39,9 @@
 			{% endfor %}
 
 	</section>
+	
+{% endblock %}
 
-	<footer class="footer">
-		<p>Todos direitos reservados, receitas Foodfy.</p>
-	</footer>
-
+{% block scripts %}
 	<script src="/scripts.js"></script>
-
 {% endblock %}

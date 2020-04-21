@@ -28,10 +28,12 @@ server.get('/recipes', (req, res) => {
 
 server.get('/recipes/:index', (req, res) => {
   const recipeIndex = req.params.index
-  const recipe = recipes[recipeIndex]
+  const recipe = [...recipes]
 
-  //console.log(recipes[recipeIndex])
-  res.render('recipe', { recipe })
+  //console.log(recipeIndex)
+  //console.log(recipe)
+  console.log(recipe[recipeIndex])
+  res.render('recipe', { recipe: recipe[recipeIndex] })
 })
 
 server.listen(3000, () => {

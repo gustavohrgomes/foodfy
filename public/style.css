@@ -305,3 +305,8 @@ button.btn-collapse {
    background-color: transparent;  
    margin-left: 8px;
 }
+
+/* === Details Collapse === */
+.hide-details {
+   display: none;
+}
