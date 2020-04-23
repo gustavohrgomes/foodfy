@@ -21,9 +21,23 @@ for (let card of cards) {
 
 // Hide/Show Button
 const buttons = document.querySelectorAll('.btn-collapse')
-const details = document.querySelectorAll('.details')
 
-function hideDetails(index) {
+for (let button of buttons) {
+  button.addEventListener('click', () => {
+    const target = document.querySelector(`#${button.getAttribute('target')} .details`)
+
+    target.classList.toggle('hide-details')
+
+    if (target.classList.contains('hide-details')){
+      button.textContent = 'mostrar'
+    }
+    else {
+      button.textContent = 'esconder'
+    }
+  })
+}
+
+/* function hideDetails(index) {
   buttons[index].addEventListener('click', () => {
     
     if (details[index].classList.contains('hide-details')) {
@@ -39,7 +53,7 @@ function hideDetails(index) {
 
 for (let i = 0; i < 3; i++) {
   hideDetails(i)
-}
+} */
 
 /* document.querySelector('.close-modal').addEventListener('click', () => {
   modalOverlay.classList.remove('active');

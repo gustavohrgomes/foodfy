@@ -19,10 +19,10 @@
       <p>Por {{recipe.author}}</p>
     </div>
 
-    <div class="ingredients">
+    <div id="ingredients-section">
       <div class="section-title">
         <h3>Ingredientes</h3>
-        <button class="btn-collapse">esconder</button>
+        <button class="btn-collapse" target="ingredients-section">esconder</button>
       </div>
       <div class="details">
         <ul>
@@ -33,13 +33,12 @@
           {% endfor%}
         </ul>
       </div>
-      
     </div>
 
-    <div class="preparation">
+    <div id="preparation-section">
       <div class="section-title">
         <h3>Modo de preparo</h3>
-        <button class="btn-collapse">esconder</button>
+        <button class="btn-collapse" target="preparation-section">esconder</button>
       </div>
       <div class="details">
         <ul>
@@ -50,20 +49,19 @@
           {% endfor%}
         </ul>
       </div>
-      
-      
     </div>
 
-    <div class="information">
-      <div class="section-title">
-        <h3>Informações Adicionais</h3>
-        <button class="btn-collapse">Mostrar</button>
+    {% if recipe.information != '' %}
+      <div id="information-section">
+        <div class="section-title">
+          <h3>Informações Adicionais</h3>
+          <button class="btn-collapse" target="information-section">mostrar</button>
+        </div>
+        <div class="details hide-details">
+          <p>{{recipe.information}}</p>
+        </div>      
       </div>
-      <div class="details hide-details">
-        <p>{{recipe.information}}</p>
-      </div>
-      
-    </div>
+    {% endif %}
   
   </section>
 

@@ -286,6 +286,8 @@ header nav ul li a:hover,
    font-size: 18px;
    line-height: 28px;
    margin-bottom: 39px;
+   max-height: 100vh;
+   transition: all 600ms ease-in-out ;
 }
 
 .btn-collapse {
@@ -308,5 +310,7 @@ button.btn-collapse {
 
 /* === Details Collapse === */
 .hide-details {
-   display: none;
+   max-height: 0;
+   opacity: 0;
+   overflow: hidden;
 }
