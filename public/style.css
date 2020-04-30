@@ -14,7 +14,7 @@
 
 html,
 body {
-   height: 100vh;
+   height: 100%;
    font-family: 'Roboto', sans-serif;
 }
 
@@ -26,6 +26,14 @@ h5,
 h6 {
    margin-bottom: 20px;
    font-weight: bold;
+}
+
+.main-container {
+   min-height: 100vh;
+   overflow: hidden;
+   display: block;
+   position: relative;
+   padding-bottom: 62px;
 }
 
 .container {
@@ -234,9 +242,13 @@ header nav ul li a:hover,
 
 /* === FOOTER === */
 .footer {
+   height: 62px;
    padding: 23px;
    text-align: center;
    background-color: #eee;
+   position: absolute;
+   bottom: 0;
+   width: 100%;
 }
 
 .footer > p {
