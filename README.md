@@ -9,24 +9,12 @@
 <blockquote align="center">“Sua única limitação é você mesmo!”</blockquote>
 
 <p align="center">
-
-  <a href="https://rocketseat.com.br">
-    <img alt="Made by Rocketseat" src="https://img.shields.io/badge/made%20by-Rocketseat-%23F8952D">
-  </a>
-
-  <a href="LICENSE" >
-    <img alt="License" src="https://img.shields.io/badge/license-MIT-%23F8952D">
-  </a>
-
-</p>
-
-<p align="center">
   <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>
 </p>
 
 ### Sobre o Desafio :rocket:
 
-Nesse desafio você vai construir um site completo para uma empresa de receitas chamada Foodfy.
+Construir um site completo para uma empresa de receitas chamada Foodfy.
 
 <div align="center">
   <img src="https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/mockup.png" />
@@ -35,8 +23,7 @@ Nesse desafio você vai construir um site completo para uma empresa de receitas 
 
 ### Dicas e regras
 
-1. Dê uma boa olhada no material extra de CSS & HTML, esse material pode conter dicas importantes para você construir o layout desse website;
-2. Na página de receitas, quando o usuário clica em uma receita, um modal deve aparecer em tela contendo as mesmas informações da receita que ele clicou;
+- Na página de receitas, quando o usuário clica em uma receita, um modal deve aparecer em tela contendo as mesmas informações da receita que ele clicou;
 
 <h3 align="center">
   Desafio: Refatorando o Foodfy
@@ -66,7 +53,7 @@ Em seguida deixamos o Front-end que estava com os dados estáticos, em algo din�
 </div>
 
 - Ao clicar em uma receita agora o usuário deve ser redirecionado para uma nova página contendo todas informações da receita como ingredientes, modo de preparo e informações adicionais (todas essas informações estão contidas no arquivo `data.js`).
-- Na página de listagem não é mais necessário abrir o modal como tínhamos no desafio anterior do Foodfy.z
+- Na página de listagem não é mais necessário abrir o modal como tínhamos no desafio anterior do Foodfy.
 
 #### Ação de mostrar/esconder
 
