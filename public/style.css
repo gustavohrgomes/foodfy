@@ -28,6 +28,13 @@ h6 {
    font-weight: bold;
 }
 
+.flex-container {
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
 .main-container {
    min-height: 100vh;
    overflow: hidden;
@@ -246,9 +253,9 @@ header nav ul li a:hover,
    padding: 23px;
    text-align: center;
    background-color: #eee;
-   position: absolute;
+   /* position: absolute;
    bottom: 0;
-   width: 100%;
+   width: 100%; */
 }
 
 .footer > p {

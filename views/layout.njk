@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  {% block head %}
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Foodfy</title>
+    {% block head %}
 
-  {% endblock %}
+      <title>Foodfy</title>
 
-  <link rel="stylesheet" href="/style.css">
-</head>
-
-<body>
-  <header>
-    <div class="wrapper">
-      <img src="/assets/logo.png" alt="Foodfy">
-
-      <div class="menu-section">
-        <nav class="navbar">
-          <ul>
-            <li class="nav-link">
-              <a href="/about">Sobre</a>
-            </li>
-            <li class="nav-link">
-              <a href="/recipes">Receita</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  <div class="main-container">
-    {% block content %}
-      
     {% endblock %}
 
-    <footer class="footer">
-      <p>Todos direitos reservados, receitas Foodfy.</p>
-    </footer>
-  </div>
-  
+    <link rel="stylesheet" href="/style.css">
+  </head>
 
-  {% block scripts %}
-    
-  {% endblock %}
+  <body>
+    <div class="flex-container">
+      <header>
+        <div class="wrapper">
+          <img src="/assets/logo.png" alt="Foodfy">
 
-</body>
+          <div class="menu-section">
+            <nav class="navbar">
+              <ul>
+                <li class="nav-link">
+                  <a href="/about">Sobre</a>
+                </li>
+                <li class="nav-link">
+                  <a href="/recipes">Receita</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {% block content %}
+
+      {% endblock %}
+
+      <footer class="footer">
+        <p>Todos direitos reservados, receitas Foodfy.</p>
+      </footer>
+
+      {% block scripts %}{% endblock %}
+    </div>
+
+  </body>
 
 </html>
