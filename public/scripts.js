@@ -1,5 +1,5 @@
 // Link Active for navbar
-const menuItems = document.querySelectorAll('.navbar .nav-link a')
+const menuItems = document.querySelectorAll('.navbar a')
 const currentPage = location.pathname
 
 for (let item of menuItems) {

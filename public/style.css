@@ -68,21 +68,13 @@ header img {
    padding: 15px 0;
 }
 
-header nav ul {
-   display: flex;
-}
-
-header nav ul li {
-   list-style: none;
-}
-
-header nav ul li a {
+header nav a {
    text-decoration: none;
    color: #333;
    padding: 15px;
 }
 
-header nav ul li a:hover,
+header nav a:hover,
 .link-active {
    font-weight: bold;
 }
