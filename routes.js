@@ -1,27 +1,16 @@
 const express = require('express');
 const routes = express.Router();
-const recipes = require('./data')
+const recipes = require('./controllers/RecipesController');
 
-routes.get('/', (req, res) => {
-  res.render('index', { items: recipes })
-});
 
-routes.get('/about', (req, res) => {
-  res.render('about')
-});
+// Admin Routes
+routes.get('/admin/recipes', recipes.index); // Mostrar a lista de receitas
+routes.get("/admin/recipes/create", recipes.create); // Mostrar formulário de nova receita
+routes.get("/admin/recipes/:id", recipes.show); // Exibir detalhes de uma receita
+routes.get("/admin/recipes/:id/edit", recipes.edit); // Mostrar formulário de edição de receita
 
-routes.get('/recipes', (req, res) => {
-  res.render('recipes', { items: recipes })
-});
-
-routes.get('/recipes/:index', (req, res) => {
-  const recipeIndex = req.params.index
-  const recipe = [...recipes]
-
-  //console.log(recipeIndex)
-  //console.log(recipe)
-  console.log(recipe[recipeIndex])
-  res.render('recipe', { recipe: recipe[recipeIndex] })
-});
+routes.post("/admin/recipes", recipes.post); // Cadastrar nova receita
+routes.put("/admin/recipes", recipes.put); // Editar uma receita
+routes.delete("/admin/recipes", recipes.delete); // Deletar uma receita
 
 module.exports = routes;
