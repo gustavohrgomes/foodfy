@@ -3,6 +3,7 @@
 :root {
    --title-color: #111111;
    --info-color: #777777;
+   --link: #6558C3;
 }
 
 * {
@@ -324,4 +325,80 @@ button.btn-collapse {
    max-height: 0;
    opacity: 0;
    overflow: hidden;
+}
+
+/* Admin Panel */
+#admin-panel .admin-header {
+   display: flex;
+   height: 80px;
+   background-color: #111111;
+   margin-bottom: 50px;
+}
+
+#admin-panel .admin-header__logo img {
+   margin-right: 0;
+   padding: 0;
+}
+
+#admin-panel .admin-header__logo {
+   display: grid;
+   grid-template-columns: 100px 1fr;
+   flex: 1;
+   max-width: 940px;
+   margin: auto;
+}
+
+#admin-panel h1 {
+   margin-bottom: 30px;
+}
+
+.admin-cards {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 20px;
+}
+
+.card-item {
+   display: grid;
+   grid-template-columns: auto 1fr;
+   gap: 20px
+}
+
+.card-item__image-container {
+   width: 172px;
+   height: 80px;
+   overflow: hidden;
+   
+   display: flex;
+   justify-content: center;
+   border-radius: 8px;
+}
+
+.card-item__image-container img {
+   height: 100%;
+}
+
+.card-item__title {
+   font-size: 18px;
+   font-family: 'Roboto', 'Sans-Serif';
+   line-height: 21px;
+   color: var(--title-color);
+   
+   margin-bottom: 5px;
+}
+
+.card-item__description {
+   font-size: 14px;
+   font-family: 'Roboto', 'Sans-Serif';
+   line-height: 16px;
+   color: var(--info-color);
+   
+   margin-bottom: 10px;
+}
+
+.card-item__info a {
+   font-size: 14px;
+   font-weight: 700;
+   color: var(--link);
+   text-decoration: none;
 }
