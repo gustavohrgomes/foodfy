@@ -48,6 +48,7 @@ h6 {
    width: 940px;
    max-width: 940px;
    margin: 0 auto 50px;
+   flex: 1;
 }
 
 /*=== HEADER SECTION === */
@@ -153,8 +154,7 @@ header nav a:hover,
 
 /*=== ABOUT SECTION ===*/
 .about-section,
-.recipes-section,
-.recipes__detail-section {
+.recipes-section {
    margin-top: 25px;
 }
 
@@ -401,4 +401,30 @@ button.btn-collapse {
    font-weight: 700;
    color: var(--link);
    text-decoration: none;
+}
+
+/* SHOW RECIPE - ADMIN */
+.show-recipe__header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 24px
+}
+
+.show-recipe__header h2 {
+   margin-bottom: 0;
+}
+
+.show-recipe__header a {
+   font-weight: 700;
+   color: #FFF;
+   text-decoration: none;
+   padding: 9px 20px;
+   background-color: var(--link);
+   border-radius: 4px;
+   transition: all 100ms ease-in-out;
+}
+
+.show-recipe__header a:hover {
+   opacity: 90%;
 }
