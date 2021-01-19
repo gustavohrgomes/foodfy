@@ -1,0 +1,26 @@
+<fieldset class="recipe__input-group">
+  <legend>Imagem da receita</legend>
+  <input type="text" value="{{ recipe.image }}">
+</fieldset>
+
+<fieldset class="recipe__input-group">
+  <legend>Ingredientes</legend>
+  {% for ingredient in recipe.ingredients %}
+    <input type="text" value="{{ ingredient }}" >
+  {% endfor %}
+  <button>Adicionar novo ingrediente</button>
+</fieldset>
+
+<fieldset class="recipe__input-group">
+  <legend>Modo de preparo</legend>
+  {% for preparation in recipe.preparation %}
+    <input type="text" value="{{ preparation }}">
+  {% endfor %}
+  <button>Adicionar novo passo</button>
+</fieldset>
+
+<fieldset class="recipe__input-group">
+  <legend>Informações adicionais</legend>
+  <textarea name="informacoes-adicionais" value="{{ recipe.information }}"></textarea>
+</fieldset>
+

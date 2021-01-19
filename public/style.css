@@ -29,6 +29,10 @@ h6 {
    font-weight: bold;
 }
 
+fieldset {
+   border: none;
+}
+
 .flex-container {
    height: 100%;
    display: flex;
@@ -403,28 +407,93 @@ button.btn-collapse {
    text-decoration: none;
 }
 
-/* SHOW RECIPE - ADMIN */
-.show-recipe__header {
+/* RECIPE - ADMIN */
+.recipe__header {
    display: flex;
    justify-content: space-between;
    align-items: center;
    margin-bottom: 24px
 }
 
-.show-recipe__header h2 {
+.recipe__header h2 {
    margin-bottom: 0;
 }
 
-.show-recipe__header a {
+.recipe__header a,
+.recipe__header button {
+   font-size: 16px;
    font-weight: 700;
    color: #FFF;
    text-decoration: none;
    padding: 9px 20px;
    background-color: var(--link);
+   border: none;
    border-radius: 4px;
    transition: all 100ms ease-in-out;
+   cursor: pointer;
 }
 
-.show-recipe__header a:hover {
+.recipe__header a:hover,
+.recipe__header button:hover {
    opacity: 90%;
+}
+
+fieldset.recipe__input-group {
+   margin-bottom: 30px;
+}
+
+.recipe__input-group legend {
+   font-size: 16px;
+   font-weight: 700;
+   color: var(--title-color);
+   line-height: 19px;
+   margin-bottom: 10px;
+}
+
+.recipe__input-group input {
+   color: var(--title-color);
+   font-size: 16px;
+   width: 100%;
+   max-width: 940px;
+   height: 49px;
+   max-height: 49px;
+   margin-bottom: 10px;
+   padding: 15px 20px;
+   border: 1px solid #DDD;
+   border-radius: 4px;
+   background-color: #FFF
+}
+
+.recipe__input-group textarea {
+   color: var(--title-color);
+   min-width: 100%;
+   max-width: 940px;
+   min-height: 257px;
+   padding: 18px 20px;
+   border: 1px solid #DDD;
+   border-radius: 4px;
+   background-color: #FFF
+}
+
+.recipe__input-group button {
+   color: var(--link);
+   font-size: 16px;
+   font-weight: 700;
+   text-align: right;
+   margin-top: 15px;
+   background: none;
+   border: none;
+   cursor: pointer;
+}
+
+.recipe__header button.form__button-delete {
+   background-color: #DC4747;
+}
+
+.form__button-container button:first-child {
+   margin-right: 10px;
+}
+
+.recipe__input-group input:last-of-type {
+   margin-bottom: 0;
 }
