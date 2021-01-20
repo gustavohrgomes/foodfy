@@ -1,64 +1,74 @@
 // Link Active for navbar
-const menuItems = document.querySelectorAll('.navbar a')
-const currentPage = location.pathname
+const menuItems = document.querySelectorAll(".navbar a");
+const currentPage = location.pathname;
 
 for (let item of menuItems) {
-  if (currentPage.includes(item.getAttribute('href'))) {
-    item.classList.add('link-active')
+  if (currentPage.includes(item.getAttribute("href"))) {
+    item.classList.add("link-active");
   }
 }
 
 // Redirect for recipe details
-const cards = document.querySelectorAll('.card');
+const cards = document.querySelectorAll(".card");
 
 for (let card of cards) {
-  card.addEventListener('click', () => {
-    const recipeId = card.getAttribute('id');
-    window.location.href = `/recipes/${recipeId}`
-    console.log(recipeId)
+  card.addEventListener("click", () => {
+    const recipeId = card.getAttribute("id");
+    window.location.href = `/recipes/${recipeId}`;
+    console.log(recipeId);
   });
 }
 
 // Hide/Show Button
-const buttons = document.querySelectorAll('.btn-collapse')
+const buttons = document.querySelectorAll(".btn-collapse");
 
 for (let button of buttons) {
-  button.addEventListener('click', () => {
-    const target = document.querySelector(`#${button.getAttribute('target')} .details`)
+  button.addEventListener("click", () => {
+    const target = document.querySelector(
+      `#${button.getAttribute("target")} .details`
+    );
 
-    target.classList.toggle('hide-details')
+    target.classList.toggle("hide-details");
 
-    if (target.classList.contains('hide-details')){
-      button.textContent = 'mostrar'
+    if (target.classList.contains("hide-details")) {
+      button.textContent = "mostrar";
+    } else {
+      button.textContent = "esconder";
     }
-    else {
-      button.textContent = 'esconder'
-    }
-  })
+  });
 }
 
-/* function hideDetails(index) {
-  buttons[index].addEventListener('click', () => {
-    
-    if (details[index].classList.contains('hide-details')) {
-      details[index].classList.remove('hide-details')
-      buttons[index].innerHTML = 'esconder'
-    }
-    else {
-      details[index].classList.add('hide-details')
-      buttons[index].innerHTML = 'mostrar'
-    }
-  })
+function addIngredient() {
+  const ingredients = document.querySelector("#ingredients");
+  const inputContainer = document.querySelectorAll(".ingredients__input");
+
+  // Realiza um clone do último ingrediente adicionado
+  const newInput = inputContainer[inputContainer.length - 1].cloneNode(true);
+
+  // Não adiciona um novo input se o último tem um valor vazio
+  if (newInput.children[0].value == "") return false;
+
+  // Deixa o valor do input vazio
+  newInput.children[0].value = "";
+  ingredients.appendChild(newInput);
 }
 
-for (let i = 0; i < 3; i++) {
-  hideDetails(i)
-} */
+function addPreparing() {
+  const preparing = document.querySelector("#preparing");
+  const inputContainer = document.querySelectorAll(".preparing__input");
 
-/* document.querySelector('.close-modal').addEventListener('click', () => {
-  modalOverlay.classList.remove('active');
-});
+  const newInput = inputContainer[inputContainer.length - 1].cloneNode(true);
 
-modalOverlay.addEventListener('click', () => {
-  modalOverlay.classList.remove('active');
-}); */
+  if (newInput.children[0].value == "") return false;
+
+  newInput.children[0].value = "";
+  preparing.appendChild(newInput);
+}
+
+document
+  .querySelector(".add-ingredient")
+  .addEventListener("click", addIngredient);
+
+document
+  .querySelector(".add-preparing")
+  .addEventListener("click", addPreparing);
