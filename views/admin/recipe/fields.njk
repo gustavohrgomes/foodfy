@@ -43,7 +43,7 @@
         <div class="preparing__input">
           <input 
             type="text" 
-            name="preparation" 
+            name="preparation[]" 
             value="{{ preparation }}"
           >
         </div>
@@ -63,11 +63,16 @@
 
 <fieldset class="recipe__input-group">
   <legend>Informações adicionais</legend>
-  <textarea 
-    class="aditional-info" 
-    name="information"
-  >
-    {{ recipe.information }}
-  </textarea>
+  {% if recipe.information %}
+    <textarea class="aditional-info" name="information">{{ recipe.information }}</textarea>
+  {% else %}
+    <textarea   
+      class="aditional-info" 
+      name="information"
+    >
+    </textarea>
+  {% endif %}
+  
+  
 </fieldset>
 

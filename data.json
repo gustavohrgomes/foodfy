@@ -132,21 +132,6 @@
         "açúcar de confeiteiro e corte em quadrados."
       ],
       "information": ""
-    },
-    {
-      "image": "www.google.com.br",
-      "ingredients": [
-        "Ingrediente 1",
-        "Ingrediente 2",
-        "Ingrediente 3"
-      ],
-      "preparation": [
-        "Passo 1",
-        "Passo 2",
-        "Passo 3",
-        "Passo 4"
-      ],
-      "information": "Informações adicionais teste 123"
     }
   ]
 }

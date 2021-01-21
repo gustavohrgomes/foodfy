@@ -13,7 +13,6 @@ exports.show = (req, res) => {
   const recipeIndex = req.params.id;
   const recipe = [...data.recipes];
 
-  console.log(recipeIndex);
   return res.render("admin/recipe/show", {
     recipe: recipe[recipeIndex],
     recipeIndex: recipeIndex,
@@ -24,7 +23,10 @@ exports.edit = (req, res) => {
   const recipeIndex = req.params.id;
   const recipe = [...data.recipes];
 
-  return res.render("admin/recipe/edit", { recipe: recipe[recipeIndex] });
+  return res.render("admin/recipe/edit", {
+    recipe: recipe[recipeIndex],
+    recipeIndex: recipeIndex,
+  });
 };
 
 exports.post = (req, res) => {
@@ -46,16 +48,54 @@ exports.post = (req, res) => {
   });
 
   fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
-    if (err) return res.send("Error ao salvar receita :(");
+    if (err) return res.send("Erro ao salvar receita");
 
     return res.redirect("/admin/recipes");
   });
 };
 
 exports.put = (req, res) => {
-  return res.send("Recipes put");
+  const { id, ingredients, preparation, information } = req.body;
+
+  let index = 0;
+
+  const foundRecipe = data.recipes.find((recipe, foundIndex) => {
+    if (id == foundIndex) {
+      index = foundIndex;
+      return true;
+    }
+  });
+
+  if (!foundRecipe) return res.send("Receita não encontrada!");
+
+  const recipe = {
+    ...foundRecipe,
+    ingredients,
+    preparation,
+    information: information.trim(),
+  };
+
+  data.recipes[index] = recipe;
+
+  fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+    if (err) return res.send("Erro ao editar receita");
+
+    return res.redirect("/admin/recipes");
+  });
 };
 
 exports.delete = (req, res) => {
-  return res.send("Recipes delete");
+  const { id } = req.body;
+
+  const filteredRecipes = data.recipes.filter((_, recipeIndex) => {
+    return recipeIndex != id;
+  });
+
+  data.recipes = filteredRecipes;
+
+  fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+    if (err) return res.send("Erro ao deletar receita");
+
+    return res.redirect("/admin/recipes");
+  });
 };
