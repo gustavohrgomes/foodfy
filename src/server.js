@@ -14,6 +14,7 @@ server.set("view engine", "njk");
 
 nunjucks.configure("src/views", {
   express: server,
+  autoescape: false,
   noCache: true,
 });
 

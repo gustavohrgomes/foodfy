@@ -334,7 +334,7 @@ button.btn-collapse {
 /* Admin Panel */
 #admin-panel .admin-header {
    display: flex;
-   height: 80px;
+   min-height: 80px;
    background-color: #111111;
    margin-bottom: 50px;
 }

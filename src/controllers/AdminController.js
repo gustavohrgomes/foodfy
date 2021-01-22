@@ -1,5 +1,8 @@
 const fs = require("fs");
 const data = require("../data.json");
+const path = require("path");
+
+const recipesDataPath = path.resolve("src", "data.json");
 
 exports.index = (req, res) => {
   return res.render("admin/recipe/index", { recipes: data.recipes });
@@ -47,7 +50,7 @@ exports.post = (req, res) => {
     information,
   });
 
-  fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+  fs.writeFile(recipesDataPath, JSON.stringify(data, null, 2), (err) => {
     if (err) return res.send("Erro ao salvar receita");
 
     return res.redirect("/admin/recipes");
@@ -77,7 +80,7 @@ exports.put = (req, res) => {
 
   data.recipes[index] = recipe;
 
-  fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+  fs.writeFile(recipesDataPath, JSON.stringify(data, null, 2), (err) => {
     if (err) return res.send("Erro ao editar receita");
 
     return res.redirect("/admin/recipes");
@@ -93,7 +96,7 @@ exports.delete = (req, res) => {
 
   data.recipes = filteredRecipes;
 
-  fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+  fs.writeFile(recipesDataPath, JSON.stringify(data, null, 2), (err) => {
     if (err) return res.send("Erro ao deletar receita");
 
     return res.redirect("/admin/recipes");
