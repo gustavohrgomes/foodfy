@@ -1,0 +1,78 @@
+<fieldset class="recipe__input-group">
+  <legend>Imagem da receita</legend>
+  <input 
+    type="text" 
+    name="image" 
+    value="{{ recipe.image }}"
+  >
+</fieldset>
+
+<fieldset class="recipe__input-group">
+  <legend>Ingredientes</legend>
+
+  <div id="ingredients">
+    {% if recipe.ingredients %}
+      {% for ingredient in recipe.ingredients %}
+        <div class="ingredients__input">
+          <input 
+            type="text" 
+            name="ingredients[]" 
+            value="{{ ingredient }}" 
+          >
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="ingredients__input">
+        <input 
+          type="text" 
+          name="ingredients"
+        >
+      </div>
+    {% endif %}
+  </div>
+
+  <button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
+</fieldset>
+
+<fieldset class="recipe__input-group">
+  <legend>Modo de preparo</legend>
+
+  <div id="preparing">
+    {% if recipe.preparation %}
+      {% for preparation in recipe.preparation %}
+        <div class="preparing__input">
+          <input 
+            type="text" 
+            name="preparation[]" 
+            value="{{ preparation }}"
+          >
+        </div>
+      {% endfor %}
+    {% else %}  
+      <div class="preparing__input">
+        <input 
+          type="text" 
+          name="preparation"
+        >
+      </div>
+    {% endif %}
+  </div>
+
+  <button type="button" class="add-preparing">Adicionar novo passo</button>
+</fieldset>
+
+<fieldset class="recipe__input-group">
+  <legend>Informações adicionais</legend>
+  {% if recipe.information %}
+    <textarea class="aditional-info" name="information">{{ recipe.information }}</textarea>
+  {% else %}
+    <textarea   
+      class="aditional-info" 
+      name="information"
+    >
+    </textarea>
+  {% endif %}
+  
+  
+</fieldset>
+

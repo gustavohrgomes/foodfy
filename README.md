@@ -41,6 +41,8 @@ Criação do servidor utilizando as seguintes tecnologias:
 - Express
 - Nunjucks
 - Nodemon
+- BrowserSync
+- npm-run-all
 
 Com o servidor configurado, configuramos as rotas no arquivo `server.js` e colocamos todos os dados das receitas em um arquivo `data.js`.
 
@@ -58,3 +60,43 @@ Em seguida deixamos o Front-end que estava com os dados estáticos, em algo din�
 #### Ação de mostrar/esconder
 
 Dentro da página do detalhe da receita, em cada seção "Ingredientes", "Modo de preparo" e "Informações adicionais" há um botão `Mostrar` ou `Esconder` que ao ser clicado deve mostrar ou esconder o texto abaixo do título baseado em seu estado de visibilidade.
+
+<h3 align="center">
+  Desafio: Administração do Foodfy
+</h3>
+
+## :rocket: Sobre o desafio
+
+Nesse desafio criamos uma área administrativa para o Foodfy, aplicação que está sendo desenvolvida durante o treinamento.
+
+O desafio consiste em somente adicionar essa área administrativa, que será responsável por cadastrar, editar e deletar os dados que estão no seu arquivo: `data.js`
+
+### Rotas do administrador
+
+Usando os conhecimentos adquiridos até aqui, criamos rotas para uma área administrativa, onde o usuário poderá cadastrar novas receitas, apresentá-las, além de atualizar e deletar também.
+
+### Dados do projeto
+
+No desafio passado criamos um arquivo de dados chamado `data.js` para servir de dados da aplicação.
+
+Agora utilizaremos, um arquivo que levará o nome `data.json`, porém, mantendo a estrutura de dados que tínhamos no arquivo: `data.js`.
+
+Exemplo:
+
+```json
+{
+  "recipes": []
+}
+```
+
+Nesse `array` de `recipes` irão as receitas cadastradas pelo seu sistema.
+
+### Adicionar Campo Dinâmico
+
+Os campos de "Ingredientes" e "Modo de preparo", serão campos dinâmicos, onde você irá adicionar quantos campos forem necessários, usando JavaScript para isso.
+
+#### GIF Exemplo
+
+<p align="center">
+  <img alt="Gif Campo Dinâmico" src="https://i.imgur.com/EOYWaJW.gif"/>
+</p>

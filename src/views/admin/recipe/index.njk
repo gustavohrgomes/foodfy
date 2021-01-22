@@ -1,0 +1,41 @@
+{% extends "admin/layout.njk" %}
+
+{% block head %}
+
+	<title>Foodfy - Painel Administrativo</title>
+
+{% endblock %}
+
+{% block content %}
+	<section id="admin-recipes" class="container">
+		<h1>Gerenciar Receitas</h1>
+		
+		<div class="admin-cards">
+			{% for recipe in recipes %}
+				<div class="card-item" id="{{loop.index0}}">
+
+					<div class="card-item__image-container">
+						<img src="{{recipe.image}}" alt="Burger">
+					</div>
+
+					<div class="card-item__info">
+						<div class="card-item__title">
+							<p>{{recipe.title}}</p>
+						</div>
+						<div class="card-item__description">
+							<p>por {{recipe.author}}</p>
+						</div>
+
+						<a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
+					</div>
+
+				</div>
+			{% endfor %}
+
+	</section>
+	
+{% endblock %}
+
+{% block scripts %}
+	<script src="/scripts.js"></script>
+{% endblock %}
