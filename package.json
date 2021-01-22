@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm-run-all -p nodemon browsersync",
-    "nodemon": "nodemon server.js",
-    "browsersync": "browser-sync start --proxy http://localhost:3333 --files 'public, views'"
+    "nodemon": "nodemon src/server.js",
+    "browsersync": "browser-sync start --proxy http://localhost:3333 --files 'public, src/views'"
   },
   "dependencies": {
     "express": "^4.17.1",
