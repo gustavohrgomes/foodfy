@@ -1,0 +1,44 @@
+<fieldset class="admin__input-group">
+  <legend>Nome</legend>
+
+  <div id="chef-name">
+    {% if chef.name %}
+      <div class="ingredients__input">
+        <input 
+          type="text" 
+          name="name" 
+          value="{{ chef.name }}"
+        >
+      </div>
+    {% else %}
+      <div class="ingredients__input">
+        <input 
+          type="text"
+          name="name"
+        >
+      </div>
+    {% endif %}
+  </div>
+</fieldset>
+
+<fieldset class="admin__input-group">
+  <legend>Avatar</legend>
+  <div id="chef-avatar">
+    {% if chef.avatar_url %}
+      <div class="ingredients__input">
+        <input 
+          type="text" 
+          name="avatar_url" 
+          value="{{ chef.avatar_url }}"
+        >
+      </div>
+    {% else %}
+      <div class="ingredients__input">
+        <input 
+          type="text"
+          name="avatar_url"
+        >
+      </div>
+    {% endif %}
+  </div>
+</fieldset>

@@ -1,0 +1,108 @@
+{% extends "admin/layout.njk" %}
+
+{% block head %}
+
+  <title>{{recipe.title}}</title>
+
+{% endblock %}
+
+{% block content %}
+
+  <section class="chefs__detail-section container">
+  
+    <div class="admin__header">
+      <h2>Chef: {{chef.name}}</h2>
+      <a href="/admin/chef/{{chefIndex}}/edit">Editar Chef</a>
+    </div>
+
+    <div class="chef-info">
+      {# <img src="{{recipe.image}}" alt="{{recipe.title}}"> #}
+      <div class="chef-avatar">
+        <img src="/assets/user.png" alt="user image">
+      </div>
+      <h1>Nome do chef</h1>
+      <p>5 Receitas</p>
+    </div>
+
+    <section class="chef-recipes">
+      <h2>Receitas</h2>
+
+      <div class="admin-cards">
+
+        <div class="card-item">
+          <div class="card-item__image-container">
+            <img src="/assets/lasanha.png" alt="lasanha">
+          </div>
+
+          <div class="card-item__info">
+            <div class="card-item__title">
+              <p>Lasanha Mac n' cheese</p>
+            </div>
+            <div class="card-item__description">
+              <p>por Nome do Chef</p>
+            </div>
+
+            <a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
+          </div>
+        </div>
+
+        <div class="card-item">
+          <div class="card-item__image-container">
+            <img src="/assets/doce.png" alt="doce">
+          </div>
+
+          <div class="card-item__info">
+            <div class="card-item__title">
+              <p>Docinhos pão-do-céu</p>
+            </div>
+            <div class="card-item__description">
+              <p>por Nome do Chef</p>
+            </div>
+
+            <a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
+          </div>
+        </div>
+
+        <div class="card-item">
+          <div class="card-item__image-container">
+            <img src="/assets/asinhas.png" alt="asinhas">
+          </div>
+
+          <div class="card-item__info">
+            <div class="card-item__title">
+              <p>Asinhas de frango ao barbecue</p>
+            </div>
+            <div class="card-item__description">
+              <p>por Nome do Chef</p>
+            </div>
+
+            <a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
+          </div>
+        </div>
+
+        <div class="card-item">
+          <div class="card-item__image-container">
+            <img src="/assets/espaguete.png" alt="espaguete">
+          </div>
+
+          <div class="card-item__info">
+            <div class="card-item__title">
+              <p>Espaguete ao alho</p>
+            </div>
+            <div class="card-item__description">
+              <p>por Nome do Chef</p>
+            </div>
+
+            <a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </section>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="/js/scripts.js"></script>
+{% endblock %}

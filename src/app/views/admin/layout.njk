@@ -11,14 +11,20 @@
 
     {% endblock %}
 
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/admin.css">
   </head>
 
   <body>
-    <div id="admin-panel" class="flex-container">
+    <main id="admin-panel" class="flex-container">
       <header class="admin-header">
-        <div class="admin-header__logo">
+        <div class="admin-header__logo wrapper">
           <img src="/assets/logo-light.png" alt="Foodfy">
+
+          <nav class="navbar">
+            <a href="/admin/recipes">Receitas</a>
+            <a href="/admin/chefs">Chefs</a>
+          </nav>
         </div>
       </header>
 
@@ -27,7 +33,7 @@
        <footer class="footer">
         <p>Todos direitos reservados, receitas Foodfy.</p>
       </footer>
-    </div>
+    </main>
 
    
 

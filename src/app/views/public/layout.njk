@@ -11,7 +11,8 @@
 
     {% endblock %}
 
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/style.css">
   </head>
 
   <body>
@@ -23,8 +24,11 @@
           <nav class="navbar">
             <a href="/about">Sobre</a>
             <a href="/recipes">Receita</a>
+            <a href="/chefs">Chefs</a>
           </nav>
 
+          {% block searchFilter %}
+          {% endblock %}
         </div>
       </header>
 

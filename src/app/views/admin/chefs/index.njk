@@ -1,0 +1,82 @@
+{% extends "admin/layout.njk" %}
+
+{% block head %}
+
+	<title>Foodfy - Painel Administrativo</title>
+
+{% endblock %}
+
+{% block content %}
+	<section id="admin-chefs" class="container">
+		<h1>Gerenciar chefs</h1>
+		
+		<div class="chef-cards">
+      <div class="card-item" id="{{loop.index0}}">
+
+        <div class="card-item__image-container">
+          <img src="/assets/user.png" alt="chef image">
+        </div>
+
+        <div class="card-item__info">
+          <div class="card-item__title">
+            <p>Nome do chef</p>
+          </div>
+
+          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
+        </div>
+      </div>
+
+      <div class="card-item" id="{{loop.index0}}">
+
+        <div class="card-item__image-container">
+          <img src="/assets/user.png" alt="chef image">
+        </div>
+
+        <div class="card-item__info">
+          <div class="card-item__title">
+            <p>Nome do chef</p>
+          </div>
+
+          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
+        </div>
+      </div>
+
+      <div class="card-item" id="{{loop.index0}}">
+
+        <div class="card-item__image-container">
+          <img src="/assets/user.png" alt="chef image">
+        </div>
+
+        <div class="card-item__info">
+          <div class="card-item__title">
+            <p>Nome do chef</p>
+          </div>
+
+          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
+        </div>
+      </div>
+
+      <div class="card-item" id="{{loop.index0}}">
+
+        <div class="card-item__image-container">
+          <img src="/assets/user.png" alt="chef image">
+        </div>
+
+        <div class="card-item__info">
+          <div class="card-item__title">
+            <p>Nome do chef</p>
+          </div>
+
+          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
+        </div>
+      </div>
+      
+    </div>
+
+	</section>
+	
+{% endblock %}
+
+{% block scripts %}
+	<script src="/js/scripts.js"></script>
+{% endblock %}

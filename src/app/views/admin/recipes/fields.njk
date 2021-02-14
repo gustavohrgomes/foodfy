@@ -1,4 +1,4 @@
-<fieldset class="recipe__input-group">
+<fieldset class="admin__input-group">
   <legend>Imagem da receita</legend>
   <input 
     type="text" 
@@ -7,7 +7,16 @@
   >
 </fieldset>
 
-<fieldset class="recipe__input-group">
+<fieldset class="admin__input-group">
+  <legend>Chef</legend>
+  <input 
+    type="text" 
+    name="author" 
+    value="{{ recipe.author }}"
+  >
+</fieldset>
+
+<fieldset class="admin__input-group">
   <legend>Ingredientes</legend>
 
   <div id="ingredients">
@@ -34,7 +43,7 @@
   <button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
 </fieldset>
 
-<fieldset class="recipe__input-group">
+<fieldset class="admin__input-group">
   <legend>Modo de preparo</legend>
 
   <div id="preparing">
@@ -61,7 +70,7 @@
   <button type="button" class="add-preparing">Adicionar novo passo</button>
 </fieldset>
 
-<fieldset class="recipe__input-group">
+<fieldset class="admin__input-group">
   <legend>Informações adicionais</legend>
   {% if recipe.information %}
     <textarea class="aditional-info" name="information">{{ recipe.information }}</textarea>

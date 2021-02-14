@@ -9,7 +9,7 @@
 {% block content %}
 	<section id="admin-recipes" class="container">
 		<form method="POST" action="/admin/recipes?_method=PUT">
-			<div class="recipe__header">
+			<div class="admin__header">
 				<h2>Editando Receita</h2>
 				<div class="form__button-container">
 					<button 
@@ -23,7 +23,7 @@
 				</div>
 			</div>
 
-			{% include "admin/recipe/fields.njk" %}
+			{% include "admin/recipes/fields.njk" %}
 
 			<input type="hidden" name="id" value="{{recipeIndex}}">
 		</form>
@@ -35,5 +35,5 @@
 {% endblock %}
 
 {% block scripts %}
-	<script src="/scripts.js"></script>
+	<script src="/js/scripts.js"></script>
 {% endblock %}

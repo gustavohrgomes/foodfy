@@ -1,0 +1,96 @@
+{% extends "public/layout.njk" %}
+
+{% block head %}
+
+	<title>Foodfy - Receitas</title>
+
+{% endblock %}
+
+{% block searchFilter %}
+  <form 
+    class="filter" 
+    action="/chefs?" 
+    method="GET"
+  >
+    <input 
+      type="text"
+      name="filter"
+      placeholder="Buscar por chef"
+      value="{{ filter }}"
+    >
+    <button type="submit">Buscar</button>
+  </form>
+{% endblock %}
+
+{% block content %}
+
+	<section class="recipes-section container">
+		<div class="chef-cards">
+      <div class="card-item" id="{{loop.index0}}">
+
+        <div class="card-item__image-container">
+          <img src="/assets/user.png" alt="chef image">
+        </div>
+
+        <div class="card-item__info">
+          <div class="card-item__title">
+            <p>Nome do chef</p>
+          </div>
+
+          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
+        </div>
+      </div>
+
+      <div class="card-item" id="{{loop.index0}}">
+
+        <div class="card-item__image-container">
+          <img src="/assets/user.png" alt="chef image">
+        </div>
+
+        <div class="card-item__info">
+          <div class="card-item__title">
+            <p>Nome do chef</p>
+          </div>
+
+          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
+        </div>
+      </div>
+
+      <div class="card-item" id="{{loop.index0}}">
+
+        <div class="card-item__image-container">
+          <img src="/assets/user.png" alt="chef image">
+        </div>
+
+        <div class="card-item__info">
+          <div class="card-item__title">
+            <p>Nome do chef</p>
+          </div>
+
+          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
+        </div>
+      </div>
+
+      <div class="card-item" id="{{loop.index0}}">
+
+        <div class="card-item__image-container">
+          <img src="/assets/user.png" alt="chef image">
+        </div>
+
+        <div class="card-item__info">
+          <div class="card-item__title">
+            <p>Nome do chef</p>
+          </div>
+
+          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
+        </div>
+      </div>
+      
+    </div>
+	</section>
+	
+{% endblock %}
+
+{% block scripts %}
+	<script src="/js/scripts.js"></script>
+{% endblock %}
