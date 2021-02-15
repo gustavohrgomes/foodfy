@@ -1,4 +1,4 @@
-{% extends "admin/layout.njk" %}
+{% extends "layouts/admin.njk" %}
 
 {% block head %}
 
@@ -11,66 +11,23 @@
 		<h1>Gerenciar chefs</h1>
 		
 		<div class="chef-cards">
-      <div class="card-item" id="{{loop.index0}}">
 
-        <div class="card-item__image-container">
-          <img src="/assets/user.png" alt="chef image">
-        </div>
+      {% for chef in chefs %}
+        <div class="card-item" id="{{loop.index0}}">
 
-        <div class="card-item__info">
-          <div class="card-item__title">
-            <p>Nome do chef</p>
+          <div class="card-item__image-container">
+            <img src="{{chef.avatar_url}}" alt="imagem do chef {{chef.name}}">
           </div>
 
-          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
-        </div>
-      </div>
+          <div class="card-item__info">
+            <div class="card-item__title">
+              <p>{{chef.name}}</p>
+            </div>
 
-      <div class="card-item" id="{{loop.index0}}">
-
-        <div class="card-item__image-container">
-          <img src="/assets/user.png" alt="chef image">
-        </div>
-
-        <div class="card-item__info">
-          <div class="card-item__title">
-            <p>Nome do chef</p>
+            <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
           </div>
-
-          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
         </div>
-      </div>
-
-      <div class="card-item" id="{{loop.index0}}">
-
-        <div class="card-item__image-container">
-          <img src="/assets/user.png" alt="chef image">
-        </div>
-
-        <div class="card-item__info">
-          <div class="card-item__title">
-            <p>Nome do chef</p>
-          </div>
-
-          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
-        </div>
-      </div>
-
-      <div class="card-item" id="{{loop.index0}}">
-
-        <div class="card-item__image-container">
-          <img src="/assets/user.png" alt="chef image">
-        </div>
-
-        <div class="card-item__info">
-          <div class="card-item__title">
-            <p>Nome do chef</p>
-          </div>
-
-          <a href="/admin/chefs/{{loop.index0}}">Visualizar</a>
-        </div>
-      </div>
-      
+      {% endfor %}
     </div>
 
 	</section>

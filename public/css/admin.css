@@ -33,19 +33,19 @@
   margin-bottom: 30px;
 }
 
-#admin-recipes .admin-cards {
+.admin-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-#admin-recipes .admin-cards .card-item {
+.admin-cards .card-item {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px
 }
 
-#admin-recipes .admin-cards .card-item__image-container {
+.admin-cards .card-item__image-container {
   width: 172px;
   height: 80px;
   overflow: hidden;
@@ -55,11 +55,11 @@
   border-radius: 8px;
 }
 
-#admin-recipes .admin-cards .card-item__image-container img {
+.admin-cards .card-item__image-container img {
   height: 100%;
 }
 
-#admin-recipes .admin-cards .card-item__title {
+.admin-cards .card-item__title {
   font-size: 18px;
   font-family: 'Roboto', 'Sans-Serif';
   line-height: 21px;
@@ -68,7 +68,7 @@
   margin-bottom: 5px;
 }
 
-#admin-recipes .admin-cards .card-item__description {
+.admin-cards .card-item__description {
   font-size: 14px;
   font-family: 'Roboto', 'Sans-Serif';
   line-height: 16px;

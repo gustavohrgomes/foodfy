@@ -1,6 +1,10 @@
+const Chefs = require('../models/Chefs');
+
 module.exports = {
   index(req, res) {
-    return res.render('admin/chefs/index');
+    Chefs.getAllChefs(function (chefs) {
+      return res.render('admin/chefs/index', { chefs });
+    });
   },
   create(req, res) {
     return res.render('admin/chefs/create');

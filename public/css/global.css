@@ -211,9 +211,11 @@ button.btn-collapse {
   align-items: center;
 }
 
-.chef-cards .card-item__image-container img{
+.chef-cards .card-item__image-container img {
   width: 64px;
+  height: 64px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .chef-cards .card-item__info .card-item__title {
