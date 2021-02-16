@@ -16,4 +16,18 @@ module.exports = {
       callback(results.rows);
     });
   },
+  getRecipe(id, callback) {
+    const selectRecipeFromRecipes = `
+      SELECT *
+      FROM recipes
+      WHERE id = $1
+    `;
+
+    db.query(selectRecipeFromRecipes, [id], (err, results) => {
+      if (err) throw `Database error! ${err}`;
+
+      console.log(results.rows[0]);
+      callback(results.rows[0]);
+    });
+  },
 };

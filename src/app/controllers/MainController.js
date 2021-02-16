@@ -1,8 +1,11 @@
-const data = require('../../data.json');
+const Recipes = require('../models/Recipe');
+const Chefs = require('../models/Chefs');
 
 module.exports = {
   index(req, res) {
-    return res.render('main/index', { items: data.recipes });
+    Recipes.getAllRecipes(function (recipes) {
+      return res.render('main/index', { recipes });
+    });
   },
 
   about(req, res) {
@@ -10,17 +13,20 @@ module.exports = {
   },
 
   recipes(req, res) {
-    return res.render('main/recipes', { items: data.recipes });
+    Recipes.getAllRecipes(function (recipes) {
+      return res.render('main/recipes', { recipes });
+    });
   },
 
   show(req, res) {
-    const recipeIndex = req.params.index;
-    const recipe = [...data.recipes];
-
-    return res.render('main/recipe', { recipe: recipe[recipeIndex] });
+    Recipes.getRecipe(req.params.id, function (recipe) {
+      return res.render('main/recipe', { recipe });
+    });
   },
 
   chefs(req, res) {
-    return res.render('main/chefs');
+    Chefs.getAllChefs(function (chefs) {
+      return res.render('main/chefs', { chefs });
+    });
   },
 };

@@ -26,30 +26,16 @@
 
 	<section class="recipes-section container">
 		<div class="cards">
-			{% for item in items %}
-				<div class="card" id="{{loop.index0}}">
+			{% for recipe in recipes %}
+				<div class="card" id="{{recipe.id}}">
 					<div class="card__image-container">
-						<img src="{{item.image}}" alt="Burger">
+						<img src="{{recipe.image}}" alt="Burger">
 					</div>
 					<div class="card__title">
-						<p>{{item.title}}</p>
+						<p>{{recipe.title}}</p>
 					</div>
 					<div class="card__description">
-						<p>por {{item.author}}</p>
-					</div>
-				</div>
-			{% endfor %}
-
-			{% for item in items %}
-				<div class="card" id="{{loop.index0}}">
-					<div class="card__image-container">
-						<img src="{{item.image}}" alt="Burger">
-					</div>
-					<div class="card__title">
-						<p>{{item.title}}</p>
-					</div>
-					<div class="card__description">
-						<p>por {{item.author}}</p>
+						<p>por {{recipe.author}}</p>
 					</div>
 				</div>
 			{% endfor %}

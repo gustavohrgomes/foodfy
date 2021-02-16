@@ -33,16 +33,16 @@
     <h1>Mais Acessadas</h1>
 
     <div class="cards">
-      {% for item in items %}
+      {% for recipe in recipes %}
 				<div class="card">
 					<div class="card__image-container">
-						<img src="{{item.image}}" alt="Burger">
+						<img src="{{recipe.image}}" alt="Burger">
 					</div>
 					<div class="card__title">
-						<p>{{item.title}}</p>
+						<p>{{recipe.title}}</p>
 					</div>
 					<div class="card__description">
-						<p>por {{item.author}}</p>
+						<p>por {{recipe.author}}</p>
 					</div>
 				</div>
 			{% endfor %}
