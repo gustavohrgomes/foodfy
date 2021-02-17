@@ -220,7 +220,7 @@ button.btn-collapse {
 
 .chef-cards .card-item__info .card-item__title {
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .card-item__info a {
@@ -228,4 +228,9 @@ button.btn-collapse {
   font-weight: 700;
   color: var(--color-purple);
   text-decoration: none;
+}
+
+.card-item__info small {
+  font-size: 14px;
+  color: #666;
 }
