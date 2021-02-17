@@ -12,91 +12,44 @@
   
     <div class="admin__header">
       <h2>Chef: {{chef.name}}</h2>
-      <a href="/admin/chef/{{chefIndex}}/edit">Editar Chef</a>
+      <a href="/admin/chef/{{chef.id}}/edit">Editar Chef</a>
     </div>
 
     <div class="chef-info">
-      {# <img src="{{recipe.image}}" alt="{{recipe.title}}"> #}
       <div class="chef-avatar">
-        <img src="/assets/user.png" alt="user image">
+        <img src="{{chef.avatar_url}}" alt="chef {{chef.name}} image">
       </div>
-      <h1>Nome do chef</h1>
-      <p>5 Receitas</p>
+      <h1>{{chef.name}}</h1>
+      <p>{{chef.total_recipes}} Receitas</p>
     </div>
 
     <section class="chef-recipes">
       <h2>Receitas</h2>
 
-      <div class="admin-cards">
+      {% if chef.total_recipes == 0 %}
 
-        <div class="card-item">
-          <div class="card-item__image-container">
-            <img src="/assets/lasanha.png" alt="lasanha">
-          </div>
+        <h3>Nenhuma receita cadastradas :(</h3>
 
-          <div class="card-item__info">
-            <div class="card-item__title">
-              <p>Lasanha Mac n' cheese</p>
-            </div>
-            <div class="card-item__description">
-              <p>por Nome do Chef</p>
+      {% else %}
+        <div class="admin-cards">
+          <div class="card-item">
+            <div class="card-item__image-container">
+              <img src="/assets/lasanha.png" alt="lasanha">
             </div>
 
-            <a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
-          </div>
-        </div>
+            <div class="card-item__info">
+              <div class="card-item__title">
+                <p>Lasanha Mac n' cheese</p>
+              </div>
+              <div class="card-item__description">
+                <p>por Nome do Chef</p>
+              </div>
 
-        <div class="card-item">
-          <div class="card-item__image-container">
-            <img src="/assets/doce.png" alt="doce">
-          </div>
-
-          <div class="card-item__info">
-            <div class="card-item__title">
-              <p>Docinhos pão-do-céu</p>
+              <a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
             </div>
-            <div class="card-item__description">
-              <p>por Nome do Chef</p>
-            </div>
-
-            <a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
           </div>
         </div>
-
-        <div class="card-item">
-          <div class="card-item__image-container">
-            <img src="/assets/asinhas.png" alt="asinhas">
-          </div>
-
-          <div class="card-item__info">
-            <div class="card-item__title">
-              <p>Asinhas de frango ao barbecue</p>
-            </div>
-            <div class="card-item__description">
-              <p>por Nome do Chef</p>
-            </div>
-
-            <a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
-          </div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-item__image-container">
-            <img src="/assets/espaguete.png" alt="espaguete">
-          </div>
-
-          <div class="card-item__info">
-            <div class="card-item__title">
-              <p>Espaguete ao alho</p>
-            </div>
-            <div class="card-item__description">
-              <p>por Nome do Chef</p>
-            </div>
-
-            <a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
-          </div>
-        </div>
-      </div>
+      {% endif %}
     </section>
 
   </section>
