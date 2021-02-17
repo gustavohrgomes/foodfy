@@ -8,7 +8,8 @@ module.exports = {
       chefs.name as author
     FROM 
       recipes
-    LEFT JOIN chefs ON chefs.id = recipes.chef_id;
+    LEFT JOIN chefs ON chefs.id = recipes.chef_id
+    ORDER BY recipes.created_at DESC;;
     `;
     db.query(selectFromRecipes, (err, results) => {
       if (err) throw `Database error! ${err}`;
@@ -26,7 +27,6 @@ module.exports = {
     db.query(selectRecipeFromRecipes, [id], (err, results) => {
       if (err) throw `Database error! ${err}`;
 
-      console.log(results.rows[0]);
       callback(results.rows[0]);
     });
   },
