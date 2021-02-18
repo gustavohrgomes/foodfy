@@ -12,7 +12,7 @@
   
     <div class="admin__header">
       <h2>Chef: {{chef.name}}</h2>
-      <a href="/admin/chef/{{chef.id}}/edit">Editar Chef</a>
+      <a href="/admin/chefs/{{chef.id}}/edit">Editar Chef</a>
     </div>
 
     <div class="chef-info">
@@ -32,22 +32,25 @@
 
       {% else %}
         <div class="admin-cards">
-          <div class="card-item">
-            <div class="card-item__image-container">
-              <img src="/assets/lasanha.png" alt="lasanha">
-            </div>
+          {% for recipe in recipes %}
 
-            <div class="card-item__info">
-              <div class="card-item__title">
-                <p>Lasanha Mac n' cheese</p>
-              </div>
-              <div class="card-item__description">
-                <p>por Nome do Chef</p>
+            <div class="card-item">
+              <div class="card-item__image-container">
+                <img src="{{recipe.image}}" alt="{{recipe.title}}">
               </div>
 
-              <a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
+              <div class="card-item__info">
+                <div class="card-item__title">
+                  <p>{{recipe.title}}</p>
+                </div>
+                <div class="card-item__description">
+                  <p>por {{chef.name}}</p>
+                </div>
+
+                <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
+              </div>
             </div>
-          </div>
+          {% endfor %}
         </div>
       {% endif %}
     </section>

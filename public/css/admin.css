@@ -184,7 +184,9 @@ fieldset.admin__input-group {
 
 #admin-panel .chef-info img {
   width: 200px;
+  height: 200px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 #admin-panel .chef-info .chef-avatar {
