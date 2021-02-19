@@ -15,7 +15,7 @@
 					<button 
 						class="form__button-delete" 
 						type="submit" 
-						form="delete-recipe"
+						form="form-delete"
 					>
 						Deletar
 					</button>
@@ -35,5 +35,6 @@
 {% endblock %}
 
 {% block scripts %}
+  {% include "admin/include/confirm.njk" %}
 	<script src="/js/scripts.js"></script>
 {% endblock %}

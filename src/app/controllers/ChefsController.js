@@ -3,7 +3,7 @@ const Chefs = require('../models/Chefs');
 
 module.exports = {
   index(req, res) {
-    Chefs.getAllChefs(function (chefs) {
+    Chefs.all(function (chefs) {
       return res.render('admin/chefs/index', { chefs });
     });
   },

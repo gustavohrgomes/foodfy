@@ -2,7 +2,7 @@ const db = require('../../config/dbConnection');
 const { date } = require('../../lib/utils');
 
 module.exports = {
-  getAllChefs(callback) {
+  all(callback) {
     const selectChefsFrom = `
       SELECT
         chefs.*,
@@ -16,6 +16,23 @@ module.exports = {
       if (err) throw `Database error! ${err}`;
 
       callback(results.rows);
+    });
+  },
+  find(id, callback) {
+    const selectChefFrom = `
+      SELECT
+        chefs.*,
+        COUNT(recipes) AS total_recipes
+      FROM chefs
+      LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+      WHERE chefs.id = $1
+      GROUP BY chefs.id;
+    `;
+
+    db.query(selectChefFrom, [id], (err, results) => {
+      if (err) throw `Database ${err}!`;
+
+      callback(results.rows[0]);
     });
   },
   getChefRecipes(id, callback) {
@@ -48,23 +65,6 @@ module.exports = {
 
     db.query(createChef, queryValues, (err, results) => {
       if (err) throw `Database error! ${err}`;
-
-      callback(results.rows[0]);
-    });
-  },
-  find(id, callback) {
-    const selectChefFrom = `
-      SELECT
-        chefs.*,
-        COUNT(recipes) AS total_recipes
-      FROM chefs
-      LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-      WHERE chefs.id = $1
-      GROUP BY chefs.id;
-    `;
-
-    db.query(selectChefFrom, [id], (err, results) => {
-      if (err) throw `Database ${err}!`;
 
       callback(results.rows[0]);
     });

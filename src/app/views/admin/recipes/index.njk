@@ -12,7 +12,7 @@
 		
 		<div class="admin-cards">
 			{% for recipe in recipes %}
-				<div class="card-item" id="{{loop.index0}}">
+				<div class="card-item" id="{{recipe.id}}">
 
 					<div class="card-item__image-container">
 						<img src="{{recipe.image}}" alt="Burger">
@@ -26,7 +26,7 @@
 							<p>por {{recipe.author}}</p>
 						</div>
 
-						<a href="/admin/recipes/{{loop.index0}}">Visualizar</a>
+						<a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
 					</div>
 
 				</div>
