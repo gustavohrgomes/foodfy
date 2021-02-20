@@ -11,17 +11,37 @@ module.exports = {
     return res.render('main/about');
   },
   recipes(req, res) {
-    let { filter } = req.query;
+    let { filter, page, limit } = req.query;
 
-    if (filter) {
-      Recipes.findby(filter, function (recipes) {
-        return res.render('main/recipes', { recipes, filter });
-      });
-    } else {
-      Recipes.all(function (recipes) {
-        return res.render('main/recipes', { recipes });
-      });
-    }
+    page = page || 1;
+    limit = limit || 6;
+
+    let offset = limit * (page - 1);
+
+    const queryParams = {
+      filter,
+      page,
+      limit,
+      offset,
+      callback(recipes) {
+        return res.render('main/recipes', {
+          recipes,
+          filter,
+        });
+      },
+    };
+
+    Recipes.paginate(queryParams);
+
+    // if (filter) {
+    //   Recipes.findby(filter, function (recipes) {
+    //     return res.render('main/recipes', { recipes, filter });
+    //   });
+    // } else {
+    //   Recipes.all(function (recipes) {
+    //     return res.render('main/recipes', { recipes });
+    //   });
+    // }
   },
   show(req, res) {
     Recipes.find(req.params.id, function (recipe) {

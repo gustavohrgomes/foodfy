@@ -138,4 +138,33 @@ module.exports = {
       callback();
     });
   },
+  paginate(params) {
+    const { filter, limit, offset, callback } = params;
+
+    let query = '';
+    filterquery = '';
+
+    if (filter) {
+      filterquery = `${query}
+        WHERE recipes.title ILIKE '%${filter}%'
+      `;
+    }
+
+    query = `${query}
+      SELECT 
+        recipes.*,
+        chefs.name AS author
+      FROM recipes
+      LEFT JOIN chefs on (recipes.chef_id = chefs.id)
+      ${filterquery}
+      ORDER BY recipes.created_at
+      LIMIT $1 OFFSET $2
+    `;
+
+    db.query(query, [limit, offset], (err, results) => {
+      if (err) throw `Database ${err}`;
+
+      callback(results.rows);
+    });
+  },
 };
