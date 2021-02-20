@@ -7,24 +7,15 @@
 {% endblock %}
 
 {% block searchFilter %}
-  <form 
-    class="filter" 
-    action="/recipes?" 
-    method="GET"
-  >
-    <input 
-      type="text"
-      name="filter"
-      placeholder="Buscar por receita"
-      value="{{ filter }}"
-    >
-    <button type="submit">Buscar</button>
-  </form>
+  {% include "main/includes/searchBar.njk" %}  
 {% endblock %}
 
 {% block content %}
 
 	<section class="recipes-section container">
+  {% if filter %}
+    <h1>Buscando por "{{filter}}"</h1>
+  {% endif %}
 		<div class="cards">
 			{% for recipe in recipes %}
 				<div class="card" id="{{recipe.id}}">

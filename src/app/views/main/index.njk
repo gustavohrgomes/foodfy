@@ -1,19 +1,7 @@
 {% extends "layouts/main.njk" %}
 
 {% block searchFilter %}
-  <form 
-    class="filter" 
-    action="/recipes?" 
-    method="GET"
-  >
-    <input 
-      type="text"
-      name="filter"
-      placeholder="Buscar por receita"
-      value="{{ filter }}"
-    >
-    <button type="submit">Buscar</button>
-  </form>
+  {% include "main/includes/searchBar.njk" %}  
 {% endblock %}
 
 {% block content %}

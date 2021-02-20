@@ -35,6 +35,24 @@ module.exports = {
       callback(results.rows[0]);
     });
   },
+  findby(filter, callback) {
+    const filterRecipe = `
+      SELECT 
+        recipes.*,
+        chefs.name AS author
+      FROM recipes
+      LEFT JOIN chefs on (recipes.chef_id = chefs.id)
+      WHERE recipes.title ILIKE '%${filter}%'
+      ORDER BY recipes.created_at
+    `;
+
+    db.query(filterRecipe, (err, results) => {
+      if (err) throw `Database error! ${err}`;
+
+      console.log(results.rows);
+      callback(results.rows);
+    });
+  },
   chefSelectOptions(callback) {
     const chefs = `
       SELECT 

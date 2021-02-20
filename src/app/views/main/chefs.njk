@@ -7,19 +7,7 @@
 {% endblock %}
 
 {% block searchFilter %}
-  <form 
-    class="filter" 
-    action="/chefs?" 
-    method="GET"
-  >
-    <input 
-      type="text"
-      name="filter"
-      placeholder="Buscar por chef"
-      value="{{ filter }}"
-    >
-    <button type="submit">Buscar</button>
-  </form>
+  {% include "main/includes/searchBar.njk" %}  
 {% endblock %}
 
 {% block content %}

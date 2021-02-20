@@ -11,9 +11,17 @@ module.exports = {
     return res.render('main/about');
   },
   recipes(req, res) {
-    Recipes.all(function (recipes) {
-      return res.render('main/recipes', { recipes });
-    });
+    let { filter } = req.query;
+
+    if (filter) {
+      Recipes.findby(filter, function (recipes) {
+        return res.render('main/recipes', { recipes, filter });
+      });
+    } else {
+      Recipes.all(function (recipes) {
+        return res.render('main/recipes', { recipes });
+      });
+    }
   },
   show(req, res) {
     Recipes.find(req.params.id, function (recipe) {
