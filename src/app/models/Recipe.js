@@ -142,18 +142,25 @@ module.exports = {
     const { filter, limit, offset, callback } = params;
 
     let query = '';
-    filterquery = '';
+    let filterquery = '';
+    let totalQuery = '(SELECT COUNT(*) FROM RECIPES) AS total';
 
     if (filter) {
       filterquery = `${query}
         WHERE recipes.title ILIKE '%${filter}%'
       `;
+
+      totalQuery = `(
+        SELECT COUNT(*) FROM RECIPES
+        ${filterquery}
+      ) AS total`;
     }
 
     query = `${query}
       SELECT 
         recipes.*,
-        chefs.name AS author
+        chefs.name AS author,
+        ${totalQuery}
       FROM recipes
       LEFT JOIN chefs on (recipes.chef_id = chefs.id)
       ${filterquery}

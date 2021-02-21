@@ -24,24 +24,20 @@ module.exports = {
       limit,
       offset,
       callback(recipes) {
+        const pagination = {
+          total: Math.ceil(recipes[0].total / limit),
+          page,
+        };
+
         return res.render('main/recipes', {
           recipes,
+          pagination,
           filter,
         });
       },
     };
 
     Recipes.paginate(queryParams);
-
-    // if (filter) {
-    //   Recipes.findby(filter, function (recipes) {
-    //     return res.render('main/recipes', { recipes, filter });
-    //   });
-    // } else {
-    //   Recipes.all(function (recipes) {
-    //     return res.render('main/recipes', { recipes });
-    //   });
-    // }
   },
   show(req, res) {
     Recipes.find(req.params.id, function (recipe) {

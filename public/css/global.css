@@ -235,3 +235,19 @@ button.btn-collapse {
   font-size: 14px;
   color: #666;
 }
+
+/* Paginação */
+.pagination {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: var(--color-font);
+  padding: 4px 8px;
+}
+
+.pagination a:hover {
+  color: var(--color-purple);
+}
