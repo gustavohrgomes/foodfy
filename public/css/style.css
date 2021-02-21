@@ -1,0 +1,160 @@
+/* === LANDING SECTION === */
+#landing .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  height: 366px;
+  border-radius: 30px;
+  background-color: #FBDFDB;
+
+  position: relative;
+}
+
+#landing .container .landing-text {
+  padding: 60px 80px 60px 60px;
+}
+
+#landing .container .landing-text h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+#landing .container .landing-text p {
+  font-size: 18px;
+  line-height: 28px;
+  opacity: 70%;
+}
+
+#landing .container .chef {
+  position: absolute;
+  bottom: 0;
+  right: 100px;
+}
+
+/* === Cards === */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px 20px;
+}
+
+.card {
+  cursor: pointer;
+}
+
+.card__image-container {
+  width: 300px;
+  height: 140px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+  
+  display: flex;
+  justify-content: center;
+}
+
+.card__image-container img{
+  height: 100%;
+}
+
+.card__title p {
+  font-size: 18px;
+  color: var(--color-black);
+  margin-bottom: 5px;
+}
+
+.card__description p {
+  font-size: 14px;
+  color: var(--color-grey);
+}
+
+/*=== ABOUT SECTION ===*/
+.about-section,
+.recipes-section {
+  margin-top: 25px;
+}
+
+.about-section p {
+  font-size: 18px;
+  line-height: 28px;
+  color: #444444;
+  margin-bottom: 30px;
+}
+
+.about-section div > h3 {
+  font-size: 20px;
+}
+
+
+/*=== Modal ===*/
+.modal-overlay {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  opacity: 0;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  width: 660px;
+  height: 413px;
+  border-radius: 16px;
+  padding: 30px;
+  position: relative;
+
+  background-color: #FFF;
+}
+
+.modal .modal__image {
+  width: 600px;
+  height: 200px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.modal .modal__title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.modal .modal__info {
+  font-size: 18px;
+  text-align: center;
+  color: var(--color-grey);
+}
+
+.modal .modal-buttons {
+  width: 600px;
+  display: flex;
+  justify-content: center;
+
+  position: absolute;
+  bottom: 30px;
+}
+
+.modal-buttons .close-modal {
+  color: #999;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+

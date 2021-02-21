@@ -1,0 +1,26 @@
+{% extends "layouts/admin.njk" %}
+
+{% block head %}
+
+	<title>Foodfy - Criando Receita</title>
+
+{% endblock %}
+
+{% block content %}
+	<section id="admin-chefs" class="container">
+		<form method="POST" action="/admin/chefs">
+			<div class="admin__header">
+				<h2>Cadastrando Chef</h2>
+				<button type="submit">Salvar Chef</button>
+			</div>
+
+			{% include "admin/chefs/fields.njk" %}
+
+		</form>
+	</section>
+	
+{% endblock %}
+
+{% block scripts %}
+	<script src="/js/scripts.js"></script>
+{% endblock %}

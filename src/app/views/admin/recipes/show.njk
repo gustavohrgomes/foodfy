@@ -1,0 +1,74 @@
+{% extends "layouts/admin.njk" %}
+
+{% block head %}
+
+  <title>{{recipe.title}}</title>
+
+{% endblock %}
+
+{% block content %}
+
+  <section class="recipes__detail-section container">
+  
+    <div class="admin__header">
+      <h2>Receita: {{recipe.title}}</h2>
+      <a href="/admin/recipes/{{recipe.id}}/edit">Editar Receita</a>
+    </div>
+
+    <div class="banner__image-container">
+      <img src="{{recipe.image}}" alt="{{recipe.title}}">
+    </div>
+    
+    <div class="recipe-info">
+      <h1>{{recipe.title}}</h1>
+      <p>Por {{recipe.author}}</p>
+    </div>
+
+    <div id="ingredients-section">
+      <div class="section-title">
+        <h3>Ingredientes</h3>
+      </div>
+      <div class="details">
+        <ul>
+          {% for ingredients in recipe.ingredients %}
+            <li>
+              {{ingredients}}
+            </li>
+          {% endfor%}
+        </ul>
+      </div>
+    </div>
+
+    <div id="preparation-section">
+      <div class="section-title">
+        <h3>Modo de preparo</h3>
+      </div>
+      <div class="details">
+        <ul>
+          {% for ingredients in recipe.preparation %}
+            <li>
+              {{ingredients}}
+            </li>
+          {% endfor%}
+        </ul>
+      </div>
+    </div>
+
+    {% if recipe.information != '' %}
+      <div id="information-section">
+        <div class="section-title">
+          <h3>Informações Adicionais</h3>
+        </div>
+        <div class="details">
+          <p>{{recipe.information}}</p>
+        </div>      
+      </div>
+    {% endif %}
+  
+  </section>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="/js/scripts.js"></script>
+{% endblock %}
