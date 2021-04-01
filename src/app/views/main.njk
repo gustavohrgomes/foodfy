@@ -16,28 +16,26 @@
   </head>
 
   <body>
-    <div class="flex-container">
-      <header>
-        <div class="wrapper">
-          <img src="/assets/logo.png" alt="Foodfy">
+    <header>
+      <div class="wrapper">
+        <img src="/assets/logo.png" alt="Foodfy">
 
-          <nav class="navbar">
-            <a href="/about">Sobre</a>
-            <a href="/recipes">Receita</a>
-            <a href="/chefs">Chefs</a>
-          </nav>
+        <nav class="navbar">
+          <a href="/about">Sobre</a>
+          <a href="/recipes">Receita</a>
+          <a href="/chefs">Chefs</a>
+        </nav>
 
-          {% block searchFilter %}
-          {% endblock %}
-        </div>
-      </header>
+        {% block searchFilter %}
+        {% endblock %}
+      </div>
+    </header>
 
-      {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
-      <footer class="footer">
-        <p>Todos direitos reservados, receitas Foodfy.</p>
-      </footer>
-    </div>
+    <footer class="footer">
+      <p>Todos direitos reservados, receitas Foodfy.</p>
+    </footer>
 
     {% block scripts %}{% endblock %}
   </body>
