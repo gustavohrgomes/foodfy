@@ -13,7 +13,10 @@
 
 {% block content %}
 
-	{{section.recipes("recipes-section container", recipes)}}
+  <section class="search container">
+    <h1>Você buscou por "{{filter}}"</h1>
+	  {{section.recipes("recipes-section", recipes)}}
+  </section>
 
   {% include "includes/pagination.njk" %}
 {% endblock %}

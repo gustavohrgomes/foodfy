@@ -1,13 +1,10 @@
-{% macro recipes(name, section, classes, recipes) %}
+{% macro recipes(classes, recipes) %}
   <section 
     {% if section %}
     id='{{section}}'
     {% endif %}
     class='{{classes}}'
   >
-  {% if name %}
-    <h1>{{name}}</h1>
-  {% endif %}
 		<div class="cards">
 			{% for recipe in recipes %}
 				<div class="card" id="{{recipe.id}}">

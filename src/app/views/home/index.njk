@@ -18,6 +18,9 @@
     </div>
   </section>
 
-  {{section.recipes("Mais acessadas", "most-accessed", "container", recipes)}}
-
+  <section class="most-accessed container">
+    <h1>Mais acessadas</h1>
+    {{section.recipes("container", recipes)}}
+  </section>
+  
 {% endblock %}
