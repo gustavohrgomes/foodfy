@@ -4,11 +4,11 @@ const Chefs = require('../models/Chefs');
 module.exports = {
   index(req, res) {
     Recipes.all(function (recipes) {
-      return res.render('main/index', { recipes });
+      return res.render('home/index', { recipes });
     });
   },
   about(req, res) {
-    return res.render('main/about');
+    return res.render('public/about');
   },
   recipes(req, res) {
     let { filter, page, limit } = req.query;
@@ -29,7 +29,7 @@ module.exports = {
           page,
         };
 
-        return res.render('main/recipes', {
+        return res.render('public/recipes', {
           recipes,
           pagination,
           filter,
@@ -41,12 +41,12 @@ module.exports = {
   },
   show(req, res) {
     Recipes.find(req.params.id, function (recipe) {
-      return res.render('main/recipe', { recipe });
+      return res.render('public/recipe', { recipe });
     });
   },
   chefs(req, res) {
     Chefs.all(function (chefs) {
-      return res.render('main/chefs', { chefs });
+      return res.render('public/chefs', { chefs });
     });
   },
 };
