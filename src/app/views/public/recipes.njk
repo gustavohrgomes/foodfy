@@ -1,4 +1,5 @@
 {% extends "main.njk" %}
+{% import "includes/recipes-section.njk" as section %}
 
 {% block head %}
 
@@ -12,29 +13,7 @@
 
 {% block content %}
 
-	<section class="recipes-section container">
-  {% if filter %}
-    <h1>Buscando por "{{filter}}"</h1>
-  {% endif %}
-		<div class="cards">
-			{% for recipe in recipes %}
-				<div class="card" id="{{recipe.id}}">
-					<div class="card__image-container">
-						<img src="{{recipe.image}}" alt="Burger">
-					</div>
-					<div class="card__title">
-						<p>{{recipe.title}}</p>
-					</div>
-					<div class="card__description">
-						<p>por {{recipe.author}}</p>
-					</div>
-				</div>
-			{% endfor %}
-	</section>
+	{{section.recipes("", "", "recipes-section container", recipes)}}
 
-{% include "includes/pagination.njk" %}
-{% endblock %}
-
-{% block scripts %}
-	<script src="/js/scripts.js"></script>
+  {% include "includes/pagination.njk" %}
 {% endblock %}

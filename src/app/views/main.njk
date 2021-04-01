@@ -18,7 +18,12 @@
   <body>
     <header>
       <div class="wrapper">
-        <img src="/assets/logo.png" alt="Foodfy">
+        <a href="/">
+          <img src="/assets/logo.png" alt="Foodfy">
+        </a>
+
+        {# <img src="/assets/logo.png" alt="Foodfy"> #}
+
 
         <nav class="navbar">
           <a href="/about">Sobre</a>
@@ -33,11 +38,6 @@
 
     {% block content %}{% endblock %}
 
-    <footer class="footer">
-      <p>Todos direitos reservados, receitas Foodfy.</p>
-    </footer>
-
-    {% block scripts %}{% endblock %}
+    {% include "includes/public/footer.njk" %}
   </body>
-
 </html>

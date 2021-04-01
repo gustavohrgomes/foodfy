@@ -1,4 +1,5 @@
 {% extends "main.njk" %}
+{% import "includes/recipes-section.njk" as section %}
 
 {% block searchFilter %}
   {% include "includes/search-bar.njk" %}  
@@ -17,24 +18,6 @@
     </div>
   </section>
 
-  <section id="most-accessed" class="container">
-    <h1>Mais Acessadas</h1>
-
-    <div class="cards">
-      {% for recipe in recipes %}
-				<div class="card">
-					<div class="card__image-container">
-						<img src="{{recipe.image}}" alt="Burger">
-					</div>
-					<div class="card__title">
-						<p>{{recipe.title}}</p>
-					</div>
-					<div class="card__description">
-						<p>por {{recipe.author}}</p>
-					</div>
-				</div>
-			{% endfor %}
-    </div>
-  </section>
+  {{section.recipes("Mais acessadas", "most-accessed", "container", recipes)}}
 
 {% endblock %}
