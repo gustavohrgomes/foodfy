@@ -16,28 +16,11 @@
   </head>
 
   <body>
-    <main id="admin-panel" class="flex-container">
-      <header class="admin-header">
-        <div class="admin-header__logo wrapper">
-          <img src="/assets/logo-light.png" alt="Foodfy">
+    {% include "includes/admin/header.njk" %}
 
-          <nav class="navbar">
-            <a href="/admin/recipes">Receitas</a>
-            <a href="/admin/chefs">Chefs</a>
-          </nav>
-        </div>
-      </header>
+    {% block content %}{% endblock %}
 
-      {% block content %}{% endblock %}
-  
-       <footer class="footer">
-        <p>Todos direitos reservados, receitas Foodfy.</p>
-      </footer>
-    </main>
-
-   
-
-    {% block scripts %}{% endblock %}
+    {% include "includes/public/footer.njk" %}
   </body>
 
 </html>

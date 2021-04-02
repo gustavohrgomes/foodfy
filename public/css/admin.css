@@ -178,19 +178,19 @@ fieldset.admin__input-group {
 }
 
 /* CHEFS */
-#admin-panel .chef-info {
+.chefs__detail-section .chef-info {
   text-align: center;
   margin: 42px 0 50px
 }
 
-#admin-panel .chef-info img {
+.chefs__detail-section .chef-info img {
   width: 200px;
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-#admin-panel .chef-info .chef-avatar {
+.chefs__detail-section .chef-info .chef-avatar {
   margin-bottom: 30px;
 }
 
@@ -199,12 +199,12 @@ fieldset.admin__input-group {
   margin-bottom: 10px;
 }
 
-#admin-panel .chef-info h1 {
+.chefs__detail-section .chef-info h1 {
   font-size: 36px;
   margin-bottom: 4px;
 }
 
-#admin-panel .chef-info p {
+.chefs__detail-section .chef-info p {
   color: var(--color-grey);
   font-size: 20px;
 }
@@ -213,10 +213,10 @@ fieldset.admin__input-group {
   margin-bottom: 30px;
 }
 
-#admin-panel .recipe-info h1{
+.chefs__detail-section .recipe-info h1{
   margin-bottom: 4px;
 }
 
-#admin-panel .recipe-info p {
+.chefs__detail-section .recipe-info p {
   margin-bottom: 31px;
 }
