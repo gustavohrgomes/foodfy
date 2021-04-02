@@ -2,101 +2,101 @@ const db = require('../../config/dbConnection');
 const { date } = require('../../lib/utils');
 
 module.exports = {
-  all(callback) {
-    const selectChefsFrom = `
-      SELECT
-        chefs.*,
-        COUNT(recipes) AS total_recipes
-      FROM chefs
-      LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-      GROUP BY chefs.id;
-    `;
+  all() {
+    try {
+      const selectChefsFrom = `
+        SELECT
+          chefs.*,
+          COUNT(recipes) AS total_recipes
+        FROM chefs
+        LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+        GROUP BY chefs.id;
+      `;
 
-    db.query(selectChefsFrom, (err, results) => {
-      if (err) throw `Database error! ${err}`;
-
-      callback(results.rows);
-    });
+      return db.query(selectChefsFrom);
+    } catch (error) {
+      throw new Error(error);
+    }
   },
-  find(id, callback) {
-    const selectChefFrom = `
-      SELECT
-        chefs.*,
-        COUNT(recipes) AS total_recipes
-      FROM chefs
-      LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-      WHERE chefs.id = $1
-      GROUP BY chefs.id;
-    `;
+  find(id) {
+    try {
+      const selectChefFrom = `
+        SELECT
+          chefs.*,
+          COUNT(recipes) AS total_recipes
+        FROM chefs
+        LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+        WHERE chefs.id = $1
+        GROUP BY chefs.id;
+      `;
 
-    db.query(selectChefFrom, [id], (err, results) => {
-      if (err) throw `Database ${err}!`;
-
-      callback(results.rows[0]);
-    });
+      return db.query(selectChefFrom, [id]);
+    } catch (error) {
+      throw new Error(error);
+    }
   },
-  getChefRecipes(id, callback) {
-    const selectChefRecipes = `
-      SELECT 
-        recipes.*
-      FROM 
-        recipes
-      LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
-      WHERE chefs.id = $1;
-    `;
+  getChefRecipes(id) {
+    try {
+      const selectChefRecipes = `
+        SELECT 
+          recipes.*
+        FROM 
+          recipes
+        LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
+        WHERE chefs.id = $1;
+      `;
 
-    db.query(selectChefRecipes, [id], (err, results) => {
-      if (err) throw `Database ${err}!`;
-
-      callback(results.rows);
-    });
+      return db.query(selectChefRecipes, [id]);
+    } catch (error) {
+      throw new Error(error);
+    }
   },
-  create(chef, callback) {
-    const createChef = `
-      INSERT INTO chefs (
-        name,
-        avatar_url
-      )
-      VALUES ($1, $2)
-      RETURNING id
-    `;
+  create(chef) {
+    try {
+      const createChef = `
+        INSERT INTO chefs (
+          name,
+          avatar_url
+        )
+        VALUES ($1, $2)
+        RETURNING id
+      `;
 
-    const queryValues = [chef.name, chef.avatar_url];
+      const queryValues = [chef.name, chef.avatar_url];
 
-    db.query(createChef, queryValues, (err, results) => {
-      if (err) throw `Database error! ${err}`;
-
-      callback(results.rows[0]);
-    });
+      return db.query(createChef, queryValues);
+    } catch (error) {
+      throw new Error(error);
+    }
   },
-  update(chef, callback) {
-    const updateChef = `
-    UPDATE 
-      chefs
-    SET
-      name=($1),
-      avatar_url=($2)
-    WHERE id = $3
-    `;
+  update(chef) {
+    try {
+      const updateChef = `
+        UPDATE 
+          chefs
+        SET
+          name=($1),
+          avatar_url=($2)
+        WHERE id = $3
+      `;
 
-    const values = [chef.name, chef.avatar_url, chef.id];
+      const values = [chef.name, chef.avatar_url, chef.id];
 
-    db.query(updateChef, values, (err, results) => {
-      if (err) throw `Database ${err}!`;
-
-      callback();
-    });
+      return db.query(updateChef, values);
+    } catch (error) {
+      throw new Error(error);
+    }
   },
-  delete(id, callback) {
-    const deleteChef = `
-      DELETE FROM chefs 
-      WHERE id = $1
-    `;
+  delete(id) {
+    try {
+      const deleteChef = `
+        DELETE FROM chefs 
+        WHERE id = $1
+      `;
 
-    db.query(deleteChef, [id], (err, results) => {
-      if (err) throw `Database ${err}!`;
-
-      callback();
-    });
+      return db.query(deleteChef, [id]);
+    } catch (error) {
+      throw new Error(error);
+    }
   },
 };

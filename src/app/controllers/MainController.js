@@ -2,51 +2,66 @@ const Recipes = require('../models/Recipe');
 const Chefs = require('../models/Chefs');
 
 module.exports = {
-  index(req, res) {
-    Recipes.all(function (recipes) {
-      return res.render('main/index', { recipes });
-    });
+  async index(req, res) {
+    try {
+      let results = await Recipes.all();
+      const recipes = results.rows;
+
+      return res.render('home/index', { recipes });
+    } catch (error) {
+      throw new Error(error);
+    }
   },
   about(req, res) {
-    return res.render('main/about');
+    return res.render('public/about');
   },
-  recipes(req, res) {
-    let { filter, page, limit } = req.query;
+  async recipes(req, res) {
+    try {
+      let { filter, page, limit } = req.query;
 
-    page = page || 1;
-    limit = limit || 6;
+      page = page || 1;
+      limit = limit || 6;
 
-    let offset = limit * (page - 1);
+      let offset = limit * (page - 1);
 
-    const queryParams = {
-      filter,
-      page,
-      limit,
-      offset,
-      callback(recipes) {
-        const pagination = {
-          total: Math.ceil(recipes[0].total / limit),
-          page,
-        };
+      const queryParams = {
+        filter,
+        page,
+        limit,
+        offset,
+      };
 
-        return res.render('main/recipes', {
-          recipes,
-          pagination,
-          filter,
-        });
-      },
-    };
+      let results = await Recipes.paginate(queryParams);
+      const recipes = results.rows;
 
-    Recipes.paginate(queryParams);
+      const pagination = {
+        total: Math.ceil(recipes[0].total / limit),
+        page,
+      };
+
+      return res.render('public/recipes', {
+        recipes,
+        pagination,
+        filter,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
   },
-  show(req, res) {
-    Recipes.find(req.params.id, function (recipe) {
-      return res.render('main/recipe', { recipe });
-    });
+  async show(req, res) {
+    try {
+      let results = await Recipes.find(req.params.id);
+      const recipe = results.rows[0];
+
+      return res.render('public/recipe', { recipe });
+    } catch (error) {
+      throw new Error(error);
+    }
   },
-  chefs(req, res) {
-    Chefs.all(function (chefs) {
-      return res.render('main/chefs', { chefs });
-    });
+  async chefs(req, res) {
+    let results = await Chefs.all();
+    const chefs = results.rows;
+
+    return res.render('public/chefs', { chefs });
   },
 };

@@ -1,0 +1,22 @@
+{% extends "main.njk" %}
+{% import "includes/recipes-section.njk" as section %}
+
+{% block head %}
+
+	<title>Foodfy - Receitas</title>
+
+{% endblock %}
+
+{% block searchFilter %}
+  {% include "includes/search-bar.njk" %}  
+{% endblock %}
+
+{% block content %}
+
+  <section class="search container">
+    <h1>Você buscou por "{{filter}}"</h1>
+	  {{section.recipes("recipes-section", recipes)}}
+  </section>
+
+  {% include "includes/pagination.njk" %}
+{% endblock %}
