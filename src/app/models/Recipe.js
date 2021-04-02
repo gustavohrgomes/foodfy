@@ -51,20 +51,6 @@ module.exports = {
       throw new Error(error);
     }
   },
-  chefSelectOptions() {
-    try {
-      const chefs = `
-        SELECT 
-          id,
-          name
-        FROM chefs
-      `;
-
-      return db.query(chefs);
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
   create(recipe) {
     try {
       const createRecipe = `
