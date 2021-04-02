@@ -2,21 +2,21 @@ const db = require('../../config/dbConnection');
 const { date } = require('../../lib/utils');
 
 module.exports = {
-  all(callback) {
-    const selectChefsFrom = `
-      SELECT
-        chefs.*,
-        COUNT(recipes) AS total_recipes
-      FROM chefs
-      LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-      GROUP BY chefs.id;
-    `;
+  all() {
+    try {
+      const selectChefsFrom = `
+        SELECT
+          chefs.*,
+          COUNT(recipes) AS total_recipes
+        FROM chefs
+        LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+        GROUP BY chefs.id;
+      `;
 
-    db.query(selectChefsFrom, (err, results) => {
-      if (err) throw `Database error! ${err}`;
-
-      callback(results.rows);
-    });
+      return db.query(selectChefsFrom);
+    } catch (error) {
+      throw new Error(error);
+    }
   },
   find(id, callback) {
     const selectChefFrom = `
