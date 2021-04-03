@@ -151,14 +151,19 @@ if (pagination) {
 }
 
 const PhotosUpload = {
-  preview: document.querySelector('#photos-preview'),
+  input: '',
   uploadLimit: 5,
+  preview: document.querySelector('#photos-preview'),
+  files: [],
   handleFileInput(event) {
     const { files: fileList } = event.target;
+    PhotosUpload.input = event.target;
 
     if (PhotosUpload.hasLimit(event)) return;
 
     Array.from(fileList).forEach(file => {
+      PhotosUpload.files.push(file);
+
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -171,10 +176,12 @@ const PhotosUpload = {
 
       reader.readAsDataURL(file);
     });
+
+    PhotosUpload.input.files = PhotosUpload.getAllFiles();
   },
   hasLimit(event) {
-    const { files: fileList } = event.target;
     const { uploadLimit } = PhotosUpload;
+    const { files: fileList } = event.target;
 
     if (fileList.length > uploadLimit) {
       alert(`Envie no máximo ${uploadLimit} fotos`);
@@ -184,14 +191,40 @@ const PhotosUpload = {
 
     return false;
   },
+  getAllFiles() {
+    const dataTransfer =
+      new ClipboardEvent('').clipboardData || new DataTransfer();
+
+    PhotosUpload.files.forEach(file => dataTransfer.items.add(file));
+
+    return dataTransfer.files;
+  },
   getContainer(image) {
     const div = document.createElement('div');
     div.classList.add('photo');
 
-    div.onclick = () => alert('Remover foto');
+    div.onclick = PhotosUpload.removePhoto;
 
     div.appendChild(image);
+    div.appendChild(PhotosUpload.getRemoveButton());
 
     return div;
+  },
+  getRemoveButton() {
+    const button = document.createElement('i');
+    button.classList.add('material-icons');
+    button.innerHTML = 'close';
+
+    return button;
+  },
+  removePhoto(event) {
+    const photoDiv = event.target.parentNode;
+    const photosArray = Array.from(PhotosUpload.preview.children);
+    const index = photosArray.indexOf(photoDiv);
+
+    PhotosUpload.files.splice(index, 1);
+    PhotosUpload.input.files = PhotosUpload.getAllFiles();
+
+    photoDiv.remove();
   },
 };
