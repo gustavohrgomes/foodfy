@@ -220,3 +220,48 @@ fieldset.admin__input-group {
 .chefs__detail-section .recipe-info p {
   margin-bottom: 31px;
 }
+
+/* IMAGES/PHOTOS UPLOAD */
+form .admin__input-group #photos-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .4rem;
+  margin-top: 10px 0;
+}
+
+form .admin__input-group #photos-upload {
+  position: relative;
+  display: block;
+  width: 150px;
+  height: 150px;
+  border: 1px solid #DDD;
+  border-radius: 4px;
+}
+
+form #photos-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: max-content;
+  opacity: 0;
+  overflow: hidden;
+  cursor: pointer;
+  transform: translateY(100%);
+}
+
+form #photos-upload i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 3rem;
+  color: var(--color-grey);
+  transition: color 200ms ease-in-out;
+}
+
+form #photos-input:hover + i {
+  color: var(--color-purple);
+}

@@ -9,11 +9,28 @@
 
 <fieldset class="admin__input-group">
   <legend>Imagem da receita</legend>
-  <input 
-    type="text" 
-    name="image" 
-    value="{{ recipe.image }}"
-  >
+  <div id="photos-container">
+    <div id="photos-upload">
+      <input 
+        id="photos-input"
+        type="file" 
+        name="photos" 
+        multiple
+        accept="image/png, image/jpeg, image/jpg"
+      >
+      <i class="material-icons">add</i>
+    </div>
+    <div id="photos-preview">
+      {% if files %}
+        {% for image in files %}
+          <div id="{{image.id}}" class="photo">
+            <img src="{{image.src}}" alt="{{image.name}}">
+          </div>
+        {% endfor %}
+        <input type="hidden" name="removed_files">
+      {% endif %}
+    </div>
+  </div>
 </fieldset>
 
 <fieldset class="admin__input-group">
