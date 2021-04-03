@@ -1,7 +1,9 @@
-DROP TABLE IF EXISTS recipes;
-DROP TABLE IF EXISTS chefs;
+DROP TABLE IF EXISTS "recipes";
+DROP TABLE IF EXISTS "chefs";
+DROP TABLE IF EXISTS "files";
+DROP TABLE IF EXISTS "recipe_files";
 
-CREATE TABLE recipes (
+CREATE TABLE "recipes" (
   id SERIAL PRIMARY KEY,
   chef_id INT,
   image TEXT,
@@ -12,12 +14,28 @@ CREATE TABLE recipes (
   created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
 );
 
-CREATE TABLE chefs (
+CREATE TABLE "chefs" (
   id SERIAL PRIMARY KEY NOT NULL,
   name TEXT,
   avatar_url TEXT,
   created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
 );
+
+CREATE TABLE "files" (
+  "id" SERIAL PRIMARY KEY,
+  "name" text,
+  "path" text NOT NULL
+);
+
+CREATE TABLE "recipe_files" (
+  "id" SERIAL PRIMARY KEY,
+  "recipe_id" int ,
+  "file_id" int
+);
+
+ALTER TABLE "recipe_files" ADD FOREIGN KEY ("recipe_id") REFERENCES "recipes" ("id")
+
+ALTER TABLE "recipe_files" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id")
 
 INSERT INTO recipes (chef_id, image, title, ingredients, preparation, information) VALUES (5, 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/lasanha.png', 'Lasanha mac n'' cheese', '{"massa pronta de lasanha","400 g de presunto","400 g de mussarela ralada","2 copos de requeijão","150 g de mussarela para gratinar"}', '{"Em uma panela, coloque a manteiga para derreter.","Acrescente a farinha de trigo e misture bem com auxílio de um fouet.","Adicione o leite e misture até formar um creme homogêneo.","Tempere com sal, pimenta e noz-moscada a gosto.","Desligue o fogo e acrescente o creme de leite; misture bem e reserve."}', 'Recheie a lasanha com o que preferir.');
 INSERT INTO recipes (chef_id, image, title, ingredients, preparation, information) VALUES (4, 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/asinha.png', 'Asinhas de frango ao barbecue', '{"12 encontros de asinha de galinha, temperados a gosto","2 colheres de sopa de farinha de trigo","1/2 xícara (chá) de óleo","1 xícara de molho barbecue"}', '{"Em uma tigela coloque o encontro de asinha de galinha e polvilhe a farinha de trigo e misture com as mãos.","Em uma frigideira ou assador coloque o óleo quando estiver quente frite até ficarem douradas.","Para servir fica bonito com salada, ou abuse da criatividade."}', ' ');
