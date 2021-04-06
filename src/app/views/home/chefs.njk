@@ -1,0 +1,28 @@
+{% extends "main.njk" %}
+
+{% block head %}
+
+	<title>Foodfy - Receitas</title>
+
+{% endblock %}
+
+{% block content %}
+
+	<section class="chefs-container container">
+    {% for chef in chefs %}
+      <div class="chef" id="{{chef.id}}">
+        {% if not chef.avatar_url %}
+          <img src="http://placehold.it/500x500" alt="Imagem do chef {{chef.name}}">
+        {% else %}
+          <img src="{{chef.avatar_url}}" alt="Imagem do chef {{chef.name}}">
+        {% endif %}
+
+        <div class="chef-info">
+          <h3>{{chef.name}}</h3>
+          <p>{{chef.total_recipes}} receitas</p>
+        </div>
+      </div>
+    {% endfor %}
+	</section>
+	
+{% endblock %}

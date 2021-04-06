@@ -8,27 +8,29 @@
 
 {% block content %}
 
-  <section class="recipes__detail-section container">
+  <section class="recipe-single container">
   
-    <div class="admin__header">
+    <div class="title">
       <h2>Receita: {{recipe.title}}</h2>
-      <a href="/admin/recipes/{{recipe.id}}/edit">Editar Receita</a>
+      <a class="btn" href="/admin/recipes/{{recipe.id}}/edit">Editar Receita</a>
     </div>
 
-    <div class="banner__image-container">
+    {% if not recipe.image %}
+      <img src="http://placehold.it/900x280" alt="Imagem da receita {{recipe.title}}">
+    {% else %}
       <img src="{{recipe.image}}" alt="{{recipe.title}}">
-    </div>
+    {% endif %}
     
-    <div class="recipe-info">
+    <div class="title">
       <h1>{{recipe.title}}</h1>
       <p>Por {{recipe.author}}</p>
     </div>
 
-    <div id="ingredients-section">
-      <div class="section-title">
-        <h3>Ingredientes</h3>
+    <div id="ingredients" class="recipe-content">
+      <div class="title">
+        <h2>Ingredientes</h2>
       </div>
-      <div class="details">
+      <div class="content">
         <ul>
           {% for ingredients in recipe.ingredients %}
             <li>
@@ -39,11 +41,11 @@
       </div>
     </div>
 
-    <div id="preparation-section">
-      <div class="section-title">
-        <h3>Modo de preparo</h3>
+    <div id="preparation-section" class="recipe-content">
+      <div class="title">
+        <h2>Modo de preparo</h2>
       </div>
-      <div class="details">
+      <div class="content">
         <ul>
           {% for ingredients in recipe.preparation %}
             <li>
@@ -54,10 +56,10 @@
       </div>
     </div>
 
-    {% if recipe.information != '' %}
-      <div id="information-section">
-        <div class="section-title">
-          <h3>Informações Adicionais</h3>
+    {% if recipe.information !== '' %}
+      <div id="information-section" class="recipe-content">
+        <div class="title">
+          <h2>Informações Adicionais</h2>
         </div>
         <div class="details">
           <p>{{recipe.information}}</p>

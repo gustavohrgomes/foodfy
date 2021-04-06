@@ -1,0 +1,13 @@
+<section class='recipes-container'>
+  {% for recipe in recipes %}
+    <div class="recipe" id="{{recipe.id}}">
+      {% if not recipe.image %}
+        <img src="http://placehold.it/500x500" alt="Burger">
+      {% else %}
+        <img src="{{recipe.image}}" alt="Burger">
+      {% endif %}
+      <h3>{{recipe.title}}</h3>
+      <p>por {{recipe.author}}</p>
+    </div>
+  {% endfor %}
+</section>

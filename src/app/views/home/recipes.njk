@@ -1,0 +1,20 @@
+{% extends "main.njk" %}
+
+{% block head %}
+
+	<title>Foodfy - Receitas</title>
+
+{% endblock %}
+
+{% block searchFilter %}
+  {% include "parts/search-recipes.njk" %}  
+{% endblock %}
+
+{% block content %}
+
+  <section class="container">
+    {% include "parts/recipes-section.njk" %}
+    {% include "parts/pagination.njk" %}
+  </section>
+
+{% endblock %}

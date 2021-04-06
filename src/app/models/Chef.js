@@ -1,5 +1,4 @@
 const db = require('../../config/dbConnection');
-const { date } = require('../../lib/utils');
 
 module.exports = {
   all() {
