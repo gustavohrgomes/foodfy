@@ -65,13 +65,22 @@ module.exports = {
     results = await Recipes.find(id);
     const recipe = results.rows[0];
 
-    if (!recipe) {
-      return res.send('Receita não encontrada!');
-    }
+    if (!recipe) return res.send('Receita não encontrada!');
+
+    results = await Recipes.files(recipe.id);
+    let files = results.rows;
+    files = files.map(file => ({
+      ...file,
+      src: `${req.protocol}://${req.headers.host}${file.path.replace(
+        'public',
+        '',
+      )}`,
+    }));
 
     return res.render('admin/recipes/edit', {
       recipe,
       chefOptions,
+      files,
     });
   },
   async put(req, res) {

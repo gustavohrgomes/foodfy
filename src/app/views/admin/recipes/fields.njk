@@ -26,6 +26,7 @@
         {% for image in files %}
           <div id="{{image.id}}" class="photo">
             <img src="{{image.src}}" alt="{{image.name}}">
+            <i class="material-icons">close</i>
           </div>
         {% endfor %}
         <input type="hidden" name="removed_files">
