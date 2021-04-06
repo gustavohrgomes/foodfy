@@ -1,5 +1,7 @@
 const express = require('express');
 const routes = express.Router();
+const multer = require('./app/middlewares/multer');
+
 const Main = require('./app/controllers/MainController');
 const Recipes = require('./app/controllers/RecipesController');
 const Chefs = require('./app/controllers/ChefsController.js');
@@ -24,8 +26,8 @@ routes.get('/admin/recipes/create', Recipes.create);
 routes.get('/admin/recipes/:id', Recipes.show);
 routes.get('/admin/recipes/:id/edit', Recipes.edit);
 
-routes.post('/admin/recipes', Recipes.post);
-routes.put('/admin/recipes', Recipes.put);
+routes.post('/admin/recipes', multer.array('photos', 5), Recipes.post);
+routes.put('/admin/recipes', multer.array('photos', 5), Recipes.put);
 routes.delete('/admin/recipes', Recipes.delete);
 
 // Chef Admin
