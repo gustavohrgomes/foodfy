@@ -57,19 +57,17 @@ module.exports = {
         INSERT INTO recipes (
           chef_id,
           title,
-          image,
           ingredients,
           preparation,
           information
         )
-        VALUES ($1, $2, $3, $4, $5, $6)
+        VALUES ($1, $2, $3, $4, $5)
         RETURNING id
       `;
 
       const values = [
         recipe.chef,
         recipe.title,
-        recipe.image,
         recipe.ingredients,
         recipe.preparation,
         recipe.information,
@@ -86,17 +84,15 @@ module.exports = {
         UPDATE 
           recipes
         SET
-          image=($1),
-          title=($2),
-          ingredients=($3),
-          preparation=($4),
-          information=($5),
-          chef_id=($6)
-        WHERE id = $7
+          title=($1),
+          ingredients=($2),
+          preparation=($3),
+          information=($4),
+          chef_id=($5)
+        WHERE id = $6
       `;
 
       const values = [
-        recipe.image,
         recipe.title,
         recipe.ingredients,
         recipe.preparation,

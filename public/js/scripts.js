@@ -181,7 +181,7 @@ const PhotosUpload = {
   },
   hasLimit(event) {
     const { uploadLimit, input, preview } = PhotosUpload;
-    const { files: fileList } = event.target;
+    const { files: fileList } = input;
 
     if (fileList.length > uploadLimit) {
       alert(`Envie no máximo ${uploadLimit} fotos`);

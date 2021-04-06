@@ -8,7 +8,11 @@
 
 {% block content %}
 	<section id="admin-recipes" class="container">
-		<form method="POST" action="/admin/recipes?_method=PUT">
+		<form 
+      method="POST" 
+      action="/admin/recipes?_method=PUT"
+      enctype="multipart/form-data"
+    >
 			<div class="admin__header">
 				<h2>Editando Receita</h2>
 				<div class="form__button-container">
