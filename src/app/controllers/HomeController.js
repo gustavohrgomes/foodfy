@@ -1,5 +1,5 @@
 const Recipes = require('../models/Recipe');
-const Chefs = require('../models/Chefs');
+const Chefs = require('../models/Chef');
 
 module.exports = {
   async index(req, res) {
@@ -26,23 +26,34 @@ module.exports = {
 
       const queryParams = {
         filter,
-        page,
         limit,
         offset,
       };
 
-      let results = await Recipes.paginate(queryParams);
+      let results = await Recipes.recipes(queryParams);
       const recipes = results.rows;
 
-      const pagination = {
-        total: Math.ceil(recipes[0].total / limit),
-        page,
-      };
+      const pagination = {};
+
+      if (recipes.length == 0) {
+        pagination.total = 1;
+        pagination.page = page;
+      } else {
+        pagination.total = Math.ceil(recipes[0].total / limit);
+        pagination.page = page;
+      }
+
+      if (filter) {
+        return res.render('search/index', {
+          recipes,
+          pagination,
+          filter,
+        });
+      }
 
       return res.render('public/recipes', {
         recipes,
         pagination,
-        filter,
       });
     } catch (error) {
       throw new Error(error);
