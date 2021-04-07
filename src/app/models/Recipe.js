@@ -34,23 +34,6 @@ module.exports = {
       throw new Error(error);
     }
   },
-  findby(filter) {
-    try {
-      const filterRecipe = `
-        SELECT 
-          recipes.*,
-          chefs.name AS author
-        FROM recipes
-        LEFT JOIN chefs on (recipes.chef_id = chefs.id)
-        WHERE recipes.title ILIKE '%${filter}%'
-        ORDER BY recipes.created_at
-      `;
-
-      return db.query(filterRecipe);
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
   create(recipe) {
     try {
       const createRecipe = `
@@ -118,7 +101,7 @@ module.exports = {
       throw new Error(error);
     }
   },
-  paginate(params) {
+  recipes(params) {
     try {
       const { filter, limit, offset } = params;
 

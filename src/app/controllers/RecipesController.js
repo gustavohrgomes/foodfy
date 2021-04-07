@@ -1,17 +1,17 @@
-const Recipes = require('../models/Recipe');
-const Chefs = require('../models/Chefs');
+const Recipe = require('../models/Recipe');
+const Chef = require('../models/Chef');
 const File = require('../models/File');
 const RecipeFile = require('../models/RecipeFile');
 
 module.exports = {
   async index(req, res) {
-    let results = await Recipes.all();
+    let results = await Recipe.all();
     const recipes = results.rows;
 
     return res.render('admin/recipes/index', { recipes });
   },
   async create(req, res) {
-    let results = await Chefs.all();
+    let results = await Chef.all();
     const chefOptions = results.rows;
 
     return res.render('admin/recipes/create', { chefOptions });
@@ -29,7 +29,7 @@ module.exports = {
       return res.send('Por favor, envie pelo menos 1 foto!');
     }
 
-    let results = await Recipes.create(req.body);
+    let results = await Recipe.create(req.body);
     const recipeId = results.rows[0].id;
 
     const filesPromise = req.files.map(async file => {
@@ -51,7 +51,7 @@ module.exports = {
   async show(req, res) {
     const { id } = req.params;
 
-    let results = await Recipes.find(id);
+    let results = await Recipe.find(id);
     const recipe = results.rows[0];
 
     return res.render('admin/recipes/show', { recipe });
@@ -59,15 +59,15 @@ module.exports = {
   async edit(req, res) {
     const { id } = req.params;
 
-    let results = await Chefs.all();
+    let results = await Chef.all();
     const chefOptions = results.rows;
 
-    results = await Recipes.find(id);
+    results = await Recipe.find(id);
     const recipe = results.rows[0];
 
     if (!recipe) return res.send('Receita não encontrada!');
 
-    results = await Recipes.files(recipe.id);
+    results = await Recipe.files(recipe.id);
     let files = results.rows;
     files = files.map(file => ({
       ...file,
@@ -121,14 +121,14 @@ module.exports = {
       await Promise.all(removedFilesPromise);
     }
 
-    await Recipes.update(req.body);
+    await Recipe.update(req.body);
 
     return res.redirect(`/admin/recipes/${req.body.id}`);
   },
   async delete(req, res) {
     const { id } = req.body;
 
-    await Recipes.delete(id);
+    await Recipe.delete(id);
     res.redirect('/admin/recipes');
   },
 };

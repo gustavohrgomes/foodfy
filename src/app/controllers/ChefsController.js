@@ -1,8 +1,8 @@
-const Chefs = require('../models/Chefs');
+const Chef = require('../models/Chef');
 
 module.exports = {
   async index(req, res) {
-    let results = await Chefs.all();
+    let results = await Chef.all();
     const chefs = results.rows;
 
     return res.render('admin/chefs/index', { chefs });
@@ -19,7 +19,7 @@ module.exports = {
       }
     }
 
-    let results = await Chefs.create(req.body);
+    let results = await Chef.create(req.body);
     const chefId = results.rows[0].id;
 
     return res.redirect(`/admin/chefs/${chefId}`);
@@ -27,10 +27,10 @@ module.exports = {
   async show(req, res) {
     const { id } = req.params;
 
-    let results = await Chefs.find(id);
+    let results = await Chef.find(id);
     const chef = results.rows[0];
 
-    results = await Chefs.getChefRecipes(id);
+    results = await Chef.getChefRecipes(id);
     const recipes = results.rows;
 
     return res.render('admin/chefs/show', { chef, recipes });
@@ -38,7 +38,7 @@ module.exports = {
   async edit(req, res) {
     const { id } = req.params;
 
-    let results = await Chefs.find(id);
+    let results = await Chef.find(id);
     const chef = results.rows[0];
 
     if (!chef) return res.send('Chef não encontrado!');
@@ -54,14 +54,14 @@ module.exports = {
       }
     }
 
-    await Chefs.update(req.body);
+    await Chef.update(req.body);
 
     return res.redirect(`/admin/chefs/${req.body.id}`);
   },
   async delete(req, res) {
     const { id } = req.body;
 
-    await Chefs.delete(id);
+    await Chef.delete(id);
 
     res.redirect('/admin/chefs');
   },
