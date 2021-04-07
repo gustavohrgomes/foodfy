@@ -13,7 +13,7 @@ module.exports = {
     }
   },
   about(req, res) {
-    return res.render('public/about');
+    return res.render('home/about');
   },
   async recipes(req, res) {
     try {
@@ -51,7 +51,7 @@ module.exports = {
         });
       }
 
-      return res.render('public/recipes', {
+      return res.render('home/recipes', {
         recipes,
         pagination,
       });
@@ -64,7 +64,7 @@ module.exports = {
       let results = await Recipes.find(req.params.id);
       const recipe = results.rows[0];
 
-      return res.render('public/recipe', { recipe });
+      return res.render('home/recipe', { recipe });
     } catch (error) {
       throw new Error(error);
     }
@@ -73,6 +73,6 @@ module.exports = {
     let results = await Chefs.all();
     const chefs = results.rows;
 
-    return res.render('public/chefs', { chefs });
+    return res.render('home/chefs', { chefs });
   },
 };
