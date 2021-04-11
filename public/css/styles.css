@@ -59,6 +59,7 @@ button {
 form button,
 .btn {
   padding: 8px 20px;
+  font-size: 1rem;
   font-weight: bold;
   color: white;
   background: var(--purple);
