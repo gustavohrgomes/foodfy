@@ -8,23 +8,25 @@
 
 {% block content %}
 
-  <section class="recipes__detail-section container">
-  
-    <div class="banner__image-container">
+  <section class="recipe-single container">
+    {% if not recipe.image %}
+      <img src="http://placehold.it/900x280" alt="Imagem da receita {{recipe.title}}">
+    {% else %}
       <img src="{{recipe.image}}" alt="{{recipe.title}}">
-    </div>
-    
-    <div class="recipe-info">
+    {% endif %}
+  
+    <div class="title">
       <h1>{{recipe.title}}</h1>
       <p>Por {{recipe.author}}</p>
     </div>
 
-    <div id="ingredients-section">
-      <div class="section-title">
-        <h3>Ingredientes</h3>
-        <button class="btn-collapse" target="ingredients-section">esconder</button>
+    <div id="ingredients" class="recipe-content recipe-hide">
+      <div class="title">
+        <h2>Ingredientes</h2>
+        <p class="hide">ESCONDER</p>
       </div>
-      <div class="details">
+
+      <div class="content">
         <ul>
           {% for ingredients in recipe.ingredients %}
             <li>
@@ -35,12 +37,12 @@
       </div>
     </div>
 
-    <div id="preparation-section">
-      <div class="section-title">
-        <h3>Modo de preparo</h3>
-        <button class="btn-collapse" target="preparation-section">esconder</button>
+    <div id="preparation" class="recipe-content recipe-hide">
+      <div class="title">
+        <h2>Modo de preparo</h2>
+        <p class="hide">ESCONDER</p>
       </div>
-      <div class="details">
+      <div class="content">
         <ul>
           {% for ingredients in recipe.preparation %}
             <li>
@@ -52,12 +54,12 @@
     </div>
 
     {% if recipe.information != '' %}
-      <div id="information-section">
-        <div class="section-title">
-          <h3>Informações Adicionais</h3>
-          <button class="btn-collapse" target="information-section">mostrar</button>
+      <div id="information" class="recipe-content recipe-hide">
+        <div class="title">
+          <h2>Informações Adicionais</h2>
+          <p class="hide">ESCONDER</p>
         </div>
-        <div class="details hide-details">
+        <div class="content">
           <p>{{recipe.information}}</p>
         </div>      
       </div>

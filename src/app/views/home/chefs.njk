@@ -8,24 +8,21 @@
 
 {% block content %}
 
-	<section class="recipes-section container">
-		<div class="chef-cards">
-      {% for chef in chefs %}
-        <div class="card-item" id="{{chef.id}}">
+	<section class="chefs-container container">
+    {% for chef in chefs %}
+      <div class="chef" id="{{chef.id}}">
+        {% if not chef.avatar_url %}
+          <img src="http://placehold.it/500x500" alt="Imagem do chef {{chef.name}}">
+        {% else %}
+          <img src="{{chef.avatar_url}}" alt="Imagem do chef {{chef.name}}">
+        {% endif %}
 
-          <div class="card-item__image-container">
-            <img src="{{chef.avatar_url}}" alt="chef {{chef.name}} image">
-          </div>
-
-          <div class="card-item__info">
-            <div class="card-item__title">
-              <p>{{chef.name}}</p>
-            </div>
-            <small>{{chef.total_recipes}} receitas</small>
-          </div>
+        <div class="chef-info">
+          <h3>{{chef.name}}</h3>
+          <p>{{chef.total_recipes}} receitas</p>
         </div>
-      {% endfor %}
-    </div>
+      </div>
+    {% endfor %}
 	</section>
 	
 {% endblock %}

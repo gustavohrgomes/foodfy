@@ -8,45 +8,41 @@
 
 {% block content %}
 
-  <section class="chefs__detail-section container">
-  
-    <div class="admin__header">
+  <section class="chef-single container">
+    <div class="title">
       <h2>Chef: {{chef.name}}</h2>
-      <a href="/admin/chefs/{{chef.id}}/edit">Editar Chef</a>
+      <a class="btn" href="/admin/chefs/{{chef.id}}/edit">Editar Chef</a>
     </div>
 
-    <div class="chef-info">
-      <div class="chef-avatar">
-        <img src="{{chef.avatar_url}}" alt="chef {{chef.name}} image">
-      </div>
+    <div class="chef-img">
+      <{% if not chef.avatar_url %}
+        <img src="http://placehold.it/200x200" alt="Image do chef {{chef.name}}">
+      {% else %}
+        <img src="{{chef.avatar_url}}" alt="imagem do chef {{chef.name}}">
+      {% endif %}
+    </div>
+
+    <div class="title">
       <h1>{{chef.name}}</h1>
       <p>{{chef.total_recipes}} Receitas</p>
     </div>
 
-    <section class="chef-recipes">
-      <h2>Receitas</h2>
+    <section class="admin">
+      <div class="title">
+        <h2>Receitas</h2>
+      </div>
 
       {% if chef.total_recipes == 0 %}
-
         <h3>Nenhuma receita cadastradas :(</h3>
-
       {% else %}
-        <div class="admin-cards">
+        <div class="recipes-container-adm">
           {% for recipe in recipes %}
+            <div class="recipe">
+              <img src="{{recipe.image}}" alt="{{recipe.title}}">
 
-            <div class="card-item">
-              <div class="card-item__image-container">
-                <img src="{{recipe.image}}" alt="{{recipe.title}}">
-              </div>
-
-              <div class="card-item__info">
-                <div class="card-item__title">
-                  <p>{{recipe.title}}</p>
-                </div>
-                <div class="card-item__description">
-                  <p>por {{chef.name}}</p>
-                </div>
-
+              <div>
+                <h3>{{recipe.title}}</h3>
+                <p>por {{chef.name}}</p>
                 <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
               </div>
             </div>
@@ -54,7 +50,6 @@
         </div>
       {% endif %}
     </section>
-
   </section>
 
 {% endblock %}

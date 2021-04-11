@@ -1,6 +1,5 @@
-<fieldset class="admin__input-group">
-  <legend>Nome</legend>
-
+<div class="input-group">
+  <label>Nome</label>
   <div id="chef-name">
     {% if chef.name %}
       <div class="ingredients__input">
@@ -19,26 +18,19 @@
       </div>
     {% endif %}
   </div>
-</fieldset>
+</div>
 
-<fieldset class="admin__input-group">
-  <legend>Avatar</legend>
-  <div id="chef-avatar">
-    {% if chef.avatar_url %}
-      <div class="ingredients__input">
-        <input 
-          type="text" 
-          name="avatar_url" 
-          value="{{ chef.avatar_url }}"
-        >
-      </div>
-    {% else %}
-      <div class="ingredients__input">
-        <input 
-          type="text"
-          name="avatar_url"
-        >
-      </div>
-    {% endif %}
+<div class="input-group">
+  <label>Avatar</label>
+  <div id="photos-upload">
+    <input 
+      id="photos-input"
+      type="file"
+      name="photos"
+      accept="image/png, image/jpg, image/jpeg"
+      onchange="PhotosUpload.handleFileEvent(event)"
+    >
+    <p>Enviar avatar</p>
   </div>
-</fieldset>
+  
+</div>

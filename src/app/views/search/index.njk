@@ -1,5 +1,5 @@
 {% extends "main.njk" %}
-{% import "includes/recipes-section.njk" as section %}
+{% import "parts/recipes-section.njk" as section %}
 
 {% block head %}
 
@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block searchFilter %}
-  {% include "includes/search-bar.njk" %}  
+  {% include "parts/search-bar.njk" %}  
 {% endblock %}
 
 {% block content %}
@@ -18,5 +18,5 @@
 	  {{section.recipes("recipes-section", recipes)}}
   </section>
 
-  {% include "includes/pagination.njk" %}
+  {% include "parts/pagination.njk" %}
 {% endblock %}

@@ -1,23 +1,13 @@
-{% macro recipes(classes, recipes) %}
-  <section 
-    {% if section %}
-    id='{{section}}'
-    {% endif %}
-    class='{{classes}}'
-  >
-		<div class="cards">
-			{% for recipe in recipes %}
-				<div class="card" id="{{recipe.id}}">
-					<div class="card__image-container">
-						<img src="{{recipe.image}}" alt="Burger">
-					</div>
-					<div class="card__title">
-						<p>{{recipe.title}}</p>
-					</div>
-					<div class="card__description">
-						<p>por {{recipe.author}}</p>
-					</div>
-				</div>
-			{% endfor %}
-	</section>
-{% endmacro %}
+<section class='recipes-container'>
+  {% for recipe in recipes %}
+    <div class="recipe" id="{{recipe.id}}">
+      {% if not recipe.image %}
+        <img src="http://placehold.it/500x500" alt="Burger">
+      {% else %}
+        <img src="{{recipe.image}}" alt="Burger">
+      {% endif %}
+      <h3>{{recipe.title}}</h3>
+      <p>por {{recipe.author}}</p>
+    </div>
+  {% endfor %}
+</section>
