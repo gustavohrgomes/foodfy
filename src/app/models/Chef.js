@@ -55,13 +55,13 @@ module.exports = {
       const createChef = `
         INSERT INTO chefs (
           name,
-          avatar_url
+          file_id
         )
         VALUES ($1, $2)
         RETURNING id
       `;
 
-      const queryValues = [chef.name, chef.avatar_url];
+      const queryValues = [chef.name, chef.file_id];
 
       return db.query(createChef, queryValues);
     } catch (error) {
@@ -94,6 +94,20 @@ module.exports = {
       `;
 
       return db.query(deleteChef, [id]);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+  files(id) {
+    try {
+      const sql = `
+        SELECT chefs.*, files.name AS "avatar-img", files.path
+        FROM chefs
+        LEFT JOIN files ON (chefs.file_id = files.id)
+        WHERE chefs.id = $1
+      `;
+
+      return db.query(sql, [id]);
     } catch (error) {
       throw new Error(error);
     }

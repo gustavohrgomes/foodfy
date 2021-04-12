@@ -8,7 +8,11 @@
 
 {% block content %}
 	<section class="container">
-		<form method="POST" action="/admin/chefs?_method=PUT">
+		<form 
+      method="POST" 
+      action="/admin/chefs?_method=PUT" 
+      enctype="multipart/form-data"
+    >
 			<div class="title">
 				<h2>Editando Chef</h2>
 				<div class="button-container">
