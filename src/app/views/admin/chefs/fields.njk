@@ -35,13 +35,11 @@
     </div>
 
     <div id="photos-preview">
-      {% if files %}
-        {% for image in files %}
-          <div id="{{image.src}}" class="photo">
-            <img src="{{image.src}}" alt="{{image.name}}">
-            <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">close</i>
-          </div>
-        {% endfor %}
+      {% if file %}
+        <div id="{{file.id}}" class="photo">
+          <img src="{{file.src}}" alt="{{file.name}}">
+          <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">close</i>
+        </div>
         <input type="hidden" name="removed_files">
       {% endif %}
     </div>

@@ -52,17 +52,14 @@ module.exports = {
 
     if (!chef) return res.send('Chef não encontrado!');
 
-    results = await Chef.files(chef.id);
-    let files = results.rows;
-    files = files.map(file => ({
-      ...file,
-      src: `${req.protocol}://${req.headers.host}${file.path.replace(
-        'public',
-        '',
-      )}`,
-    }));
+    results = await Chef.files(chef.file_id);
+    let file = { ...results.rows[0] };
+    file.src = `${req.protocol}://${req.headers.host}${file.path.replace(
+      'public',
+      '',
+    )}`;
 
-    return res.render('admin/chefs/edit', { chef, files });
+    return res.render('admin/chefs/edit', { chef, file });
   },
   async put(req, res) {
     const keys = Object.keys(req.body);
@@ -73,7 +70,28 @@ module.exports = {
       }
     }
 
-    await Chef.update(req.body);
+    if (req.body.removed_files && req.files == 0) {
+      return res.send('Por favor, envie pelo menos 1 imagem.');
+    }
+
+    let file_id;
+
+    if (req.files.length != 0) {
+      const results = await File.create(req.files[0]);
+      file_id = results.rows[0].id;
+    }
+
+    const data = {
+      ...req.body,
+      file_id: file_id || req.body.file_id,
+    };
+
+    await Chef.update(data);
+
+    if (req.body.removed_files) {
+      const removedFileId = req.body.removed_files.replace(',', '');
+      await File.delete(removedFileId);
+    }
 
     return res.redirect(`/admin/chefs/${req.body.id}`);
   },

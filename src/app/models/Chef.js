@@ -75,11 +75,11 @@ module.exports = {
           chefs
         SET
           name=($1),
-          avatar_url=($2)
+          file_id=($2)
         WHERE id = $3
       `;
 
-      const values = [chef.name, chef.avatar_url, chef.id];
+      const values = [chef.name, chef.file_id, chef.id];
 
       return db.query(updateChef, values);
     } catch (error) {
@@ -100,14 +100,7 @@ module.exports = {
   },
   files(id) {
     try {
-      const sql = `
-        SELECT chefs.*, files.name AS "avatar-img", files.path
-        FROM chefs
-        LEFT JOIN files ON (chefs.file_id = files.id)
-        WHERE chefs.id = $1
-      `;
-
-      return db.query(sql, [id]);
+      return db.query(`SELECT * FROM files WHERE id = $1`, [id]);
     } catch (error) {
       throw new Error(error);
     }
