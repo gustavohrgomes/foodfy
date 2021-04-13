@@ -24,7 +24,7 @@
     <div id="photos-preview">
       {% if files %}
         {% for image in files %}
-          <div id="{{image.id}}" class="photo">
+          <div id="{{image.file_id}}" class="photo">
             <img src="{{image.src}}" alt="{{image.name}}">
             <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">close</i>
           </div>

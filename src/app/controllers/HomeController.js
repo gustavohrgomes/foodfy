@@ -1,10 +1,10 @@
-const Recipes = require('../models/Recipe');
-const Chefs = require('../models/Chef');
+const Recipe = require('../models/Recipe');
+const Chef = require('../models/Chef');
 
 module.exports = {
   async index(req, res) {
     try {
-      let results = await Recipes.all();
+      let results = await Recipe.all();
       const recipes = results.rows;
 
       return res.render('home/index', { recipes });
@@ -30,7 +30,7 @@ module.exports = {
         offset,
       };
 
-      let results = await Recipes.recipes(queryParams);
+      let results = await Recipe.recipes(queryParams);
       const recipes = results.rows;
 
       const pagination = {};
@@ -61,16 +61,25 @@ module.exports = {
   },
   async show(req, res) {
     try {
-      let results = await Recipes.find(req.params.id);
+      let results = await Recipe.find(req.params.id);
       const recipe = results.rows[0];
 
-      return res.render('home/recipe', { recipe });
+      results = await Recipe.files(recipe.id);
+      const files = results.rows.map(file => ({
+        ...file,
+        src: `${req.protocol}://${req.headers.host}${file.path.replace(
+          'public',
+          '',
+        )}`,
+      }));
+
+      return res.render('home/recipe', { recipe, files });
     } catch (error) {
       throw new Error(error);
     }
   },
   async chefs(req, res) {
-    let results = await Chefs.all();
+    let results = await Chef.all();
     const chefs = results.rows;
 
     return res.render('home/chefs', { chefs });
