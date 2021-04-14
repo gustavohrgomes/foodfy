@@ -15,10 +15,10 @@
     </div>
 
     <div class="chef-img">
-      {% if not chef.avatar_url %}
+      {% if not chef.file %}
         <img src="http://placehold.it/200x200" alt="Image do chef {{chef.name}}">
       {% else %}
-        <img src="{{chef.avatar_url}}" alt="imagem do chef {{chef.name}}">
+        <img src="{{chef.file.src}}" alt="imagem do chef {{chef.name}}">
       {% endif %}
     </div>
 
@@ -38,10 +38,10 @@
         <div class="recipes-container-adm">
           {% for recipe in recipes %}
             <div class="recipe">
-              {% if not recipe.image %}
+              {% if not recipe.img %}
                 <img src="http://placehold.it/600x280" alt="Image de {{recipe.title}}">
               {% else %}
-                <img src="{{recipe.image}}" alt="Image de {{recipe.title}}">
+                <img src="{{recipe.img}}" alt="Image de {{recipe.title}}">
               {% endif %}
 
               <div>

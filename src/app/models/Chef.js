@@ -34,7 +34,7 @@ module.exports = {
       throw new Error(error);
     }
   },
-  getChefRecipes(id) {
+  chefRecipes(id) {
     try {
       const selectChefRecipes = `
         SELECT 
@@ -98,7 +98,7 @@ module.exports = {
       throw new Error(error);
     }
   },
-  files(id) {
+  file(id) {
     try {
       return db.query(`SELECT * FROM files WHERE id = $1`, [id]);
     } catch (error) {

@@ -7,6 +7,29 @@ module.exports = {
       let results = await Recipe.all();
       const recipes = results.rows;
 
+      async function getImage(recipeId) {
+        let results = await Recipe.files(recipeId);
+        const files = results.rows.map(
+          file =>
+            `${req.protocol}://${req.headers.host}${file.path.replace(
+              'public',
+              '',
+            )}`,
+        );
+
+        return files[0];
+      }
+
+      const recipesPromise = recipes
+        .map(async recipe => {
+          recipe.img = await getImage(recipe.id);
+
+          return recipe;
+        })
+        .filter((recipe, index) => (index > 5 ? false : true));
+
+      await Promise.all(recipesPromise);
+
       return res.render('home/index', { recipes });
     } catch (error) {
       throw new Error(error);
@@ -32,6 +55,31 @@ module.exports = {
 
       let results = await Recipe.recipes(queryParams);
       const recipes = results.rows;
+
+      if (!recipes) return res.send('Receita não encontrada!');
+
+      async function getImage(recipeId) {
+        let results = await Recipe.files(recipeId);
+        const files = results.rows.map(
+          file =>
+            `${req.protocol}://${req.headers.host}${file.path.replace(
+              'public',
+              '',
+            )}`,
+        );
+
+        return files[0];
+      }
+
+      const recipesPromise = recipes
+        .map(async recipe => {
+          recipe.img = await getImage(recipe.id);
+
+          return recipe;
+        })
+        .filter((recipe, index) => (index > 5 ? false : true));
+
+      await Promise.all(recipesPromise);
 
       const pagination = {};
 
@@ -82,6 +130,23 @@ module.exports = {
     let results = await Chef.all();
     const chefs = results.rows;
 
-    return res.render('home/chefs', { chefs });
+    async function getImage(fileId) {
+      let results = await Chef.file(fileId);
+      const file = results.rows[0];
+
+      return `${req.protocol}://${req.headers.host}${file.path.replace(
+        'public',
+        '',
+      )}`;
+    }
+
+    const chefsPromise = chefs.map(async chef => {
+      chef.avatar = await getImage(chef.file_id);
+      return chef;
+    });
+
+    const allChefs = await Promise.all(chefsPromise);
+
+    return res.render('home/chefs', { chefs: allChefs });
   },
 };

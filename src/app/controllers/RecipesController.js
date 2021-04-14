@@ -8,7 +8,29 @@ module.exports = {
     let results = await Recipe.all();
     const recipes = results.rows;
 
-    return res.render('admin/recipes/index', { recipes });
+    if (!recipes) return res.send('Receita não encontrada');
+
+    async function getImage(recipeId) {
+      let results = await Recipe.files(recipeId);
+      const files = results.rows.map(
+        file =>
+          `${req.protocol}://${req.headers.host}${file.path.replace(
+            'public',
+            '',
+          )}`,
+      );
+
+      return files[0];
+    }
+
+    const recipesPromise = recipes.map(async recipe => {
+      recipe.img = await getImage(recipe.id);
+      return recipe;
+    });
+
+    const allRecipes = await Promise.all(recipesPromise);
+
+    return res.render('admin/recipes/index', { recipes: allRecipes });
   },
   async create(req, res) {
     let results = await Chef.all();
