@@ -107,28 +107,21 @@ module.exports = {
 
       let query = '';
       let filterquery = '';
-      let totalQuery = '(SELECT COUNT(*) FROM RECIPES) AS total';
 
       if (filter) {
         filterquery = `${query}
           WHERE recipes.title ILIKE '%${filter}%'
         `;
-
-        totalQuery = `(
-          SELECT COUNT(*) FROM RECIPES
-          ${filterquery}
-        ) AS total`;
       }
 
       query = `${query}
         SELECT 
           recipes.*,
-          chefs.name AS author,
-          ${totalQuery}
+          chefs.name AS author
         FROM recipes
         LEFT JOIN chefs on (recipes.chef_id = chefs.id)
         ${filterquery}
-        ORDER BY recipes.created_at
+        ORDER BY ${filter ? 'recipes.updated_at' : 'recipes.created_at'} DESC
         LIMIT $1 OFFSET $2
       `;
 

@@ -42,7 +42,8 @@ module.exports = {
         FROM 
           recipes
         LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
-        WHERE chefs.id = $1;
+        WHERE chefs.id = $1
+        ORDER BY recipes.created_at DESC;
       `;
 
       return db.query(selectChefRecipes, [id]);
