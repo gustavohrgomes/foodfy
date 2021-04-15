@@ -7,13 +7,17 @@
 {% endblock %}
 
 {% block content %}
-	<section id="admin-chefs" class="container">
-		<form method="POST" action="/admin/chefs?_method=PUT">
-			<div class="admin__header">
+	<section class="container">
+		<form 
+      method="POST" 
+      action="/admin/chefs?_method=PUT" 
+      enctype="multipart/form-data"
+    >
+			<div class="title">
 				<h2>Editando Chef</h2>
-				<div class="form__button-container">
+				<div class="button-container">
 					<button 
-						class="form__button-delete" 
+						class="btn-delete" 
 						type="submit" 
 						form="form-delete"
 					>

@@ -1,17 +1,18 @@
 const express = require('express');
 const routes = express.Router();
-const Main = require('./app/controllers/MainController');
+const multer = require('./app/middlewares/multer');
+
+const Home = require('./app/controllers/HomeController');
 const Recipes = require('./app/controllers/RecipesController');
 const Chefs = require('./app/controllers/ChefsController.js');
-const Search = require('./app/controllers/SearchController.js');
 
 // Public Routes
-routes.get('/', Main.index);
-routes.get('/about', Main.about);
-routes.get('/recipes', Main.recipes);
-routes.get('/recipes/search', Search.recipes);
-routes.get('/recipes/:id', Main.show);
-routes.get('/chefs', Main.chefs);
+routes.get('/', Home.index);
+routes.get('/about', Home.about);
+routes.get('/recipes', Home.recipes);
+routes.get('/recipes/search', Home.recipes);
+routes.get('/recipes/:id', Home.show);
+routes.get('/chefs', Home.chefs);
 
 // Admin
 routes.get('/admin', (req, res) => {
@@ -24,8 +25,8 @@ routes.get('/admin/recipes/create', Recipes.create);
 routes.get('/admin/recipes/:id', Recipes.show);
 routes.get('/admin/recipes/:id/edit', Recipes.edit);
 
-routes.post('/admin/recipes', Recipes.post);
-routes.put('/admin/recipes', Recipes.put);
+routes.post('/admin/recipes', multer.array('photos', 5), Recipes.post);
+routes.put('/admin/recipes', multer.array('photos', 5), Recipes.put);
 routes.delete('/admin/recipes', Recipes.delete);
 
 // Chef Admin
@@ -34,8 +35,8 @@ routes.get('/admin/chefs/create', Chefs.create);
 routes.get('/admin/chefs/:id', Chefs.show);
 routes.get('/admin/chefs/:id/edit', Chefs.edit);
 
-routes.post('/admin/chefs', Chefs.post);
-routes.put('/admin/chefs', Chefs.put);
+routes.post('/admin/chefs', multer.array('photos', 1), Chefs.post);
+routes.put('/admin/chefs', multer.array('photos', 1), Chefs.put);
 routes.delete('/admin/chefs', Chefs.delete);
 
 module.exports = routes;

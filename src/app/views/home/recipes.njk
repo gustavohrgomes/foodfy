@@ -1,5 +1,4 @@
 {% extends "main.njk" %}
-{% import "parts/recipes-section.njk" as section %}
 
 {% block head %}
 
@@ -13,12 +12,9 @@
 
 {% block content %}
 
-  <section class="search container">
-    <div class="title">
-      <h1>Você buscou por "{{filter}}"</h1>
-    </div>
+  <section class="container">
     {% include "parts/recipes-section.njk" %}
+    {% include "parts/pagination.njk" %}
   </section>
 
-  {% include "parts/pagination.njk" %}
 {% endblock %}

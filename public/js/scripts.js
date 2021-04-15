@@ -1,17 +1,17 @@
 // Link Active for navbar
-const menuItems = document.querySelectorAll('.navbar a');
+const menuItems = document.querySelectorAll('.links a');
 const currentPage = location.pathname;
 
 for (let item of menuItems) {
   if (currentPage.includes(item.getAttribute('href'))) {
-    item.classList.add('link-active');
+    item.classList.add('active');
   }
 }
 
 // =============================================================
 
 // Redirect for recipe details
-const cards = document.querySelectorAll('.card');
+const cards = document.querySelectorAll('.recipe');
 
 for (let card of cards) {
   card.addEventListener('click', () => {
@@ -24,74 +24,24 @@ for (let card of cards) {
 // =============================================================
 
 // Hide/Show Button
-function hideAndShow(buttons) {
-  for (let button of buttons) {
-    button.addEventListener('click', () => {
-      const target = document.querySelector(
-        `#${button.getAttribute('target')} .details`,
-      );
+const contentToHide = document.querySelectorAll('.recipe-hide');
 
-      target.classList.toggle('hide-details');
+for (let item of contentToHide) {
+  const hideShowButton = item.querySelector('.hide');
 
-      if (target.classList.contains('hide-details')) {
-        button.textContent = 'mostrar';
-      } else {
-        button.textContent = 'esconder';
-      }
-    });
-  }
-}
-
-const buttons = document.querySelectorAll('.btn-collapse');
-
-if (buttons) {
-  hideAndShow(buttons);
+  hideShowButton.addEventListener('click', () => {
+    item.querySelector('.content').classList.toggle('hidden');
+    if (hideShowButton.innerHTML == 'ESCONDER') {
+      hideShowButton.innerHTML = 'MOSTRAR';
+    } else {
+      hideShowButton.innerHTML = 'ESCONDER';
+    }
+  });
 }
 
 // =============================================================
 
-// Add ingredients and preparation
-
-function addIngredient() {
-  const ingredients = document.querySelector('#ingredients');
-  const inputContainer = document.querySelectorAll('.ingredients__input');
-
-  // Realiza um clone do último ingrediente adicionado
-  const newInput = inputContainer[inputContainer.length - 1].cloneNode(true);
-
-  // Não adiciona um novo input se o último tem um valor vazio
-  if (newInput.children[0].value == '') return false;
-
-  // Deixa o valor do input vazio
-  newInput.children[0].value = '';
-  ingredients.appendChild(newInput);
-}
-
-function addPreparing() {
-  const preparing = document.querySelector('#preparing');
-  const inputContainer = document.querySelectorAll('.preparing__input');
-
-  const newInput = inputContainer[inputContainer.length - 1].cloneNode(true);
-
-  if (newInput.children[0].value == '') return false;
-
-  newInput.children[0].value = '';
-  preparing.appendChild(newInput);
-}
-
-const addIngredientAction = document.querySelector('.add-ingredient');
-const addPreparationStep = document.querySelector('.add-preparing');
-
-if (addIngredientAction) {
-  addIngredientAction.addEventListener('click', addIngredient);
-}
-
-if (addPreparationStep) {
-  addPreparationStep.addEventListener('click', addPreparing);
-}
-
 // Paginação
-
 function paginate(selectedPage, totalPages) {
   let pages = [];
   let oldPage;
@@ -149,3 +99,126 @@ const pagination = document.querySelector('.pagination');
 if (pagination) {
   createPagination(pagination);
 }
+
+const PhotosUpload = {
+  input: '',
+  uploadLimit: 5,
+  preview: document.querySelector('#photos-preview'),
+  files: [],
+  handleFileInput(event) {
+    const { files: fileList } = event.target;
+    PhotosUpload.input = event.target;
+
+    if (PhotosUpload.hasLimit(event)) return;
+
+    Array.from(fileList).forEach(file => {
+      PhotosUpload.files.push(file);
+
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const image = new Image();
+        image.src = String(reader.result);
+
+        const div = PhotosUpload.getContainer(image);
+        PhotosUpload.preview.appendChild(div);
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    PhotosUpload.input.files = PhotosUpload.getAllFiles();
+  },
+  hasLimit(event) {
+    const { uploadLimit, input, preview } = PhotosUpload;
+    const { files: fileList } = input;
+
+    if (fileList.length > uploadLimit) {
+      alert(`Envie no máximo ${uploadLimit} fotos`);
+      event.preventDefault();
+      return true;
+    }
+
+    const photosDiv = [];
+    preview.childNodes.forEach(item => {
+      if (item.classList && item.classList.value == 'photo')
+        photosDiv.push(item);
+    });
+
+    const totalPhotos = fileList.length + photosDiv.length;
+    if (totalPhotos > uploadLimit) {
+      alert('Você atingiu o limite máximo de fotos');
+      event.preventDefault();
+      return true;
+    }
+
+    return false;
+  },
+  getAllFiles() {
+    const dataTransfer =
+      new ClipboardEvent('').clipboardData || new DataTransfer();
+
+    PhotosUpload.files.forEach(file => dataTransfer.items.add(file));
+
+    return dataTransfer.files;
+  },
+  getContainer(image) {
+    const div = document.createElement('div');
+    div.classList.add('photo');
+
+    div.onclick = PhotosUpload.removePhoto;
+
+    div.appendChild(image);
+    div.appendChild(PhotosUpload.getRemoveButton());
+
+    return div;
+  },
+  getRemoveButton() {
+    const button = document.createElement('i');
+    button.classList.add('material-icons');
+    button.innerHTML = 'close';
+
+    return button;
+  },
+  removePhoto(event) {
+    const photoDiv = event.target.parentNode;
+    const photosArray = Array.from(PhotosUpload.preview.children);
+    const index = photosArray.indexOf(photoDiv);
+
+    PhotosUpload.files.splice(index, 1);
+    PhotosUpload.input.files = PhotosUpload.getAllFiles();
+
+    photoDiv.remove();
+  },
+  removeOldPhoto(event) {
+    const photoDiv = event.target.parentNode;
+
+    if (photoDiv.id) {
+      const removedFiles = document.querySelector(
+        'input[name="removed_files"]',
+      );
+
+      if (removedFiles) {
+        removedFiles.value += `${photoDiv.id},`;
+      }
+    }
+
+    photoDiv.remove();
+  },
+};
+
+const ImageGallery = {
+  highlight: document.querySelector('.gallery .highlight > img'),
+  previews: document.querySelectorAll('.gallery-preview img'),
+  setImage(event) {
+    const { target } = event;
+
+    ImageGallery.previews.forEach(preview =>
+      preview.classList.remove('active'),
+    );
+
+    target.classList.add('active');
+
+    ImageGallery.highlight.src = target.src;
+  },
+};

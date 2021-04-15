@@ -34,42 +34,23 @@ module.exports = {
       throw new Error(error);
     }
   },
-  findby(filter) {
-    try {
-      const filterRecipe = `
-        SELECT 
-          recipes.*,
-          chefs.name AS author
-        FROM recipes
-        LEFT JOIN chefs on (recipes.chef_id = chefs.id)
-        WHERE recipes.title ILIKE '%${filter}%'
-        ORDER BY recipes.created_at
-      `;
-
-      return db.query(filterRecipe);
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
   create(recipe) {
     try {
       const createRecipe = `
         INSERT INTO recipes (
           chef_id,
           title,
-          image,
           ingredients,
           preparation,
           information
         )
-        VALUES ($1, $2, $3, $4, $5, $6)
+        VALUES ($1, $2, $3, $4, $5)
         RETURNING id
       `;
 
       const values = [
         recipe.chef,
         recipe.title,
-        recipe.image,
         recipe.ingredients,
         recipe.preparation,
         recipe.information,
@@ -86,17 +67,15 @@ module.exports = {
         UPDATE 
           recipes
         SET
-          image=($1),
-          title=($2),
-          ingredients=($3),
-          preparation=($4),
-          information=($5),
-          chef_id=($6)
-        WHERE id = $7
+          title=($1),
+          ingredients=($2),
+          preparation=($3),
+          information=($4),
+          chef_id=($5)
+        WHERE id = $6
       `;
 
       const values = [
-        recipe.image,
         recipe.title,
         recipe.ingredients,
         recipe.preparation,
@@ -122,38 +101,45 @@ module.exports = {
       throw new Error(error);
     }
   },
-  paginate(params) {
+  recipes(params) {
     try {
       const { filter, limit, offset } = params;
 
       let query = '';
       let filterquery = '';
-      let totalQuery = '(SELECT COUNT(*) FROM RECIPES) AS total';
 
       if (filter) {
         filterquery = `${query}
           WHERE recipes.title ILIKE '%${filter}%'
         `;
-
-        totalQuery = `(
-          SELECT COUNT(*) FROM RECIPES
-          ${filterquery}
-        ) AS total`;
       }
 
       query = `${query}
         SELECT 
           recipes.*,
-          chefs.name AS author,
-          ${totalQuery}
+          chefs.name AS author
         FROM recipes
         LEFT JOIN chefs on (recipes.chef_id = chefs.id)
         ${filterquery}
-        ORDER BY recipes.created_at
+        ORDER BY ${filter ? 'recipes.updated_at' : 'recipes.created_at'} DESC
         LIMIT $1 OFFSET $2
       `;
 
       return db.query(query, [limit, offset]);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+  files(id) {
+    try {
+      const sql = `
+        SELECT recipe_files.*, files.name AS name, files.path AS path
+        FROM recipe_files
+        LEFT JOIN files ON (recipe_files.file_id = files.id)
+        WHERE recipe_files.recipe_id = $1
+      `;
+
+      return db.query(sql, [id]);
     } catch (error) {
       throw new Error(error);
     }

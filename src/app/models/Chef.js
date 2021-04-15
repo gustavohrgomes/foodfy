@@ -1,5 +1,4 @@
 const db = require('../../config/dbConnection');
-const { date } = require('../../lib/utils');
 
 module.exports = {
   all() {
@@ -35,7 +34,7 @@ module.exports = {
       throw new Error(error);
     }
   },
-  getChefRecipes(id) {
+  chefRecipes(id) {
     try {
       const selectChefRecipes = `
         SELECT 
@@ -43,7 +42,8 @@ module.exports = {
         FROM 
           recipes
         LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
-        WHERE chefs.id = $1;
+        WHERE chefs.id = $1
+        ORDER BY recipes.created_at DESC;
       `;
 
       return db.query(selectChefRecipes, [id]);
@@ -56,13 +56,13 @@ module.exports = {
       const createChef = `
         INSERT INTO chefs (
           name,
-          avatar_url
+          file_id
         )
         VALUES ($1, $2)
         RETURNING id
       `;
 
-      const queryValues = [chef.name, chef.avatar_url];
+      const queryValues = [chef.name, chef.file_id];
 
       return db.query(createChef, queryValues);
     } catch (error) {
@@ -76,11 +76,11 @@ module.exports = {
           chefs
         SET
           name=($1),
-          avatar_url=($2)
+          file_id=($2)
         WHERE id = $3
       `;
 
-      const values = [chef.name, chef.avatar_url, chef.id];
+      const values = [chef.name, chef.file_id, chef.id];
 
       return db.query(updateChef, values);
     } catch (error) {
@@ -95,6 +95,13 @@ module.exports = {
       `;
 
       return db.query(deleteChef, [id]);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+  file(id) {
+    try {
+      return db.query(`SELECT * FROM files WHERE id = $1`, [id]);
     } catch (error) {
       throw new Error(error);
     }

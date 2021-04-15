@@ -7,13 +7,17 @@
 {% endblock %}
 
 {% block content %}
-	<section id="admin-recipes" class="container">
-		<form method="POST" action="/admin/recipes?_method=PUT">
-			<div class="admin__header">
+	<section class="container">
+		<form 
+      method="POST" 
+      action="/admin/recipes?_method=PUT"
+      enctype="multipart/form-data"
+    >
+			<div class="title">
 				<h2>Editando Receita</h2>
-				<div class="form__button-container">
+				<div class="button-container">
 					<button 
-						class="form__button-delete" 
+						class="btn-delete" 
 						type="submit" 
 						form="form-delete"
 					>
@@ -37,4 +41,5 @@
 {% block scripts %}
 	<script src="/js/scripts.js"></script>
 	<script src="/js/confirm.js"></script>
+	<script src="/js/addField.js"></script>
 {% endblock %}

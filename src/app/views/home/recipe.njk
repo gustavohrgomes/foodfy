@@ -1,4 +1,4 @@
-{% extends "admin.njk" %}
+{% extends "main.njk" %}
 
 {% block head %}
 
@@ -9,12 +9,6 @@
 {% block content %}
 
   <section class="recipe-single container">
-  
-    <div class="title">
-      <h2>Receita: {{recipe.title}}</h2>
-      <a class="btn" href="/admin/recipes/{{recipe.id}}/edit">Editar Receita</a>
-    </div>
-
     <div class="gallery">
       <div class="highlight">
         {% if not files[0] %}
@@ -37,16 +31,18 @@
         {% endfor %}
       </div>
     </div>
-    
+  
     <div class="title">
       <h1>{{recipe.title}}</h1>
       <p>Por {{recipe.author}}</p>
     </div>
 
-    <div id="ingredients" class="recipe-content">
+    <div id="ingredients" class="recipe-content recipe-hide">
       <div class="title">
         <h2>Ingredientes</h2>
+        <p class="hide">ESCONDER</p>
       </div>
+
       <div class="content">
         <ul>
           {% for ingredients in recipe.ingredients %}
@@ -58,9 +54,10 @@
       </div>
     </div>
 
-    <div id="preparation-section" class="recipe-content">
+    <div id="preparation" class="recipe-content recipe-hide">
       <div class="title">
         <h2>Modo de preparo</h2>
+        <p class="hide">ESCONDER</p>
       </div>
       <div class="content">
         <ul>
@@ -73,12 +70,13 @@
       </div>
     </div>
 
-    {% if recipe.information !== '' %}
-      <div id="information-section" class="recipe-content">
+    {% if recipe.information != '' %}
+      <div id="information" class="recipe-content recipe-hide">
         <div class="title">
           <h2>Informações Adicionais</h2>
+          <p class="hide">ESCONDER</p>
         </div>
-        <div class="details">
+        <div class="content">
           <p>{{recipe.information}}</p>
         </div>      
       </div>
@@ -86,8 +84,4 @@
   
   </section>
 
-{% endblock %}
-
-{% block scripts %}
-  <script src="/js/scripts.js"></script>
 {% endblock %}

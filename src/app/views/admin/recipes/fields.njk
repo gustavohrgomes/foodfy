@@ -1,25 +1,44 @@
-<fieldset class="admin__input-group">
-  <legend>Título da receita</legend>
+<div class="input-group">
+  <label>Título da receita</label>
   <input 
     type="text" 
     name="title" 
     value="{{ recipe.title }}"
   >
-</fieldset>
+</div>
 
-<fieldset class="admin__input-group">
-  <legend>Imagem da receita</legend>
-  <input 
-    type="text" 
-    name="image" 
-    value="{{ recipe.image }}"
-  >
-</fieldset>
+<div class="input-group">
+  <label>Fotos da receita (até 5 fotos)</label>
+  <div id="photos-container">
+    <div id="photos-upload">
+      <input 
+        id="photos-input"
+        type="file" 
+        name="photos" 
+        multiple
+        accept="image/png, image/jpeg, image/jpg"
+        onchange="PhotosUpload.handleFileInput(event)"
+      >
+      <i class="material-icons">add</i>
+    </div>
+    <div id="photos-preview">
+      {% if files %}
+        {% for image in files %}
+          <div id="{{image.file_id}}" class="photo">
+            <img src="{{image.src}}" alt="{{image.name}}">
+            <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">close</i>
+          </div>
+        {% endfor %}
+        <input type="hidden" name="removed_files">
+      {% endif %}
+    </div>
+  </div>
+</div>
 
-<fieldset class="admin__input-group">
-  <legend>Chef</legend>
+<div class="input-group">
+  <label>Chef</label>
   <select name="chef">
-    <option selected value="" disabled hidden >Selecione um Chef</option>
+    <option selected value disabled hidden >Selecione um Chef</option>
     {% for chef in chefOptions %}
       <option 
         value="{{chef.id}}" 
@@ -31,15 +50,15 @@
       </option>
     {% endfor %}
   </select>
-</fieldset>
+</div>
 
-<fieldset class="admin__input-group">
-  <legend>Ingredientes</legend>
+<div class="input-group">
+  <label>Ingredientes</label>
 
   <div id="ingredients">
     {% if recipe.ingredients %}
       {% for ingredient in recipe.ingredients %}
-        <div class="ingredients__input">
+        <div class="ingredients">
           <input 
             type="text" 
             name="ingredients[]" 
@@ -48,25 +67,25 @@
         </div>
       {% endfor %}
     {% else %}
-      <div class="ingredients__input">
+      <div class="ingredients">
         <input 
           type="text" 
           name="ingredients"
-        >
+        >    
       </div>
     {% endif %}
   </div>
 
-  <button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
-</fieldset>
+  <a class="add-ingredient add">Adicionar novo ingrediente</a>
+</div>
 
-<fieldset class="admin__input-group">
-  <legend>Modo de preparo</legend>
+<div class="input-group">
+  <label>Modo de preparo</label>
 
   <div id="preparing">
     {% if recipe.preparation %}
       {% for preparation in recipe.preparation %}
-        <div class="preparing__input">
+        <div class="steps">
           <input 
             type="text" 
             name="preparation[]" 
@@ -75,7 +94,7 @@
         </div>
       {% endfor %}
     {% else %}  
-      <div class="preparing__input">
+      <div class="steps">
         <input 
           type="text" 
           name="preparation"
@@ -84,11 +103,11 @@
     {% endif %}
   </div>
 
-  <button type="button" class="add-preparing">Adicionar novo passo</button>
-</fieldset>
+  <a class="add-step add">Adicionar novo passo</a>
+</div>
 
-<fieldset class="admin__input-group">
-  <legend>Informações adicionais</legend>
+<div class="input-group">
+  <label>Informações adicionais</label>
   {% if recipe.information %}
     <textarea class="aditional-info" name="information">{{ recipe.information }}</textarea>
   {% else %}
@@ -99,5 +118,5 @@
   {% endif %}
   
   
-</fieldset>
+</div>
 

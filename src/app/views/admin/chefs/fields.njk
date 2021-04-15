@@ -1,9 +1,8 @@
-<fieldset class="admin__input-group">
-  <legend>Nome</legend>
-
+<div class="input-group">
+  <label>Nome</label>
   <div id="chef-name">
     {% if chef.name %}
-      <div class="ingredients__input">
+      <div class="ingredients">
         <input 
           type="text" 
           name="name" 
@@ -11,7 +10,7 @@
         >
       </div>
     {% else %}
-      <div class="ingredients__input">
+      <div class="ingredients">
         <input 
           type="text"
           name="name"
@@ -19,26 +18,31 @@
       </div>
     {% endif %}
   </div>
-</fieldset>
+</div>
 
-<fieldset class="admin__input-group">
-  <legend>Avatar</legend>
-  <div id="chef-avatar">
-    {% if chef.avatar_url %}
-      <div class="ingredients__input">
-        <input 
-          type="text" 
-          name="avatar_url" 
-          value="{{ chef.avatar_url }}"
-        >
-      </div>
-    {% else %}
-      <div class="ingredients__input">
-        <input 
-          type="text"
-          name="avatar_url"
-        >
-      </div>
-    {% endif %}
+<div class="input-group">
+  <label>Avatar</label>
+  <div id="photos-container">
+    <div id="photos-upload">
+      <input 
+        id="photos-input"
+        type="file"
+        name="photos"
+        accept="image/png, image/jpg, image/jpeg"
+        onchange="PhotosUpload.handleFileInput(event)"
+      >
+      <i class="material-icons">add</i>
+    </div>
+
+    <div id="photos-preview">
+      {% if file %}
+        <div id="{{file.id}}" class="photo">
+          <img src="{{file.src}}" alt="{{file.name}}">
+          <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">close</i>
+        </div>
+        <input type="hidden" name="removed_files">
+      {% endif %}
+    </div>
   </div>
-</fieldset>
+  
+</div>

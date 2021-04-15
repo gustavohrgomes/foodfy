@@ -1,26 +1,25 @@
 {% extends "main.njk" %}
-{% import "includes/recipes-section.njk" as section %}
 
 {% block searchFilter %}
-  {% include "includes/search-bar.njk" %}  
+  {% include "parts/search-recipes.njk" %}  
 {% endblock %}
 
 {% block content %}
 
-  <section id="landing">
-    <div class="container">
-      <div class="landing-text">
-        <h1>As melhores receitas</h1>
-        <p>Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.</p>
-      </div>
+  <section class="banner container">
+    <div class="banner-content">
+      <h1>As melhores receitas</h1>
+      <p>Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.</p>
+    </div>
 
+    <div class="banner-img">
       <img class="chef" src="assets/chef.png" alt="Chef">
     </div>
   </section>
 
   <section class="most-accessed container">
     <h1>Mais acessadas</h1>
-    {{section.recipes("container", recipes)}}
+    {% include "parts/recipes-section.njk" %}
   </section>
   
 {% endblock %}
