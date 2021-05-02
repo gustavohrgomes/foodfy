@@ -149,6 +149,7 @@ module.exports = {
     const { id } = req.body;
 
     await Chef.delete(id);
+    await File.delete(req.body.file_id);
 
     res.redirect('/admin/chefs');
   },
