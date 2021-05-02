@@ -12,6 +12,7 @@
    --purple-dark: #5345c0;
    --danger-red: #dd4141;
    --danger-red-dark: #be3636;
+   --error: #FF3131;
    --input-border: #DDD;
 }
 
@@ -99,7 +100,7 @@ header .logo img {
 
 header .links ul {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   max-width: 250px;
   justify-items: center;
@@ -602,4 +603,20 @@ form #photos-preview .photo i:hover {
 .recipe-single .gallery-preview img:hover,
 .recipe-single .gallery-preview img.active {
   opacity: 1;
+}
+
+/* Error Validate */
+.input-group .error {
+  width: 100%;
+  font-weight: bold;
+  color: #FFF;
+  background-color: var(--error);
+  padding: 5px 8px;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 4px;
+}
+
+form .input-group input.input-error-outline {
+  border: 1px solid var(--error);
 }

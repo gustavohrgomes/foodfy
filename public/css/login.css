@@ -1,0 +1,33 @@
+.login.container {
+  margin-top: 65px;
+  max-width: 500px;
+}
+
+.login .header {
+  font-size: 24px;
+  text-align: center;
+}
+
+.login .fields {
+  margin-bottom: 35px;
+}
+
+.login footer.footer {
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login footer.footer button {
+  padding: 9px 35px; 
+}
+
+.login footer.footer a {
+  font-weight: bold;
+  color: #969696;
+}
+
+.login footer.footer a:hover {
+  color: var(--grey-dark)
+}

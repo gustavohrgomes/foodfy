@@ -11,7 +11,7 @@
 
     {% endblock %}
 
-    <link rel="stylesheet" href="/css/styles.css">
+    {% include "parts/styles.njk" %}
   </head>
 
   <body>
@@ -31,6 +31,9 @@
             </li>
             <li>
               <a href="/chefs">Chefs</a>
+            </li>
+            <li>
+              <a href="/login">Login</a>
             </li>
           </ul>
         </nav>
