@@ -6,12 +6,12 @@ DROP TABLE IF EXISTS "recipe_files";
 CREATE TABLE "recipes" (
   id SERIAL PRIMARY KEY,
   chef_id INT,
-  image TEXT,
   title TEXT,
   ingredients TEXT[],
   preparation TEXT[],
   information TEXT,
   created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
+  updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
 );
 
 CREATE TABLE "chefs" (
@@ -19,6 +19,7 @@ CREATE TABLE "chefs" (
   name TEXT,
   avatar_url TEXT,
   created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
+  updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
 );
 
 CREATE TABLE "files" (
@@ -50,6 +51,11 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON recipes
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON chefs
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
