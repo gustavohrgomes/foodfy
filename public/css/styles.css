@@ -140,7 +140,7 @@ header.header-admin {
 }
 
 header.header-admin .container {
-  grid-template-columns: 92px 1fr;
+  grid-template-columns: 92px 1fr auto;
   gap: 50px;
   align-items: center;
   padding: 1.5rem;
@@ -152,15 +152,21 @@ header.header-admin .container {
   justify-items: start;
 }
 
-.header-admin .links a {
+.header-admin .links a,
+.header-admin .logout button {
   text-transform: uppercase;
   color: var(--grey-light);
   font-weight: bold
 }
 
 .header-admin .links a:hover,
+.header-admin .logout button:hover,
 .header-admin .links .active {
   color: white;
+}
+
+.header-admin .logout button {
+  background: none;
 }
 
 /* Home Footer */

@@ -3,6 +3,11 @@ module.exports = {
     return res.render('session/login');
   },
   login(req, res) {
+    req.session.userId = req.user.id;
     return res.redirect('/admin');
+  },
+  logout(req, res) {
+    req.session.destroy();
+    return res.redirect('/');
   },
 };
