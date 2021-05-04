@@ -1,3 +1,9 @@
+.users.container .title a,
+.user.container .title button {
+  width: 140px;
+  text-align: center;
+}
+
 .users-container-admin {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -35,4 +41,15 @@
   padding: 0;
   background: none;
   color: var(--delete-red);
+}
+
+/* User Register */
+.user .fields { 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px
+}
+
+.user .fields input[type="checkbox"] {
+  cursor: pointer;
 }

@@ -14,6 +14,7 @@
    --danger-red: #dd4141;
    --danger-red-dark: #be3636;
    --error: #FF3131;
+   --error-box: #DC4747;
    --input-border: #DDD;
 }
 
@@ -442,7 +443,7 @@ form .input-group label {
   font-weight: bold;
 }
 
-form input, form textarea, form select {
+form input:not(input[type="checkbox"]), form textarea, form select {
   margin-top: 5px;
   padding: 15px 20px;
   width: 100%;
