@@ -9,7 +9,7 @@ const recipes = require('./recipes.routes');
 
 routes.use(main);
 routes.use(session);
-routes.use('/users', users);
+routes.use('/admin/users', users);
 routes.use('/admin/chefs', chefs);
 routes.use('/admin/recipes', recipes);
 

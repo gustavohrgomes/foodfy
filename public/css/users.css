@@ -1,0 +1,38 @@
+.users-container-admin {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 54px;
+}
+
+.user .user-info h3 {
+  font-size: 18px;
+  font-weight: normal;
+  color: var(--black);
+}
+
+.user .user-info p {
+  font-size: 14px;
+  color: var(--grey);
+  margin-top: 4px;
+}
+
+.user .user-info .user-options {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.user .user-info .user-options a,
+.user .user-info .user-options button {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--purple);
+  margin-right: 16px;
+}
+
+.user .user-info .user-options button {
+  padding: 0;
+  background: none;
+  color: var(--delete-red);
+}

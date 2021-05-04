@@ -10,6 +10,7 @@
    --grey-darker: #444444;
    --purple: #6558C3;
    --purple-dark: #5345c0;
+   --delete-red: #F55A5A;
    --danger-red: #dd4141;
    --danger-red-dark: #be3636;
    --error: #FF3131;
@@ -143,11 +144,11 @@ header.header-admin .container {
   grid-template-columns: 92px 1fr auto;
   gap: 50px;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1.5rem 0;
 }
 
 .header-admin .links ul {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   max-width: 200px;
   justify-items: start;
 }

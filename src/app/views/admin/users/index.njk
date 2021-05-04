@@ -1,0 +1,39 @@
+{% extends "admin.njk" %}
+
+{% block head %}
+
+	<title>Gerenciar Usuários | Foodfy</title>
+
+{% endblock %}
+
+{% block content %}
+	<section class="admin users container">
+		<div class="title">
+      <h2>Usuários</h2>
+      <a href="/admin/users/create" class="btn">Novo</a>
+    </div>
+		
+		<div class="users-container-admin">
+      {% for user in users %}
+        <div class="user" id="{{user.id}}">
+          <div class="user-info">
+            <h3>{{user.name}}</h3>
+            <p>{{user.email}}</p>
+            <div class="user-options">
+              <a href="/admin/users/{{user.id}}/edit">Editar</a>
+              
+              <form action="/admin/users?_method=DELETE">
+                <button>Remover</button>
+                <input type="hidden" value="{{user.id}}">
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+	</section>
+{% endblock %}
+
+{% block scripts %}
+	<script src="/js/scripts.js"></script>
+{% endblock %}

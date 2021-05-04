@@ -1,6 +1,14 @@
 const db = require('../../config/dbConnection');
 
 module.exports = {
+  all() {
+    const sql = `
+      SELECT * FROM users
+      ORDER BY updated_at DESC
+    `;
+
+    return db.query(sql);
+  },
   async findOne(filters) {
     let query = `SELECT * FROM users`;
 

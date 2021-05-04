@@ -8,7 +8,7 @@ const UserController = require('../app/controllers/UserController');
 // routes.put('/admin/profile', ProfileController.put); // Editar o usuário logado
 
 // Rotas que o administrador irá acessar para gerenciar usuários
-// routes.get('/admin/users', UserController.list); // Mostrar a lista de usuários cadastrados
+routes.get('/', UserController.list); // Mostrar a lista de usuários cadastrados
 // routes.post('/admin/users', UserController.post); // Cadastrar um usuário
 // routes.get('/admin/users/create', UserController.create); // Mostrar o formulário de criação de um usuário
 // routes.put('/admin/users/:id', UserController.put); // Editar um usuário
