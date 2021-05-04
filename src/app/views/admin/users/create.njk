@@ -1,0 +1,31 @@
+{% extends "admin.njk" %}
+
+{% block head %}
+
+	<title>Foodfy | Criar Usuário</title>
+
+{% endblock %}
+
+{% block content %}
+	<section class="user container">
+		<form 
+      method="POST" 
+      action="/admin/users" 
+    >
+			<div class="title">
+				<h2>Criar Usuário</h2>
+				<button type="submit">Salvar</button>
+			</div>
+
+      <div class="fields">
+			  {% include "admin/users/fields.njk" %}
+      </div>
+
+		</form>
+	</section>
+	
+{% endblock %}
+
+{% block scripts %}
+	<script src="/js/scripts.js"></script>
+{% endblock %}
