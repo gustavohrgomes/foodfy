@@ -7,7 +7,8 @@
 .users-container-admin {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  column-gap: 20px;
+  row-gap: 54px;
   margin-top: 54px;
 }
 
