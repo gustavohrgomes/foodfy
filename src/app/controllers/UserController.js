@@ -14,6 +14,8 @@ module.exports = {
     return res.render('admin/users/create');
   },
   async post(req, res) {
-    return res.send('passed!');
+    await User.create(req.body);
+
+    return res.redirect('/admin/users');
   },
 };
