@@ -71,6 +71,11 @@ BEFORE UPDATE ON chefs
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
 /* Connect Pg Simple */
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",

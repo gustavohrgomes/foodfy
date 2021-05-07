@@ -60,7 +60,7 @@ async function update(req, res, next) {
       return res.render('admin/users/edit', fillAllFields);
     }
 
-    const { id, password } = req.body;
+    let { id, password } = req.body;
 
     if (!password) {
       return res.render('admin/users/edit', {

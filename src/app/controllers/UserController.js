@@ -28,6 +28,10 @@ module.exports = {
       const { user } = req;
       let { name, email, is_admin } = req.body;
 
+      if (is_admin === undefined || is_admin === null) {
+        is_admin = false;
+      }
+
       await User.update(user.id, {
         name,
         email,
