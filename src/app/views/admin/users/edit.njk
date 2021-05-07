@@ -10,7 +10,7 @@
 	<section class="user container">
 		<form 
       method="POST" 
-      action="/admin/users?_method=PUT"
+      action="/admin/users/{{user.id}}?_method=PUT"
     >
 			<div class="title">
 				<h2>Editar Usuário</h2>
@@ -20,6 +20,8 @@
       <div class="fields">
 			  {% include "admin/users/fields.njk" %}
       </div>
+
+      <input type="hidden" name="id" value="{{user.id}}">
 
 		</form>
 	</section>

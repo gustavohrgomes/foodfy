@@ -19,10 +19,28 @@ module.exports = {
     return res.redirect('/admin/users');
   },
   async edit(req, res) {
-    const { id } = req.params
+    const { user } = req;
 
-    const user  = await User.findOne({ where: { id } })
-    
-    return res.render('admin/users/edit', { user })
-  }
+    return res.render('admin/users/edit', { user });
+  },
+  async put(req, res) {
+    try {
+      const { user } = req;
+      let { name, email, is_admin } = req.body;
+
+      await User.update(user.id, {
+        name,
+        email,
+        is_admin,
+      });
+
+      return res.render('admin/users/edit', {
+        user: req.body,
+        success: 'Usuário atualizado com sucesso. 🚀',
+      });
+    } catch (error) {
+      res.render('admin/users/edit', { error: 'Ops... Algo deu errado! 😓' });
+      throw new Error(error);
+    }
+  },
 };
