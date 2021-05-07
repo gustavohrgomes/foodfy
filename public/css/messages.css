@@ -24,3 +24,7 @@
 .messages.error {
   background: var(--error-box);
 }
+
+.messages.success {
+  background: var(--success-green);
+}
