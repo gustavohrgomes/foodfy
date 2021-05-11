@@ -16,6 +16,7 @@
   align-items: center;
   color: #FFF;
   font-weight: bold;
+  text-align: center;
   border-radius: 4px;
   box-shadow: 0px 2px 6px -3px rgba(60, 60, 60, .5);
   animation: hidemessage 400ms 5s ease-out forwards;
