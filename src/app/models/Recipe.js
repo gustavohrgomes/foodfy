@@ -107,6 +107,7 @@ module.exports = {
 
       let query = '';
       let filterquery = '';
+      let totalQuery = `(SELECT count(*) FROM recipes) AS total`;
 
       if (filter) {
         filterquery = `${query}
@@ -117,6 +118,7 @@ module.exports = {
       query = `${query}
         SELECT 
           recipes.*,
+          ${totalQuery},
           chefs.name AS author
         FROM recipes
         LEFT JOIN chefs on (recipes.chef_id = chefs.id)
