@@ -9,6 +9,10 @@ const recipes = require('./recipes.routes');
 
 routes.use(main);
 routes.use(session);
+routes.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
 routes.use('/admin/users', users);
 routes.use('/admin/chefs', chefs);
 routes.use('/admin/recipes', recipes);
