@@ -12,9 +12,11 @@
         <li>
           <a href="/admin/chefs">Chefs</a>  
         </li>
+        {% if session.isAdmin %}
         <li>
           <a href="/admin/users">Usuários</a>
         </li>
+        {% endif %}
       </ul>
     </nav>
     <div class="logout">

@@ -10,7 +10,9 @@
 	<section class="admin users container">
 		<div class="title">
       <h2>Usuários</h2>
-      <a href="/admin/users/create" class="btn">Novo</a>
+      {% if session.isAdmin %}
+        <a href="/admin/users/create" class="btn">Novo</a>
+      {% endif %}
     </div>
 		
 		<div class="users-container-admin">
