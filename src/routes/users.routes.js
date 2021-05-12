@@ -6,10 +6,6 @@ const UserController = require('../app/controllers/UserController');
 
 const UserValidator = require('../app/validators/user');
 
-// Rotas de perfil de um usuário logado
-// routes.get('/admin/profile', ProfileController.index); // Mostrar o formulário com dados do usuário logado
-// routes.put('/admin/profile', ProfileController.put); // Editar o usuário logado
-
 // Rotas que o administrador irá acessar para gerenciar usuários
 routes.get('/', IsUserAdmin, UserController.list); // Mostrar a lista de usuários cadastrados
 routes.post('/', IsUserAdmin, UserValidator.post, UserController.post); // Cadastrar um usuário
