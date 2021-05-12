@@ -1,0 +1,32 @@
+
+<div class="input-group">
+  <label>Nome</label>
+  <input 
+    type="text" 
+    name="name"
+    placeholder="Digite o nome completo"
+    value="{{ user.name }}"
+    required
+  >
+</div>
+
+<div class="input-group">
+  <label>E-mail</label>
+  <input 
+    type="email" 
+    name="email"
+    placeholder="Digite o e-mail"
+    value="{{ user.email }}"
+    onblur="Validate.apply(this, 'isEmail')"
+    required
+  >
+</div>
+
+<div class="input-group">
+  <label>Senha</label>
+  <input 
+    type="password" 
+    name="password"
+    palceholder="Digite sua senha"
+  >
+</div>
