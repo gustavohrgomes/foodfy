@@ -21,7 +21,7 @@ routes.use('/admin/profile', profile);
 
 // Alias
 routes.get('/admin', (req, res) => {
-  return res.redirect('/admin/recipes');
+  return res.redirect('/admin/profile');
 });
 
 module.exports = routes;
