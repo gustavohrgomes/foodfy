@@ -26,6 +26,50 @@ async function index(req, res, next) {
   next();
 }
 
+async function update(req, res, next) {
+  try {
+    const fillAllFields = checkAllFields(req.body);
+    if (fillAllFields) {
+      return res.render('admin/profile/index', fillAllFields);
+    }
+
+    const { userId: id } = req.session;
+    const { password, email } = req.body;
+    const user = await User.findOne({ where: { id } });
+
+    if (email != user.email) {
+      const isNotAvaliable = await User.findOne({ where: { email } });
+      if (isNotAvaliable) {
+        return res.render('admin/profile/index', {
+          user: req.body,
+          error: 'Este email já está cadastrado!',
+        });
+      }
+    }
+
+    if (!password) {
+      return res.render('admin/profile/index', {
+        user: req.body,
+        error: 'Digite sua senha para atualizar seu cadastro.',
+      });
+    }
+
+    const passwordPassed = await compare(password, user.password);
+    if (!passwordPassed) {
+      return res.render('admin/profile/index', {
+        user: req.body,
+        error: 'Senha incorreta.',
+      });
+    }
+
+    req.user = user;
+
+    next();
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 module.exports = {
   index,
 };
