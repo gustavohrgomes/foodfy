@@ -1,4 +1,6 @@
-const Profile = require('../models/Profile');
+const { compare } = require('bcryptjs');
+
+const User = require('../models/User');
 
 function checkAllFields(body) {
   const keys = Object.keys(body);
@@ -13,7 +15,7 @@ function checkAllFields(body) {
 async function index(req, res, next) {
   const { userId: id } = req.session;
 
-  const userProfile = await Profile.findOne({ where: { id } });
+  const userProfile = await User.findOne({ where: { id } });
 
   if (userProfile === null || userProfile === undefined) {
     return res.render('admin/profile/index', {
@@ -72,4 +74,5 @@ async function update(req, res, next) {
 
 module.exports = {
   index,
+  update,
 };
