@@ -24,9 +24,9 @@
             <div class="user-options">
               <a href="/admin/users/{{user.id}}/edit">Editar</a>
               
-              <form action="/admin/users?_method=DELETE">
-                <button>Remover</button>
-                <input type="hidden" value="{{user.id}}">
+              <form method="POST" action="/admin/users/{{user.id}}?_method=DELETE">
+                <button type="submit">Remover</button>
+                <input type="hidden" name="id" value="{{user.id}}">
               </form>
             </div>
           </div>
