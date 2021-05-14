@@ -6,12 +6,12 @@ const { IsUserAdmin } = require('../app/middlewares/session');
 const Recipes = require('../app/controllers/RecipesController');
 
 routes.get('/', Recipes.index);
-routes.get('/create', IsUserAdmin, Recipes.create);
+routes.get('/create', Recipes.create);
 routes.get('/:id', Recipes.show);
-routes.get('/:id/edit', IsUserAdmin, Recipes.edit);
+routes.get('/:id/edit', Recipes.edit);
 
-routes.post('/', IsUserAdmin, multer.array('photos', 5), Recipes.post);
-routes.put('/', IsUserAdmin, multer.array('photos', 5), Recipes.put);
+routes.post('/', multer.array('photos', 5), Recipes.post);
+routes.put('/', multer.array('photos', 5), Recipes.put);
 routes.delete('/', IsUserAdmin, Recipes.delete);
 
 module.exports = routes;
