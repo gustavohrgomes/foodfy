@@ -11,8 +11,8 @@
   <section class="recipe-single container">
   
     <div class="title">
-      <h2>Receita: {{recipe.title}}</h2>,
-      {% if session.isAdmin %}
+      <h2>Receita: {{recipe.title}}</h2>
+      {% if session.userId == recipe.user_id or session.isAdmin  %}
         <a class="btn" href="/admin/recipes/{{recipe.id}}/edit">Editar Receita</a>
       {% endif %}
     </div>
