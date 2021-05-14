@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS "recipe_files";
 CREATE TABLE "recipes" (
   id SERIAL PRIMARY KEY,
   chef_id INT,
+  user_id INT,
   title TEXT,
   ingredients TEXT[],
   preparation TEXT[],
