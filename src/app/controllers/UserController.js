@@ -47,4 +47,22 @@ module.exports = {
       throw new Error(error);
     }
   },
+  async delete(req, res) {
+    try {
+      await User.delete(req.body.id);
+
+      let results = await User.all();
+
+      return res.render('admin/users/index', {
+        users: results.rows,
+        success: 'Usuário deletado com sucesso. 😁',
+      });
+    } catch (error) {
+      let results = await User.all();
+      return res.render('admin/users/index', {
+        users: results.rows,
+        error: 'Erro ao deletar usuário. 😅',
+      });
+    }
+  },
 };

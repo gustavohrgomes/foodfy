@@ -82,4 +82,11 @@ module.exports = {
       throw new Error(error);
     }
   },
+  async delete(id) {
+    try {
+      await db.query('DELETE FROM users WHERE id = $1', [id]);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
 };
