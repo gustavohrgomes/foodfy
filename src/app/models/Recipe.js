@@ -39,17 +39,19 @@ module.exports = {
       const createRecipe = `
         INSERT INTO recipes (
           chef_id,
+          user_id,
           title,
           ingredients,
           preparation,
           information
         )
-        VALUES ($1, $2, $3, $4, $5)
+        VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING id
       `;
 
       const values = [
         recipe.chef,
+        recipe.user_id,
         recipe.title,
         recipe.ingredients,
         recipe.preparation,

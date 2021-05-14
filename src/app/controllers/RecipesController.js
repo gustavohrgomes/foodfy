@@ -51,6 +51,8 @@ module.exports = {
       return res.send('Por favor, envie pelo menos 1 foto!');
     }
 
+    req.body.user_id = req.session.userId;
+
     let results = await Recipe.create(req.body);
     const recipeId = results.rows[0].id;
 
