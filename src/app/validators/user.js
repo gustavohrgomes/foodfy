@@ -87,8 +87,19 @@ async function update(req, res, next) {
   }
 }
 
+async function exclude(req, res, next) {
+  if (req.session.userId == req.body.id) {
+    return res.render('admin/users/index', {
+      error: 'Desculpe, você não pode excluir sua própria conta! 😕',
+    });
+  }
+
+  next();
+}
+
 module.exports = {
   post,
   edit,
   update,
+  exclude,
 };
