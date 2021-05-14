@@ -12,7 +12,7 @@ function IsUserAdmin(req, res, next) {
     // se o usuário é admin ou não
     return res.send({
       error:
-        'Desculpe, parece que você não possui permissões para criar receitas. 😅',
+        'Desculpe, parece que você não possui permissões acessar este recurso. 😅',
     });
   }
 
