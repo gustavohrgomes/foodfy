@@ -10,7 +10,9 @@
 	<section class="admin container">
 		<div class="title">
       <h2>Gerenciar chefs</h2>
-      <a href="/admin/chefs/create" class="btn">+ Novo Chef</a>
+      {% if session.isAdmin %}
+        <a href="/admin/chefs/create" class="btn">+ Novo Chef</a>
+      {% endif %} 
     </div>
 		
 		<div class="chefs-container-admin">

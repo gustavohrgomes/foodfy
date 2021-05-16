@@ -1,0 +1,42 @@
+.login.container,
+.forgot-password.container {
+  margin-top: 65px;
+  max-width: 500px;
+}
+
+.login .header,
+.forgot-password .header {
+  font-size: 24px;
+  text-align: center;
+}
+
+.login .fields,
+.forgot-password .fields {
+  margin-bottom: 35px;
+}
+
+.login footer.footer,
+.forgot-password footer.footer {
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.forgot-password footer.footer {
+  justify-content: flex-end;
+}
+
+.login footer.footer button {
+  padding: 9px 35px; 
+}
+
+.login footer.footer a {
+  font-weight: bold;
+  color: #969696;
+}
+
+.login footer.footer a:hover {
+  color: var(--grey-dark)
+}
+

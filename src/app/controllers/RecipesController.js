@@ -51,6 +51,8 @@ module.exports = {
       return res.send('Por favor, envie pelo menos 1 foto!');
     }
 
+    req.body.user_id = req.session.userId;
+
     let results = await Recipe.create(req.body);
     const recipeId = results.rows[0].id;
 
@@ -157,9 +159,21 @@ module.exports = {
     return res.redirect(`/admin/recipes/${req.body.id}`);
   },
   async delete(req, res) {
-    const { id } = req.body;
+    try {
+      const { id } = req.body;
+      let results = await Recipe.files(id);
+      const files = results.rows;
+      const deletedFilesPromise = files.map(file => {
+        RecipeFile.delete(file.file_id);
+        File.delete(file.file_id);
+      });
 
-    await Recipe.delete(id);
-    res.redirect('/admin/recipes');
+      await Promise.all(deletedFilesPromise);
+      await Recipe.delete(id);
+
+      return res.redirect('/admin/recipes');
+    } catch (error) {
+      throw new Error(error);
+    }
   },
 };

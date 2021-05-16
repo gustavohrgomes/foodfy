@@ -1,0 +1,39 @@
+{% extends "main.njk" %}
+{% import "parts/recipes-section.njk" as section %}
+
+{% block head %}
+
+	<title>Foodfy | Recuperar Senha</title>
+
+{% endblock %}
+
+{% block searchFilter %}
+  {% include "parts/search-recipes.njk" %}  
+{% endblock %}
+
+{% block content %}
+
+<section class="login container">
+  <form 
+    method="POST" 
+    action="/login"
+  >
+    <div class="header">
+      <h3>Iniciar Sessão</h3>
+    </div>
+
+    <div class="fields">
+      {% include "session/fields.njk" %}
+    </div>
+
+    <footer class="footer">
+      <a href="/forgot-password">Perdeu a senha?</a>
+      <button type="submit">Acessar</button>
+    </footer>
+  </form>
+
+
+  
+</section>
+
+{% endblock %}

@@ -110,7 +110,7 @@ module.exports = {
     const keys = Object.keys(req.body);
 
     for (key of keys) {
-      if (req.body[key] == '') {
+      if (req.body[key] == '' && key != 'removed_files') {
         return res.send('Por favor, preencha todos os campos!');
       }
     }
@@ -120,6 +120,11 @@ module.exports = {
     }
 
     let file_id;
+
+    if (req.files.length == 0) {
+      const results = await Chef.file(req.body.id);
+      file_id = results.rows[0].id;
+    }
 
     if (req.files.length != 0) {
       const results = await File.create(req.files[0]);
@@ -144,6 +149,7 @@ module.exports = {
     const { id } = req.body;
 
     await Chef.delete(id);
+    await File.delete(req.body.file_id);
 
     res.redirect('/admin/chefs');
   },

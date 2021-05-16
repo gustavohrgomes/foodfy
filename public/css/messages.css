@@ -1,0 +1,31 @@
+@keyframes hidemessage {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.messages {
+  width: 345px;
+  height: 135px;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px -3px rgba(60, 60, 60, .5);
+  animation: hidemessage 400ms 5s ease-out forwards;
+}
+
+.messages.error {
+  background: var(--error-box);
+}
+
+.messages.success {
+  background: var(--success-green);
+}

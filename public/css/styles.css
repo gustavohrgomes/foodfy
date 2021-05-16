@@ -10,9 +10,13 @@
    --grey-darker: #444444;
    --purple: #6558C3;
    --purple-dark: #5345c0;
+   --delete-red: #F55A5A;
    --danger-red: #dd4141;
    --danger-red-dark: #be3636;
+   --error: #FF3131;
+   --error-box: #DC4747;
    --input-border: #DDD;
+   --success-green: #01B12A;
 }
 
 * {
@@ -99,7 +103,7 @@ header .logo img {
 
 header .links ul {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   max-width: 250px;
   justify-items: center;
@@ -139,27 +143,33 @@ header.header-admin {
 }
 
 header.header-admin .container {
-  grid-template-columns: 92px 1fr;
+  grid-template-columns: 92px 1fr auto;
   gap: 50px;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1.5rem 0;
 }
 
 .header-admin .links ul {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   max-width: 200px;
   justify-items: start;
 }
 
-.header-admin .links a {
+.header-admin .links a,
+.header-admin .logout button {
   text-transform: uppercase;
   color: var(--grey-light);
   font-weight: bold
 }
 
 .header-admin .links a:hover,
+.header-admin .logout button:hover,
 .header-admin .links .active {
   color: white;
+}
+
+.header-admin .logout button {
+  background: none;
 }
 
 /* Home Footer */
@@ -434,7 +444,7 @@ form .input-group label {
   font-weight: bold;
 }
 
-form input, form textarea, form select {
+form input:not(input[type="checkbox"]), form textarea, form select {
   margin-top: 5px;
   padding: 15px 20px;
   width: 100%;
@@ -602,4 +612,20 @@ form #photos-preview .photo i:hover {
 .recipe-single .gallery-preview img:hover,
 .recipe-single .gallery-preview img.active {
   opacity: 1;
+}
+
+/* Error Validate */
+.input-group .error {
+  width: 100%;
+  font-weight: bold;
+  color: #FFF;
+  background-color: var(--error);
+  padding: 5px 8px;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 4px;
+}
+
+form .input-group input.input-error-outline {
+  border: 1px solid var(--error);
 }

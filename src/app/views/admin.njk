@@ -11,11 +11,12 @@
 
     {% endblock %}
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/styles.css">
+    {% include "parts/styles.njk" %}
   </head>
 
   <body>
+    {% include "parts/messages.njk" %}
+
     {% include "admin/parts/header.njk" %}
 
     {% block content %}{% endblock %}
