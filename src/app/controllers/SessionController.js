@@ -11,4 +11,7 @@ module.exports = {
     req.session.destroy();
     return res.redirect('/');
   },
+  forgotForm(req, res) {
+    return res.render('session/forgot-password');
+  },
 };
