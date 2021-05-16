@@ -45,7 +45,53 @@ async function forgot(req, res, next) {
   next();
 }
 
+async function reset(req, res, next) {
+  const { email, password, passwordConfirm, token } = req.body;
+
+  const user = await User.findOne({ where: { email } });
+
+  if (user == null || user == undefined) {
+    return res.render('session/password-reset', {
+      token,
+      user: req.body,
+      error: 'Usuário não encontrado. 😓',
+    });
+  }
+
+  if (password != passwordConfirm) {
+    return res.render('session/password-reset', {
+      token,
+      user: req.body,
+      error: 'Confirmação de senha está diferente da senha digitada. 😓',
+    });
+  }
+
+  if (token != user.reset_token) {
+    return res.render('session/password-reset', {
+      user: req.body,
+      error: 'Token inválido! Solicite uma nova recuperação de senha.',
+    });
+  }
+
+  let now = new Date();
+  now = now.setHours(now.getHours());
+
+  if (now > user.reset_token_expires) {
+    return res.render('session/password-reset', {
+      token,
+      user: req.body,
+      error:
+        'Seu token para redefinação de senha expirou.\n Faça uma nova solicitação de redefinição de senha.',
+    });
+  }
+
+  req.user = user;
+
+  next();
+}
+
 module.exports = {
   login,
   forgot,
+  reset,
 };

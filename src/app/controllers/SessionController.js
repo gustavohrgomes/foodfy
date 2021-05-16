@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const mailer = require('../../lib/mailer');
+const { hash } = require('bcryptjs');
 
 const User = require('../models/User');
 
@@ -44,7 +45,7 @@ module.exports = {
           <h2>Esqueceu sua senha?</h2>      
           <p>Não se preocupe, clique no link abaixo para recuperar sua senha</p>
           <p>
-            <a href="http://localhost:3000/users/password-reset?token=${token}" target="_blank">
+            <a href="http://localhost:3333/password-reset?token=${token}" target="_blank">
               Recuperar senha
             </a>
           </p>
@@ -59,6 +60,36 @@ module.exports = {
       console.error(error);
       return res.render('session/forgot-password', {
         error: 'Ops, algo deu errado... 😥 \n Por favor, tente novamente!',
+      });
+    }
+  },
+  resetForm(req, res) {
+    return res.render('session/password-reset', { token: req.query.token });
+  },
+  async reset(req, res) {
+    const { user } = req;
+    const { password, token } = req.body;
+
+    try {
+      const newPassword = await hash(password, 8);
+
+      await User.update(user.id, {
+        password: newPassword,
+        reset_token: '',
+        reset_token_expires: '',
+      });
+
+      return res.render('session/login', {
+        user: req.body,
+        success: 'Senha redefinida com sucesso. 😎',
+      });
+    } catch (error) {
+      console.error(error);
+      return res.render('session/password-reset', {
+        token,
+        user: req.body,
+        error:
+          'Ops, algo inesperado aconteceu... 😥 \n Por favor, tente novamente!',
       });
     }
   },
