@@ -17,7 +17,8 @@ function IsUserAdmin(req, res, next) {
 }
 
 async function IsRecipeCreator(req, res, next) {
-  const recipe = await Recipe.find(req.params.id);
+  const results = await Recipe.find(req.params.id);
+  const recipe = results.rows[0];
 
   if (req.session.isAdmin || req.session.userId === recipe.userId) {
     next();
