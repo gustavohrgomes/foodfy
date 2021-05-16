@@ -28,6 +28,24 @@ async function login(req, res, next) {
   next();
 }
 
+async function forgot(req, res, next) {
+  const { email } = req.body;
+
+  const user = await User.findOne({ where: { email } });
+
+  if (user == null || user == undefined) {
+    return res.render('session/forgot-password', {
+      user: req.body,
+      error: 'E-mail não encontrado. 😪',
+    });
+  }
+
+  req.user = user;
+
+  next();
+}
+
 module.exports = {
   login,
+  forgot,
 };
