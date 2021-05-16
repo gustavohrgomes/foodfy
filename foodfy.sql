@@ -4,23 +4,23 @@ DROP TABLE IF EXISTS "files";
 DROP TABLE IF EXISTS "recipe_files";
 
 CREATE TABLE "recipes" (
-  id SERIAL PRIMARY KEY,
-  chef_id INT,
-  user_id INT,
-  title TEXT,
-  ingredients TEXT[],
-  preparation TEXT[],
-  information TEXT,
-  created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
-  updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
+  "id" SERIAL PRIMARY KEY,
+  "chef_id" int,
+  "user_id" int,
+  "title" text,
+  "ingredients" text[],
+  "preparation" text[],
+  "information" text,
+  "created_at" timestamp DEFAULT (now()),
+  "updated_at" timestamp DEFAULT (now())
 );
 
 CREATE TABLE "chefs" (
-  id SERIAL PRIMARY KEY NOT NULL,
-  name TEXT,
-  avatar_url TEXT,
-  created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
-  updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
+  "id" SERIAL PRIMARY KEY,
+  "name" text,
+  "file_id" int,
+  "created_at" timestamp DEFAULT (now()),
+  "updated_at" timestamp DEFAULT (now())
 );
 
 CREATE TABLE "files" (
@@ -31,27 +31,27 @@ CREATE TABLE "files" (
 
 CREATE TABLE "recipe_files" (
   "id" SERIAL PRIMARY KEY,
-  "recipe_id" int ,
+  "recipe_id" int,
   "file_id" int
 );
 
 CREATE TABLE "users" (
-	"id" SERIAL PRIMARY KEY,
-  "name" TEXT NOT NULL,
-  "email" TEXT UNIQUE NOT NULL,
-  "password" TEXT NOT NULL,
-  "reset_token" TEXT,
-  "reset_token_expires" TEXT,
-  "is_admin" BOOLEAN DEFAULT false,
-  "created_at" TIMESTAMP DEFAULT(NOW()),
-  "updated_at" TIMESTAMP DEFAULT(NOW())
+  "id" SERIAL PRIMARY KEY,
+  "name" text NOT NULL,
+  "email" text UNIQUE NOT NULL,
+  "password" text NOT NULL,
+  "reset_token" text,
+  "reset_token_expires" text,
+  "is_admin" boolean DEFAULT false,
+  "created_at" timestamp DEFAULT (now()),
+  "updated_at" timestamp DEFAULT (now())
 );
 
-ALTER TABLE "recipe_files" ADD FOREIGN KEY ("recipe_id") REFERENCES "recipes" ("id")
-ALTER TABLE "recipe_files" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id")
-
-ALTER TABLE "chefs" DROP COLUMN "avatar_url";
-ALTER TABLE "chefs" ADD COLUMN "file_id" INTEGER REFERENCES "files" ("id");
+/* FOREIGN KEYS */
+ALTER TABLE "recipes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
+ALTER TABLE "recipe_files" ADD FOREIGN KEY ("recipe_id") REFERENCES "recipes" ("id") ON DELETE CASCADE;
+ALTER TABLE "recipe_files" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id") ON DELETE CASCADE;
+ALTER TABLE "chefs" ADD FOREIGN KEY ("file_id") REFERENCES "files" ("id");
 
 /* TRIGGERS & PROCEDURES */
 CREATE FUNCTION trigger_set_timestamp()
@@ -84,29 +84,6 @@ CREATE TABLE "session" (
 	"expire" timestamp(6) NOT NULL
 )
 WITH (OIDS=FALSE);
-
-ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
-
+ALTER TABLE "session" 
+ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 CREATE INDEX "IDX_session_expire" ON "session" ("expire");
-
-/* SQL CASCADE ON DELETE */
-ALTER TABLE "recipe_files"
-DROP CONSTRAINT recipe_files_recipe_id_fkey,
-ADD CONSTRAINT recipe_files_recipe_id_fkey
-FOREIGN KEY (recipe_id) 
-REFERENCES recipes (id)
-ON DELETE CASCADE
-
-ALTER TABLE "recipe_files"
-DROP CONSTRAINT recipe_files_file_id_fkey,
-ADD CONSTRAINT recipe_files_file_id_fkey
-FOREIGN KEY (file_id) 
-REFERENCES files(id)
-ON DELETE CASCADE
-
-ALTER TABLE "chefs"
-DROP CONSTRAINT chefs_file_id_fkey,
-ADD CONSTRAINT chefs_file_id_fkey
-FOREIGN KEY (file_id) 
-REFERENCES files(id)
-ON DELETE CASCADE
