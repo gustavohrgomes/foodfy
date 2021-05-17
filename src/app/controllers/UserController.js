@@ -1,3 +1,6 @@
+const crypto = require('crypto');
+const mailer = require('../../lib/mailer');
+
 const User = require('../models/User');
 
 module.exports = {
@@ -14,9 +17,48 @@ module.exports = {
     return res.render('admin/users/create');
   },
   async post(req, res) {
-    await User.create(req.body);
+    try {
+      const { name, email, is_admin } = req.body;
+      const password = crypto.randomBytes(5).toString('hex');
 
-    return res.redirect('/admin/users');
+      const userData = {
+        name,
+        email,
+        password,
+        is_admin,
+      };
+
+      await User.create(userData);
+
+      await mailer.sendMail({
+        to: email,
+        from: 'no-reply@foodfy.com.br',
+        subject: 'Bem vindo ao Foodfy',
+        html: `
+          <h2>Olá <strong>${name}</strong>,</h2>
+          <p>Seja muito bem-vindo(a) ao <strong>Foodfy</strong> 😃</p>
+          <p>Seu cadastro foi realizado com sucesso! Aqui estão seus dados:</p>
+          <p>Login: ${email}</p>
+          <p>Senha: ${password}</p>
+          <br>
+          <h3>Como eu acesso minha Conta?</h3>
+          <p>
+            Bem simples, você só tem que clicar no botão abaixo e acessar a plataforma com seu email e senha informados acima.
+          </p>
+          <p>
+            <a href="http:localhost:3333/login" target="_blank">Acessar</a> 
+          </p>
+          <p>Equipe Foodfy.</p>
+        `,
+      });
+
+      return res.redirect('/admin/users');
+    } catch (error) {
+      console.log(error);
+      return res.render('admin/users/create', {
+        error: 'Ops, algo deu errado ao criar este usuário. 😓',
+      });
+    }
   },
   async edit(req, res) {
     const { user } = req;
