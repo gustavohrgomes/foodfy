@@ -60,24 +60,9 @@ async function update(req, res, next) {
       return res.render('admin/users/edit', fillAllFields);
     }
 
-    let { id, password } = req.body;
-
-    if (!password) {
-      return res.render('admin/users/edit', {
-        user,
-        error: 'Digite a senha do usuário para atualizar o cadastro.',
-      });
-    }
+    const { id } = req.body;
 
     const user = await User.findOne({ where: { id } });
-
-    const passed = await compare(password, user.password);
-
-    if (!passed)
-      return res.render('admin/users/edit', {
-        user,
-        error: 'Senha incorreta.',
-      });
 
     req.user = user;
 
