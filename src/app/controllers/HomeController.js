@@ -4,12 +4,11 @@ const Chef = require('../models/Chef');
 module.exports = {
   async index(req, res) {
     try {
-      let results = await Recipe.all();
-      const recipes = results.rows;
+      const recipes = await Recipe.all();
 
       async function getImage(recipeId) {
-        let results = await Recipe.files(recipeId);
-        const files = results.rows.map(
+        let files = await Recipe.files(recipeId);
+        files = files.map(
           file =>
             `${req.protocol}://${req.headers.host}${file.path.replace(
               'public',
@@ -53,14 +52,13 @@ module.exports = {
         offset,
       };
 
-      let results = await Recipe.recipes(queryParams);
-      const recipes = results.rows;
+      const recipes = await Recipe.recipes(queryParams);
 
       if (!recipes) return res.send('Receita não encontrada!');
 
       async function getImage(recipeId) {
-        let results = await Recipe.files(recipeId);
-        const files = results.rows.map(
+        let files = await Recipe.files(recipeId);
+        files = files.map(
           file =>
             `${req.protocol}://${req.headers.host}${file.path.replace(
               'public',
@@ -109,11 +107,10 @@ module.exports = {
   },
   async show(req, res) {
     try {
-      let results = await Recipe.find(req.params.id);
-      const recipe = results.rows[0];
+      const recipe = await Recipe.find(req.params.id);
 
-      results = await Recipe.files(recipe.id);
-      const files = results.rows.map(file => ({
+      let files = await Recipe.files(recipe.id);
+      files = files.map(file => ({
         ...file,
         src: `${req.protocol}://${req.headers.host}${file.path.replace(
           'public',
@@ -127,12 +124,10 @@ module.exports = {
     }
   },
   async chefs(req, res) {
-    let results = await Chef.all();
-    const chefs = results.rows;
+    const chefs = await Chef.all();
 
     async function getImage(fileId) {
-      let results = await Chef.file(fileId);
-      const file = results.rows[0];
+      const file = await Chef.file(fileId);
 
       return `${req.protocol}://${req.headers.host}${file.path.replace(
         'public',
