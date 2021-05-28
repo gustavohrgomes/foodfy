@@ -68,13 +68,14 @@ const Base = {
       throw new Error(error);
     }
   },
-  delete(id) {
-    const deleteQuery = `
-      DELETE FROM ${this.table}
-      WHERE id = $1
-    `;
+  delete(field) {
+    let exclude;
 
-    return db.query(deleteQuery, [id]);
+    Object.keys(field).map(key => {
+      exclude = `${key} = '${field[key]}'`;
+    });
+
+    return db.query(`DELETE FROM ${this.table} WHERE ${exclude}`);
   },
 };
 
