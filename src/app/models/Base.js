@@ -33,7 +33,10 @@ const Base = {
 
       Object.keys(fields).map(key => {
         keys.push(`${key}`);
-        values.push(`'${fields[key]}'`);
+
+        Array.isArray(fields[key])
+          ? values.push(`'{"${fields[key].join('","')}"}'`)
+          : values.push(`'${fields[key]}'`);
       });
 
       const insert = `
@@ -53,7 +56,12 @@ const Base = {
       let values = [];
 
       Object.keys(fields).map(key => {
-        const line = `${key} = '${fields[key]}'`;
+        let line;
+
+        Array.isArray(fields[key])
+          ? (line = `${key} = '{"${fields[key].join('","')}"}'`)
+          : (line = `${key} = '${fields[key]}'`);
+
         values.push(line);
       });
 
