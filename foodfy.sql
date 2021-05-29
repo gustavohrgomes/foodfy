@@ -1,7 +1,9 @@
-DROP TABLE IF EXISTS "recipes";
-DROP TABLE IF EXISTS "chefs";
-DROP TABLE IF EXISTS "files";
-DROP TABLE IF EXISTS "recipe_files";
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
+DROP DATABASE IF EXISTS "foodfy";
+CREATE DATABASE "foodfy";
+
 
 CREATE TABLE "recipes" (
   "id" SERIAL PRIMARY KEY,
@@ -87,3 +89,17 @@ WITH (OIDS=FALSE);
 ALTER TABLE "session" 
 ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+
+/* To Run Seeds */
+DELETE FROM chefs;
+DELETE FROM files;
+DELETE FROM recipe_files;
+DELETE FROM recipes;
+DELETE FROM users;
+
+/* restart sequence auto_increment from tables ids */
+ALTER SEQUENCE chefs_id_seq restart with 1;
+ALTER SEQUENCE files_id_seq restart with 1;
+ALTER SEQUENCE recipe_files_id_seq restart with 1;
+ALTER SEQUENCE recipes_id_seq restart with 1;
+ALTER SEQUENCE users_id_seq restart with 1;
