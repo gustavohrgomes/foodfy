@@ -11,7 +11,7 @@ for (let item of menuItems) {
 // =============================================================
 
 // Redirect for recipe details
-const cards = document.querySelectorAll('.recipe');
+const cards = document.querySelectorAll('.recipes-container .recipe');
 
 for (let card of cards) {
   card.addEventListener('click', () => {
@@ -268,7 +268,11 @@ const Validate = {
       '.input-group input, .input-group select, .input-group textarea',
     );
     for (item of items) {
-      if (item.value == '') {
+      if (
+        item.value == '' &&
+        item.name != 'removed_files' &&
+        item.type != 'file'
+      ) {
         const message = document.createElement('div');
         message.classList.add('messages');
         message.classList.add('error');
