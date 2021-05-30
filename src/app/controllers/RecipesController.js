@@ -7,11 +7,20 @@ const RecipeFile = require('../models/RecipeFile');
 
 const LoadRecipeService = require('../services/LoadRecipeService');
 
+const { getParams } = require('../../lib/utils');
+
 module.exports = {
   async index(req, res) {
     try {
-      const recipes = await LoadRecipeService.load('recipes');
-      return res.render('admin/recipes/index', { recipes });
+      const queryParams = getParams(req.query, 6);
+      const recipes = await LoadRecipeService.load('recipes', queryParams);
+      const pagination = { page: queryParams.page };
+
+      recipes.length == 0
+        ? (pagination.total = 1)
+        : (pagination.total = Math.ceil(recipes[0].total / queryParams.limit));
+
+      return res.render('admin/recipes/index', { recipes, pagination });
     } catch (error) {
       throw new Error(error);
     }
