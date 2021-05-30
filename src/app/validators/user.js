@@ -73,8 +73,11 @@ async function update(req, res, next) {
 }
 
 async function exclude(req, res, next) {
+  const users = await User.all();
+
   if (req.session.userId == req.body.id) {
     return res.render('admin/users/index', {
+      users,
       error: 'Desculpe, você não pode excluir sua própria conta! 😕',
     });
   }

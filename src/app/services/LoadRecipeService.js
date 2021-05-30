@@ -37,6 +37,17 @@ const loadService = {
       throw new Error(error);
     }
   },
+  async userRecipes() {
+    const recipes = await Recipe.userRecipes(this.filter);
+    const recipesPromise = recipes.map(async recipe => {
+      const files = await getImages(recipe.id);
+      recipe.files = files;
+      recipe.img = files[0].src;
+      return recipe;
+    });
+    const allRecipes = await Promise.all(recipesPromise);
+    return allRecipes;
+  },
 };
 
 module.exports = loadService;

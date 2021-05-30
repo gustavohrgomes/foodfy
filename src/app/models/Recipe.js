@@ -88,4 +88,15 @@ module.exports = {
       throw new Error(error);
     }
   },
+  async userRecipes(id) {
+    const sql = `
+    SELECT recipes.*, chefs.name AS chef_name
+    FROM recipes
+    LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+    WHERE user_id = $1
+    ORDER BY created_at DESC`;
+
+    const results = await db.query(sql, [id]);
+    return results.rows;
+  },
 };

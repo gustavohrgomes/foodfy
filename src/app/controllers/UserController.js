@@ -1,9 +1,11 @@
 const crypto = require('crypto');
-const mailer = require('../../lib/mailer');
 const { hash } = require('bcryptjs');
+const { unlinkSync } = require('fs');
 
 const User = require('../models/User');
-const File = require('../models/File');
+const LoadRecipeService = require('../services/LoadRecipeService');
+
+const mailer = require('../../lib/mailer');
 
 module.exports = {
   registerForm(req, res) {
@@ -96,6 +98,19 @@ module.exports = {
   },
   async delete(req, res) {
     try {
+      const recipes = await LoadRecipeService.load('userRecipes', req.body.id);
+      const deletedFilesPromise = recipes.map(recipe => {
+        recipe.files.map(file => {
+          if (
+            file.path != 'public/images/chef_placeholder.png' &&
+            file.path != 'public/images/recipe_placeholder.png'
+          ) {
+            unlinkSync(file.path);
+          }
+        });
+      });
+
+      await Promise.all(deletedFilesPromise);
       await User.delete({ id: req.body.id });
 
       const users = await User.all();
