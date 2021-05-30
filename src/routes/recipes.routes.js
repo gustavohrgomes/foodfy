@@ -12,8 +12,8 @@ routes.get('/create', Recipes.create);
 routes.get('/:id', Recipes.show);
 routes.get('/:id/edit', IsRecipeCreator, Recipes.edit);
 
-routes.post('/', multer.array('photos', 5), Recipes.post);
-routes.put('/', multer.array('photos', 5), Recipes.put);
+routes.post('/', multer.array('photos', 5), RecipeValidator.post, Recipes.post);
+routes.put('/', multer.array('photos', 5), RecipeValidator.put, Recipes.put);
 routes.delete('/', RecipeValidator.exclude, Recipes.delete);
 
 module.exports = routes;

@@ -13,12 +13,12 @@ const {
   IsUserAdmin,
 } = require('../app/middlewares/session');
 
-routes.use(main);
-routes.use(session);
 routes.use((req, res, next) => {
   res.locals.session = req.session;
   next();
 });
+routes.use(main);
+routes.use(session);
 routes.use('/admin/users', IsUserAuthenticated, IsUserAdmin, users);
 routes.use('/admin/chefs', IsUserAuthenticated, chefs);
 routes.use('/admin/recipes', IsUserAuthenticated, recipes);

@@ -17,7 +17,7 @@
     </div>
 
     <div class="chef-img">
-      {% if not chef.file %}
+      {% if not chef.file.src %}
         <img src="http://placehold.it/200x200" alt="Image do chef {{chef.name}}">
       {% else %}
         <img src="{{chef.file.src}}" alt="imagem do chef {{chef.name}}">
@@ -38,7 +38,7 @@
         <h3>Nenhuma receita cadastradas :(</h3>
       {% else %}
         <div class="recipes-container-adm">
-          {% for recipe in recipes %}
+          {% for recipe in chef.recipes %}
             <div class="recipe">
               {% if not recipe.img %}
                 <img src="http://placehold.it/600x280" alt="Image de {{recipe.title}}">

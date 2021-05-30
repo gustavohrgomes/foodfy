@@ -34,9 +34,15 @@
             <li>
               <a href="/chefs">Chefs</a>
             </li>
-            <li>
-              <a href="/login">Login</a>
-            </li>
+            {% if session.userId %}
+              <li>
+                <a href="/admin">Perfil</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="/login">Login</a>
+              </li>
+            {% endif %}
           </ul>
         </nav>
 

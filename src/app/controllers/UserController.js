@@ -1,17 +1,23 @@
 const crypto = require('crypto');
-const mailer = require('../../lib/mailer');
+const { hash } = require('bcryptjs');
+const { unlinkSync } = require('fs');
 
 const User = require('../models/User');
+const LoadRecipeService = require('../services/LoadRecipeService');
+
+const mailer = require('../../lib/mailer');
 
 module.exports = {
   registerForm(req, res) {
     return res.send('formulário de cadastro de usuário!');
   },
   async list(req, res) {
-    let results = await User.all();
-    const users = results.rows;
-
-    return res.render('admin/users/index', { users });
+    try {
+      const users = await User.all();
+      return res.render('admin/users/index', { users });
+    } catch (error) {
+      console.log(error);
+    }
   },
   create(req, res) {
     return res.render('admin/users/create');
@@ -20,11 +26,12 @@ module.exports = {
     try {
       const { name, email, is_admin } = req.body;
       const password = crypto.randomBytes(5).toString('hex');
+      const encryptedPassword = await hash(password, 8);
 
       const userData = {
         name,
         email,
-        password,
+        password: encryptedPassword,
         is_admin,
       };
 
@@ -91,18 +98,31 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-      await User.delete(req.body.id);
+      const recipes = await LoadRecipeService.load('userRecipes', req.body.id);
+      const deletedFilesPromise = recipes.map(recipe => {
+        recipe.files.map(file => {
+          if (
+            file.path != 'public/images/chef_placeholder.png' &&
+            file.path != 'public/images/recipe_placeholder.png'
+          ) {
+            unlinkSync(file.path);
+          }
+        });
+      });
 
-      let results = await User.all();
+      await Promise.all(deletedFilesPromise);
+      await User.delete({ id: req.body.id });
+
+      const users = await User.all();
 
       return res.render('admin/users/index', {
-        users: results.rows,
+        users,
         success: 'Usuário deletado com sucesso. 😁',
       });
     } catch (error) {
-      let results = await User.all();
+      const users = await User.all();
       return res.render('admin/users/index', {
-        users: results.rows,
+        users,
         error: 'Erro ao deletar usuário. 😅',
       });
     }

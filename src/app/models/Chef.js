@@ -1,7 +1,12 @@
 const db = require('../../config/dbConnection');
 
+const Base = require('./Base');
+
+Base.init({ table: 'chefs' });
+
 module.exports = {
-  all() {
+  ...Base,
+  async all() {
     try {
       const selectChefsFrom = `
         SELECT
@@ -12,12 +17,13 @@ module.exports = {
         GROUP BY chefs.id;
       `;
 
-      return db.query(selectChefsFrom);
+      const results = await db.query(selectChefsFrom);
+      return results.rows;
     } catch (error) {
       throw new Error(error);
     }
   },
-  find(id) {
+  async find(id) {
     try {
       const selectChefFrom = `
         SELECT
@@ -29,12 +35,13 @@ module.exports = {
         GROUP BY chefs.id;
       `;
 
-      return db.query(selectChefFrom, [id]);
+      const results = await db.query(selectChefFrom, [id]);
+      return results.rows[0];
     } catch (error) {
       throw new Error(error);
     }
   },
-  chefRecipes(id) {
+  async chefRecipes(id) {
     try {
       const selectChefRecipes = `
         SELECT 
@@ -46,62 +53,16 @@ module.exports = {
         ORDER BY recipes.created_at DESC;
       `;
 
-      return db.query(selectChefRecipes, [id]);
+      const results = await db.query(selectChefRecipes, [id]);
+      return results.rows;
     } catch (error) {
       throw new Error(error);
     }
   },
-  create(chef) {
+  async file(id) {
     try {
-      const createChef = `
-        INSERT INTO chefs (
-          name,
-          file_id
-        )
-        VALUES ($1, $2)
-        RETURNING id
-      `;
-
-      const queryValues = [chef.name, chef.file_id];
-
-      return db.query(createChef, queryValues);
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
-  update(chef) {
-    try {
-      const updateChef = `
-        UPDATE 
-          chefs
-        SET
-          name=($1),
-          file_id=($2)
-        WHERE id = $3
-      `;
-
-      const values = [chef.name, chef.file_id, chef.id];
-
-      return db.query(updateChef, values);
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
-  delete(id) {
-    try {
-      const deleteChef = `
-        DELETE FROM chefs 
-        WHERE id = $1
-      `;
-
-      return db.query(deleteChef, [id]);
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
-  file(id) {
-    try {
-      return db.query(`SELECT * FROM files WHERE id = $1`, [id]);
+      const results = await db.query(`SELECT * FROM files WHERE id = $1`, [id]);
+      return results.rows[0];
     } catch (error) {
       throw new Error(error);
     }
