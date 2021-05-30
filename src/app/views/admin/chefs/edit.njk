@@ -23,7 +23,7 @@
 					>
 						Deletar
 					</button>
-					<button type="submit">Salvar Chef</button>
+					<button type="submit" onclick="Validate.allFields(event)">Salvar Chef</button>
 				</div>
 			</div>
 
@@ -33,7 +33,7 @@
 		</form>
 		<form id="form-delete" method="POST" action="/admin/chefs?_method=DELETE">
 			<input type="hidden" name="id" value="{{chef.id}}">
-      <input type="hidden" name="file_id" value="{{file.id}}">
+      <input type="hidden" name="file_id" value="{{chef.file.id}}">
 		</form>
 	</section>
 

@@ -1,3 +1,5 @@
+const Recipe = require('../app/models/Recipe');
+
 module.exports = {
   age(timeStamp) {
     const today = new Date();
@@ -24,5 +26,25 @@ module.exports = {
       birthDay: `${day}/${month}`,
       format: `${day}/${month}/${year}`,
     };
+  },
+  checkAllFields(body) {
+    const keys = Object.keys(body);
+
+    for (value of keys) {
+      if (body[value] == '' && value != 'removed_files') {
+        return {
+          user: body,
+          error: 'Por favor, preencha todos os campos!',
+        };
+      }
+    }
+  },
+  async getImages(recipeId) {
+    let files = await Recipe.files(recipeId);
+    files = files.map(file => ({
+      ...file,
+      src: `${file.path.replace('public', '')}`,
+    }));
+    return files;
   },
 };
