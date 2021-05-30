@@ -1,6 +1,3 @@
-const Recipe = require('../models/Recipe');
-const Chef = require('../models/Chef');
-
 const LoadChefService = require('../services/LoadChefService');
 const LoadRecipeService = require('../services/LoadRecipeService');
 
