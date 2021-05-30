@@ -18,7 +18,11 @@ const loadService = {
   },
   async recipes() {
     try {
-      const recipes = await Recipe.all();
+      let recipes;
+
+      this.filter
+        ? (recipes = await Recipe.recipes(this.filter))
+        : (recipes = await Recipe.all());
 
       const recipesPromise = recipes.map(async recipe => {
         const files = await getImages(recipe.id);

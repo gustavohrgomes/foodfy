@@ -47,4 +47,19 @@ module.exports = {
     }));
     return files;
   },
+  getParams(query, limit) {
+    let { filter, page } = query;
+
+    page = page || 1;
+    let offset = limit * (page - 1);
+
+    const params = {
+      filter,
+      limit,
+      offset,
+      page,
+    };
+
+    return params;
+  },
 };
