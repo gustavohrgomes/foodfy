@@ -66,7 +66,7 @@ $ npm start
 
 ### Acessando a Área Administrativa 🔐
 
-Selecione um email da tabela users, acesse a tela de login e entre utilizando o mesmo com a senha "rocket" (senha padrão).
+Selecione um email da tabela users, acesse a tela de login e entre utilizando o mesmo com a senha "1234" (senha padrão).
 
 ### Criando Novos Usuários e Recupeção de Senha
 
