@@ -157,10 +157,12 @@ module.exports = {
       const deletedFilesPromise = files.map(file => {
         RecipeFile.delete({ file_id: file.file_id });
         File.delete({ id: file.file_id });
-        try {
-          unlinkSync(file.path);
-        } catch (error) {
-          throw new Error(error);
+        if (file.path != 'public/images/recipe_placeholder.png') {
+          try {
+            unlinkSync(file.path);
+          } catch (error) {
+            throw new Error(error);
+          }
         }
       });
 

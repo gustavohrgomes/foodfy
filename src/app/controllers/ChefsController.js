@@ -79,7 +79,9 @@ module.exports = {
 
       const file = await File.findOne({ where: { id: req.body.file_id } });
       await File.delete({ id: file.id });
-      unlinkSync(file.path);
+      if (file.path != 'public/images/chef_placeholder.png') {
+        unlinkSync(file.path);
+      }
 
       res.redirect('/admin/chefs');
     } catch (error) {
